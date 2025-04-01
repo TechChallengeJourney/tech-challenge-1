@@ -2,7 +2,11 @@
   "name": "@bytebank/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx dev bytebank",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
   "private": true,
   "dependencies": {
     "next": "~15.1.4",
@@ -10,6 +14,7 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.6",
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^2.1.1",
     "@eslint/js": "^9.8.0",
@@ -20,6 +25,11 @@
     "@nx/js": "20.7.0",
     "@nx/next": "20.7.0",
     "@nx/workspace": "20.7.0",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/addon-onboarding": "^8.6.11",
+    "@storybook/experimental-addon-test": "^8.6.11",
+    "@storybook/experimental-nextjs-vite": "^8.6.11",
+    "@storybook/nextjs": "^8.6.11",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
@@ -44,11 +54,13 @@
     "nx": "20.7.0",
     "prettier": "^2.6.2",
     "sass": "1.62.1",
+    "storybook": "^8.6.11",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "~5.7.2",
-    "typescript-eslint": "^8.19.0"
+    "typescript-eslint": "^8.19.0",
+    "vitest": "^3.1.1"
   },
   "workspaces": [
     "apps/*"
