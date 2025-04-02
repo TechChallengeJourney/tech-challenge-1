@@ -1,19 +1,14 @@
 'use client';
 import { CustomButton } from './styled';
 
-export interface ButtonComponentProps {
+export interface ButtonProps {
   text: string;
   type: 'ORANGE' | 'GREEN' | 'BLACK' | 'NEUTRAL';
   outlined?: boolean;
-  sendSubmit: () => void;
+  sendSubmit?: () => void;
 }
 
-export function ButtonComponent({
-  text,
-  type,
-  outlined,
-  sendSubmit,
-}: ButtonComponentProps) {
+export function Button({ text, type, outlined, sendSubmit }: ButtonProps) {
   return (
     <CustomButton
       green={type === 'GREEN' ? 'true' : undefined}

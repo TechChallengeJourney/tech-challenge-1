@@ -93,9 +93,22 @@
         "linter": "eslint"
       }
     },
+    "@nrwl/nest:library": {
+      "controller": true,
+      "service": true
+    },
     "@nx/react": {
       "library": {
         "unitTestRunner": "none"
+      }
+    }
+  },
+  "implicitDependencies": {
+    "tsconfig.base.json": {
+      "compilerOptions": {
+        "paths": {
+          "@bytebank/shared": "*"
+        }
       }
     }
   }
