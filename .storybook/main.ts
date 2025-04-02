@@ -2,8 +2,8 @@ import { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   stories: [
-    '../apps/bytebank/src/**/*.mdx',
-    '../apps/bytebank/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../libs/shared/src/**/*.mdx',
+    '../libs/shared/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-essentials',

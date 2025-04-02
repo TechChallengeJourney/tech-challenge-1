@@ -8,7 +8,7 @@ export interface ButtonComponentProps {
   sendSubmit: () => void;
 }
 
-export default function ButtonComponent({
+export function ButtonComponent({
   text,
   type,
   outlined,

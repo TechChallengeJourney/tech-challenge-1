@@ -1,5 +1,5 @@
 'use client';
-import ButtonComponent from './components/ButtonComponent';
+import { ButtonComponent } from '@bytebank/shared';
 
 export default function Index() {
   /*
