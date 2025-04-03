@@ -1,21 +1,20 @@
 'use client';
-// import { CustomButton } from './styled';
 import Button from '@mui/material/Button';
 import './style.scss';
 
-export interface ButtonProps {
+export interface BytebankButtonProps {
   text: string;
   type: 'ORANGE' | 'GREEN' | 'BLACK' | 'NEUTRAL';
   outlined?: boolean;
   sendSubmit?: () => void;
 }
 
-export function ButtonComponent({
+export function BytebankButton({
   text,
   type,
   outlined,
   sendSubmit,
-}: ButtonProps) {
+}: BytebankButtonProps) {
   const typeColor = (
     type: 'ORANGE' | 'GREEN' | 'BLACK' | 'NEUTRAL'
   ): string => {
@@ -28,10 +27,10 @@ export function ButtonComponent({
     return obj[type];
   };
   return (
-    <div className={`button-component button-component--${typeColor(type)}`}>
+    <div className={`bytebank-button bytebank-button--${typeColor(type)}`}>
       <div
         className={`${
-          outlined ? `button-component--${typeColor(type)}--outlined` : ''
+          outlined ? `bytebank-button--${typeColor(type)}--outlined` : ''
         }`}
       >
         <Button variant="contained" color="primary" onClick={sendSubmit}>
@@ -39,16 +38,5 @@ export function ButtonComponent({
         </Button>
       </div>
     </div>
-
-    // <CustomButton
-    //   green={type === 'GREEN' ? 'true' : undefined}
-    //   orange={type === 'ORANGE' ? 'true' : undefined}
-    //   black={type === 'BLACK' ? 'true' : undefined}
-    //   neutral={type === 'NEUTRAL' ? 'true' : undefined}
-    //   outlined={outlined ? 'true' : undefined}
-    //   onClick={sendSubmit}
-    // >
-    //   {text}
-    // </CustomButton>
   );
 }

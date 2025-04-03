@@ -1,14 +1,14 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { Button, ButtonProps } from './index';
+import { BytebankButton, BytebankButtonProps } from './index';
 
 export default {
   title: 'Components/Button', // O título aqui deve estar correto
-  component: Button,
+  component: BytebankButton,
 } as Meta;
 
 // Alterando de Story para StoryFn
-const Template: StoryFn<ButtonProps> = (args) => (
-  <Button {...args} />
+const Template: StoryFn<BytebankButtonProps> = (args) => (
+  <BytebankButton {...args} />
 );
 
 export const Orange = Template.bind({});
