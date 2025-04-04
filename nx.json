@@ -103,14 +103,5 @@
       }
     }
   },
-  "implicitDependencies": {
-    "tsconfig.base.json": {
-      "compilerOptions": {
-        "paths": {
-          "@bytebank/shared": "*"
-        }
-      }
-    }
-  },
   "neverConnectToCloud": true
 }
