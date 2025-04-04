@@ -1,6 +1,6 @@
 'use client';
+import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
-import { ThemeProvider } from '@emotion/react';
 import { BytebankButton } from '@bytebank/shared';
 
 export default function Index() {
