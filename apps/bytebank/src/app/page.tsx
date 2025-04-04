@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@bytebank/shared';
+import { BytebankButton } from '@bytebank/shared';
 
 export default function Index() {
   /*
@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <div>
-      <Button
+      <BytebankButton
         text="Concluir transação"
         type="GREEN"
         outlined={true}

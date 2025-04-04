@@ -1,11 +1,11 @@
+import React from 'react';
 import { render } from '@testing-library/react';
-
-import { Button } from './index';
+import { BytebankButton } from './index';
 
 describe('Button', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <Button text="Concluir transação" type="GREEN" outlined={true} />
+      <BytebankButton text="Concluir transação" type="GREEN" outlined={true} />
     );
     expect(baseElement).toBeTruthy();
   });
