@@ -111,5 +111,6 @@
         }
       }
     }
-  }
+  },
+  "neverConnectToCloud": true
 }
