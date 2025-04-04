@@ -9,7 +9,7 @@ const inter = Inter({
 
 const theme = createTheme({
   typography: {
-    fontFamily: `${inter.style.fontFamily}, Arial`,
+    fontFamily: inter.style.fontFamily,
   },
 });
 
