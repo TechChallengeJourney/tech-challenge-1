@@ -1,26 +1,23 @@
 'use client';
+import theme from './theme';
+import { ThemeProvider } from '@emotion/react';
 import { BytebankButton } from '@bytebank/shared';
 
 export default function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.scss file.
-   *
-   */
-
   const handleSubmit = () => {
     alert('Clicou no botão');
   };
 
   return (
-    <div>
-      <BytebankButton
-        text="Concluir transação"
-        type="GREEN"
-        outlined={true}
-        sendSubmit={() => handleSubmit()}
-      />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <BytebankButton
+          text="Concluir transação"
+          type="GREEN"
+          outlined={true}
+          sendSubmit={() => handleSubmit()}
+        />
+      </div>
+    </ThemeProvider>
   );
 }
