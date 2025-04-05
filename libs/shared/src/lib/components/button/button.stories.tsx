@@ -1,19 +1,26 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { BytebankButton, BytebankButtonProps } from './index';
+import { Meta, StoryObj } from '@storybook/react';
+import { BytebankButton } from './index';
 
-export default {
+const meta: Meta<typeof BytebankButton> = {
   title: 'Components/Button', // O título aqui deve estar correto
   component: BytebankButton,
-} as Meta;
+};
+export default meta;
 
-// Alterando de Story para StoryFn
-const Template: StoryFn<BytebankButtonProps> = (args) => (
-  <BytebankButton {...args} />
-);
+type Story = StoryObj<typeof BytebankButton>;
 
-export const Orange = Template.bind({});
-Orange.args = {
-  text: 'Botão primário',
-  type: 'primary',
-  variant: 'contained'
+export const Primary: Story = {
+  args: {
+    text: 'Botão primário',
+    type: 'primary',
+    variant: 'contained',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    text: 'Botão secundário',
+    type: 'secondary',
+    variant: 'contained',
+  },
 };
