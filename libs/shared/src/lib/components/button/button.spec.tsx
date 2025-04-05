@@ -5,7 +5,7 @@ import { BytebankButton } from './index';
 describe('Button', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <BytebankButton text="Concluir transação" type="primary" variant="contained" />
+      <BytebankButton label="Concluir transação" color="primary" variant="contained" />
     );
     expect(baseElement).toBeTruthy();
   });

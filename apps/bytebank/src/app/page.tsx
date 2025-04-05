@@ -13,8 +13,8 @@ export default function Index() {
     <ThemeProvider theme={theme}>
       <div>
         <BytebankButton
-          text="Concluir transação"
-          type="tertiary"
+          label="Concluir transação"
+          color="tertiary"
           variant="contained"
           sendSubmit={() => handleSubmit()}
         />

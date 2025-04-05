@@ -10,22 +10,24 @@ declare module '@mui/material/Button' {
 }
 
 export interface BytebankButtonProps {
-  text: string;
-  type:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
-  variant?: 'text' | 'contained' | 'outlined';
+  /**
+   * O texto do botão
+   */
+  label: string;
+  /**
+   * A cor do botão
+   */
+  color: 'primary' | 'secondary' | 'tertiary'| 'success' | 'error' | 'info' | 'warning';
+  /**
+   * O estilo do botão
+   */
+  variant?: 'contained' | 'text' | 'outlined';
   sendSubmit?: () => void;
 }
 
 export function BytebankButton({
-  text,
-  type,
+  label,
+  color,
   variant,
   sendSubmit,
 }: BytebankButtonProps) {
@@ -36,9 +38,9 @@ export function BytebankButton({
   }));
 
   return (
-    <div className={`bytebank-button bytebank-button--${type}`}>
-      <ColorButton variant={variant} color={type} onClick={sendSubmit}>
-        {text}
+    <div className={`bytebank-button bytebank-button--${color}`}>
+      <ColorButton variant={variant} color={color} onClick={sendSubmit}>
+        {label}
       </ColorButton>
     </div>
   );

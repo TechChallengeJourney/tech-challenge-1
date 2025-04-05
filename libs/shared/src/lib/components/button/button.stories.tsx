@@ -29,16 +29,16 @@ type Story = StoryObj<typeof BytebankButton>;
 
 export const Primary: Story = {
   args: {
-    text: 'Label',
-    type: 'primary',
+    label: 'Label',
+    color: 'primary',
     variant: 'contained',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    text: 'Label',
-    type: 'secondary',
+    label: 'Label',
+    color: 'secondary',
     variant: 'contained',
   },
 };
@@ -46,8 +46,8 @@ export const Secondary: Story = {
 
 export const Tertiary: Story = {
   args: {
-    text: 'Label',
-    type: 'tertiary',
+    label: 'Label',
+    color: 'tertiary',
     variant: 'contained',
   },
 };
