@@ -13,7 +13,7 @@ const Template: StoryFn<BytebankButtonProps> = (args) => (
 
 export const Orange = Template.bind({});
 Orange.args = {
-  text: 'Botão Laranja',
-  type: 'ORANGE',
-  outlined: false,
+  text: 'Botão primário',
+  type: 'primary',
+  variant: 'contained'
 };
