@@ -1,0 +1,47 @@
+import { Meta, ColorPalette, ColorItem, Title, Subtitle } from '@storybook/blocks';
+import { palette } from '../styles/palette';
+
+<Meta title="Colors" />
+ 
+<Title>Tema</Title>
+<Subtitle>O tema usado neste projeto é baseado no <strong>Mui Material</strong>.</Subtitle>
+
+<ColorPalette>
+  <ColorItem
+    title="palette.primary"
+    subtitle="Primary"
+    colors={{ 'palette.primary.main': palette['primary.main'], 'palette.primary.light': palette['primary.light'], 'palette.primary.dark': palette['primary.dark'] }}
+  />
+  <ColorItem
+    title="palette.secondary"
+    subtitle="Secondary"
+    colors={{ 'palette.secondary.main': palette['secondary.main'], 'palette.secondary.light': palette['secondary.light'], 'palette.secondary.dark': palette['secondary.dark'] }}
+  />
+  <ColorItem
+    title="palette.tertiary"
+    subtitle="Tertiary"
+    colors={{ 'palette.tertiary.main': palette['tertiary.main'], 'palette.tertiary.light': palette['tertiary.light'], 'palette.tertiary.dark': palette['tertiary.dark'] }}
+  />
+  <ColorItem
+    title="palette.success"
+    subtitle="Success"
+    colors={{ 'palette.success.main': palette['success.main'], 'palette.success.light': palette['success.light'], 'palette.success.dark': palette['success.dark'] }}
+  />
+  <ColorItem
+    title="palette.grey"
+    subtitle="Grey"
+    colors={{ 'palette.grey.50': palette['grey.50'], 'palette.grey.200': palette['grey.200'], 'palette.grey.400': palette['grey.400'], 'palette.grey.500': palette['grey.500'], 'palette.grey.700': palette['grey.700'], 'palette.grey.900': palette['grey.900'] }}
+  />
+  <ColorItem
+    title="background.gradient"
+    subtitle="Background"
+    colors={{
+      Gradient: 'linear-gradient(to right,'+ palette['primary.main'] +',white)',
+    }}
+  />
+  <ColorItem
+    title="background"
+    subtitle="Background default"
+    colors={{'palette.background': palette['background']}}
+  />
+</ColorPalette>

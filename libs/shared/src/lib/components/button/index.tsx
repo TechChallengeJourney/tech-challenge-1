@@ -31,7 +31,7 @@ export function BytebankButton({
   variant,
   sendSubmit,
 }: BytebankButtonProps) {
-  const ColorButton = styled(Button)(({ theme }) => ({
+  const ColorButton = styled(Button)(() => ({
     '&.MuiButton-containedTertiary:hover': {
       color: 'white',
     },

@@ -1,27 +1,28 @@
 import { Inter } from 'next/font/google';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 declare module '@mui/material/styles' {
-    interface Palette {
-      tertiary: Palette['primary'];
-    }
-  
-    interface PaletteOptions {
-    tertiary?: PaletteOptions['primary'];
-    }
+  interface Palette {
+    tertiary: Palette['primary'];
   }
+
+  interface PaletteOptions {
+    tertiary?: PaletteOptions['primary'];
+  }
+}
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
   style: ['normal', 'italic'],
 });
-let theme = createTheme({
+
+let defaultTheme = createTheme({
   typography: {
     fontFamily: inter.style.fontFamily,
-  },
+  }
 });
 
-theme = createTheme(theme, {
+defaultTheme = createTheme(defaultTheme, {
   palette: {
     primary: {
       main: '#004D61',
@@ -33,7 +34,7 @@ theme = createTheme(theme, {
       light: '#ffbaad',
       dark: '#C43C28',
     },
-    tertiary: theme.palette.augmentColor({
+    tertiary: defaultTheme.palette.augmentColor({
       color: {
         main: '#DEE9EA',
         light: '#F8F8F8',
@@ -46,5 +47,5 @@ theme = createTheme(theme, {
   cssVariables: true,
 });
 
-theme = responsiveFontSizes(theme);
-export default theme;
+defaultTheme = responsiveFontSizes(defaultTheme);
+export default defaultTheme;
