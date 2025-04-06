@@ -36,19 +36,19 @@ const TextsTemplate: Story<{variant: string, label: string}> = ({variant = 'lg',
   <>
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ margin: 2 }}> 
-        <Typography variant={variant}>{label} ({variant})</Typography>
+        <Typography variant={variant}>{label}</Typography>
       </Box>
       <Box sx={{ margin: 2 }}> 
-        <Typography variant="lg">Heading (lg)</Typography>
+        <Typography variant="lg">Heading</Typography> (lg)
       </Box>
       <Box sx={{ margin: 2 }}>
-        <Typography variant="md">Heading (md)</Typography>
+        <Typography variant="md">Heading</Typography> (md)
       </Box>
       <Box sx={{ margin: 2 }}>
-        <Typography variant="sm">Text (sm)</Typography>
+        <Typography variant="sm">Text</Typography> (sm)
       </Box>
       <Box sx={{ margin: 2 }}>
-        <Typography variant="xs">Text (xs)</Typography>
+        <Typography variant="xs">Text</Typography> (xs)
       </Box>
     </ThemeProvider>
   </>
@@ -59,27 +59,27 @@ const SpacingTemplate: Story = () => (
     <ThemeProvider theme={defaultTheme}>
       <Box paddingBottom={defaultTheme.spacing(1)}>
         <Box padding={defaultTheme.spacing(1)} sx={{ backgroundColor: defaultTheme.palette.grey[100] }}>
-          <Typography variant="md">Espaçamento 8px</Typography>
+          <Typography variant="md">Espaçamento</Typography> 8px
         </Box>
       </Box>
       <Box paddingBottom={defaultTheme.spacing(2)}>
         <Box padding={defaultTheme.spacing(2)} sx={{ backgroundColor: defaultTheme.palette.grey[200] }}>
-          <Typography variant="md">Espaçamento 16px</Typography>
+          <Typography variant="md">Espaçamento</Typography> 16px
         </Box>
       </Box>
       <Box paddingBottom={defaultTheme.spacing(3)}>
         <Box padding={defaultTheme.spacing(2)} sx={{ backgroundColor: defaultTheme.palette.grey[400] }}>
-          <Typography variant="md">Espaçamento 24px</Typography>
+          <Typography variant="md">Espaçamento</Typography> 24px
         </Box>
       </Box>
       <Box paddingBottom={defaultTheme.spacing(4)}>
         <Box padding={defaultTheme.spacing(2)} sx={{ backgroundColor: defaultTheme.palette.grey[500] }}>
-          <Typography variant="md">Espaçamento 32px</Typography>
+          <Typography variant="md">Espaçamento</Typography> 32px
         </Box>
       </Box>
       <Box paddingBottom={defaultTheme.spacing(5)}>
         <Box padding={defaultTheme.spacing(2)} sx={{ backgroundColor: defaultTheme.palette.grey[600] }}>
-          <Typography variant="md">Espaçamento 64px</Typography>
+          <Typography variant="md">Espaçamento</Typography> 64px
         </Box>
       </Box>
       <Box padding={defaultTheme.spacing(2)} sx={{ height: '2rem', backgroundColor: defaultTheme.palette.grey[700] }}>
