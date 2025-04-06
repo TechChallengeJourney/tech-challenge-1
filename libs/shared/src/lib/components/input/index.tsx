@@ -1,6 +1,5 @@
 'use client';
 import TextField from '@mui/material/TextField';
-import './style.scss';
 
 export interface InputProps {
   value: string;

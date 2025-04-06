@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import type { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import Input from './index';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import * as DocBlock from '@storybook/blocks';
 
 export default {
-  title: 'Components/InputField',
+  title: 'Input',
   component: Input,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <DocBlock.Title />
+          <DocBlock.Description />
+          <DocBlock.Primary />
+          <DocBlock.Controls />
+          <DocBlock.Stories />
+        </>
+      ),
+    },
+  },
 } as Meta<typeof Input>;
 
 const Template: StoryFn<typeof Input> = (args) => {

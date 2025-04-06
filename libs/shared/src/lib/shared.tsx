@@ -1,5 +1,4 @@
 import { BytebankButton } from './components/button';
-import BytebankInput from './components/input/ControlledInput';
+import { BytebankInput } from './components/input/ControlledInput';
 
-export { BytebankButton };
-export { BytebankInput };
+export { BytebankButton, BytebankInput };

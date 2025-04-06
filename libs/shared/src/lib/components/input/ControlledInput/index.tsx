@@ -9,7 +9,7 @@ interface ControlledInputProps {
   placeholder?: string;
 }
 
-const BytebankInput: React.FC<ControlledInputProps> = ({
+export const BytebankInput: React.FC<ControlledInputProps> = ({
   name,
   label,
   type = 'text',
@@ -34,5 +34,3 @@ const BytebankInput: React.FC<ControlledInputProps> = ({
     />
   );
 };
-
-export default BytebankInput;

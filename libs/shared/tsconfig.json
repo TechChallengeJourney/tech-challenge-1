@@ -8,7 +8,7 @@
   ],
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["dom", "esnext"], // <- ESSENCIAL
-    "jsx": "react-jsx" // ou "react"
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx"
   }
 }
