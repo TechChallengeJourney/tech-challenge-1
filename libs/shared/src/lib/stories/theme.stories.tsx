@@ -9,12 +9,6 @@ export default {
     docs: {
       page: () =>
                 <>
-                <DocBlock.Title />
-                <DocBlock.Description />
-                
-                <DocBlock.Primary />
-                <DocBlock.Controls />
-      
                 <DocBlock.Stories />
                 </> 
     },

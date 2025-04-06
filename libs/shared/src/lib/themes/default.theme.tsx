@@ -1,14 +1,8 @@
 import { Inter } from 'next/font/google';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { palette } from '../styles/palette';
+
 declare module '@mui/material/styles' {
-  interface Palette {
-    tertiary: Palette['primary'];
-  }
-
-  interface PaletteOptions {
-    tertiary?: PaletteOptions['primary'];
-  }
-
   interface TypographyVariantsOptions {
     xs?: TypographyVariantsOptions['h1'];
     sm?: TypographyVariantsOptions['h1'];
@@ -47,21 +41,21 @@ let defaultTheme = createTheme({
 defaultTheme = createTheme(defaultTheme, {
   palette: {
     primary: {
-      main: '#004D61',
-      light: '#DEE9EA',
-      dark: '#002B3D',
+      main: palette['primary.main'],
+      light: palette['primary.light'],
+      dark: palette['primary.dark'],
     },
     secondary: {
-      main: '#FF5031',
-      light: '#ffbaad',
-      dark: '#C43C28',
+      main: palette['secondary.main'],
+      light: palette['secondary.light'],
+      dark: palette['secondary.dark'],
     },
     tertiary: defaultTheme.palette.augmentColor({
       color: {
-        main: '#DEE9EA',
-        light: '#F8F8F8',
-        dark: '#004D61',
-        contrastText: '#004D61',
+        main: palette['tertiary.main'],
+        light: palette['tertiary.light'],
+        dark: palette['tertiary.dark'],
+        contrastText: palette['tertiary.dark'],
       },
       name: 'tertiary',
     }),
