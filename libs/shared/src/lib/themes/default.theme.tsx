@@ -8,6 +8,21 @@ declare module '@mui/material/styles' {
   interface PaletteOptions {
     tertiary?: PaletteOptions['primary'];
   }
+
+  interface TypographyVariantsOptions {
+    xs?: TypographyVariantsOptions['h1'];
+    sm?: TypographyVariantsOptions['h1'];
+    md?: TypographyVariantsOptions['h1'];
+    lg?: TypographyVariantsOptions['h1'];
+  }
+}
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    xs: true;
+    sm: true;
+    md: true;
+    lg: true;
+  }
 }
 
 const inter = Inter({
@@ -19,7 +34,14 @@ const inter = Inter({
 let defaultTheme = createTheme({
   typography: {
     fontFamily: inter.style.fontFamily,
-  }
+    h1: { fontSize: 25, fontWeight: 700 },
+    xs: { fontSize: 13, fontFamily: inter.style.fontFamily },
+    sm: { fontSize: 16, fontFamily: inter.style.fontFamily },
+    md: { fontSize: 28, fontFamily: inter.style.fontFamily },
+    lg: { fontSize: 34, fontFamily: inter.style.fontFamily, fontWeight: 500 },
+    button: { fontSize: 16 },
+  },
+  spacing: [0, 8, 16, 24, 32, 64],
 });
 
 defaultTheme = createTheme(defaultTheme, {

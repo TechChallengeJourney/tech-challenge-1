@@ -1,11 +1,14 @@
-import { Meta, ColorPalette, ColorItem, Title, Subtitle } from '@storybook/blocks';
+import { Meta, ColorPalette, ColorItem, Title, Subtitle, Canvas } from '@storybook/blocks';
 import { palette } from '../styles/palette';
+import { Box,Typography } from '@mui/material';
+import * as ThemeStories from './theme.stories';
 
-<Meta title="Colors" />
+<Meta title="Tema" />
  
 <Title>Tema</Title>
 <Subtitle>O tema usado neste projeto é baseado no <strong>Mui Material</strong>.</Subtitle>
 
+<Title>Colors</Title>
 <ColorPalette>
   <ColorItem
     title="palette.primary"
@@ -45,3 +48,11 @@ import { palette } from '../styles/palette';
     colors={{'palette.background': palette['background']}}
   />
 </ColorPalette>
+
+<Title>Texts</Title>
+<Subtitle>Definições de tamanho das fontes de títulos e textos.</Subtitle>
+<ThemeStories.Texts />
+
+<Title>Spacing</Title>
+<Subtitle>Definições de espaçamento entre elementos.</Subtitle>
+<ThemeStories.Spacing />
