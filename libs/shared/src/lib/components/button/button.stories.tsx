@@ -1,19 +1,53 @@
-import { Meta, StoryFn } from '@storybook/react';
-import { BytebankButton, BytebankButtonProps } from './index';
+import { Meta, StoryObj } from '@storybook/react';
+import  * as DocBlock from '@storybook/blocks';
+import { BytebankButton } from './index';
 
-export default {
+const meta = {
   title: 'Components/Button', // O título aqui deve estar correto
   component: BytebankButton,
-} as Meta;
+  tags: ['autodocs'],
+  parameters: {
+         docs: {
+        page: () =>
+          <>
+          <DocBlock.Title />
+          <DocBlock.Description />
+          
+          <DocBlock.Primary />
+          <DocBlock.Controls />
 
-// Alterando de Story para StoryFn
-const Template: StoryFn<BytebankButtonProps> = (args) => (
-  <BytebankButton {...args} />
-);
+          <DocBlock.Title>Variações</DocBlock.Title>
+          <DocBlock.Stories />
+          </>
+      }
+    }
+} satisfies Meta<typeof BytebankButton>;
 
-export const Orange = Template.bind({});
-Orange.args = {
-  text: 'Botão Laranja',
-  type: 'ORANGE',
-  outlined: false,
+export default meta;
+
+type Story = StoryObj<typeof BytebankButton>;
+
+export const Primary: Story = {
+  args: {
+    label: 'Label',
+    color: 'primary',
+    variant: 'contained',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    label: 'Label',
+    color: 'secondary',
+    variant: 'contained',
+  },
+};
+
+
+export const Tertiary: Story = {
+  args: {
+    label: 'Label',
+    color: 'tertiary',
+    variant: "text",
+  },
 };

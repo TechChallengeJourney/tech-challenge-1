@@ -1,8 +1,8 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
-import { BytebankButton } from '@bytebank/shared';
+import { BytebankButton, defaultTheme as theme } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
+import { Box, Typography } from '@mui/material';
 
 import { BytebankInput } from '@bytebank/shared';
 
@@ -39,11 +39,18 @@ export default function Index() {
             type="email"
           />
 
-          <BytebankButton
-            text="Concluir transação"
-            type="GREEN"
-            outlined={true}
-          />
+          <Box>
+            <Box marginBottom={theme.spacing(4)}>
+              <Typography variant="lg" color="primary">
+                Eu sou um título
+              </Typography>
+            </Box>
+            <BytebankButton
+              label="Concluir transação"
+              color="primary"
+              variant="contained"
+            />
+          </Box>
         </form>
       </FormProvider>
     </ThemeProvider>
