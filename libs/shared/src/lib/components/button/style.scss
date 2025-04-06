@@ -1,66 +1,10 @@
 @import '../../styles/variables.scss';
 
 .bytebank-button {
-  &--orange {
-    button {
-      background-color: map-get($color, orange);
-      border: 2px solid map-get($color, orange);
-    }
-
-    &--outlined {
-      button {
-        background-color: transparent;
-        color: map-get($color, orange) !important;
-      }
-    }
-  }
-
-  &--green {
-    button {
-      background-color: map-get($color, green);
-      border: 2px solid map-get($color, green);
-    }
-
-    &--outlined {
-      button {
-        background-color: transparent;
-        color: map-get($color, green) !important;
-      }
-    }
-  }
-
-  &--black {
-    button {
-      background-color: map-get($color, black);
-      border: 2px solid map-get($color, black);
-    }
-
-    &--outlined {
-      button {
-        background-color: transparent;
-        color: map-get($color, black) !important;
-      }
-    }
-  }
-
-  &--neutral {
-    button {
-      background-color: transparent;
-      color: map-get($color, text) !important;
-    }
-  }
-
   button {
     border-radius: map-get($border, radius);
-    font-size: map-get($font-size, text);
-    color: #FFF;
     padding: 10px 40px;
     box-shadow: none;
-    cursor: pointer;
     text-transform: none;
-
-    &:hover {
-      opacity: 0.8;
-    }
   }
 }

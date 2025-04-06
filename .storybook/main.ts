@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@chromatic-com/storybook',
     '@storybook/experimental-addon-test',
+    '@storybook/blocks',
   ],
   framework: {
     name: '@storybook/nextjs',

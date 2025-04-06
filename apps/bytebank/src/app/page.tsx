@@ -1,7 +1,7 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
-import { BytebankButton } from '@bytebank/shared';
+import { BytebankButton, defaultTheme as theme } from '@bytebank/shared';
+import { Box, Typography } from '@mui/material';
 
 export default function Index() {
   const handleSubmit = () => {
@@ -10,14 +10,17 @@ export default function Index() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <Box>
+        <Box marginBottom={theme.spacing(4)}>
+          <Typography variant="lg" color="primary">Eu sou um título</Typography>
+        </Box>
         <BytebankButton
-          text="Concluir transação"
-          type="GREEN"
-          outlined={true}
+          label="Concluir transação"
+          color="primary"
+          variant="contained"
           sendSubmit={() => handleSubmit()}
         />
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }

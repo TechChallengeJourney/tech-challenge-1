@@ -1,42 +1,47 @@
 'use client';
 import Button from '@mui/material/Button';
 import './style.scss';
+import { styled } from '@mui/material';
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    tertiary: true;
+  }
+}
 
 export interface BytebankButtonProps {
-  text: string;
-  type: 'ORANGE' | 'GREEN' | 'BLACK' | 'NEUTRAL';
-  outlined?: boolean;
+  /**
+   * O texto do botão
+   */
+  label: string;
+  /**
+   * A cor do botão
+   */
+  color: 'primary' | 'secondary' | 'tertiary'| 'success' | 'error' | 'info' | 'warning';
+  /**
+   * O estilo do botão
+   */
+  variant?: 'contained' | 'text' | 'outlined';
   sendSubmit?: () => void;
 }
 
 export function BytebankButton({
-  text,
-  type,
-  outlined,
+  label,
+  color,
+  variant,
   sendSubmit,
 }: BytebankButtonProps) {
-  const typeColor = (
-    type: 'ORANGE' | 'GREEN' | 'BLACK' | 'NEUTRAL'
-  ): string => {
-    const obj = {
-      ORANGE: 'orange',
-      GREEN: 'green',
-      BLACK: 'black',
-      NEUTRAL: 'neutral',
-    };
-    return obj[type];
-  };
+  const ColorButton = styled(Button)(() => ({
+    '&.MuiButton-containedTertiary:hover': {
+      color: 'white',
+    },
+  }));
+
   return (
-    <div className={`bytebank-button bytebank-button--${typeColor(type)}`}>
-      <div
-        className={`${
-          outlined ? `bytebank-button--${typeColor(type)}--outlined` : ''
-        }`}
-      >
-        <Button variant="contained" color="primary" onClick={sendSubmit}>
-          {text}
-        </Button>
-      </div>
+    <div className={`bytebank-button bytebank-button--${color}`}>
+      <ColorButton variant={variant} color={color} onClick={sendSubmit}>
+        {label}
+      </ColorButton>
     </div>
   );
 }
