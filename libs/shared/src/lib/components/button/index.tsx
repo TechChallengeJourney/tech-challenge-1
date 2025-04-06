@@ -33,7 +33,12 @@ export function BytebankButton({
           outlined ? `bytebank-button--${typeColor(type)}--outlined` : ''
         }`}
       >
-        <Button variant="contained" color="primary" onClick={sendSubmit}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          onClick={sendSubmit}
+        >
           {text}
         </Button>
       </div>
