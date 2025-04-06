@@ -89,7 +89,7 @@ const SpacingTemplate: Story = () => (
 );
 
 export const Texts = TextsTemplate.bind({});
-Texts.storyName = 'Texts';
+Texts.storyName = 'Text';
 
 export const Spacing = SpacingTemplate.bind({});
 Spacing.storyName = 'Spacing';
