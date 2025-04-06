@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import * as DocBlock from '@storybook/blocks';
 
 export default {
-  title: 'Input',
+  title: 'Components/InputField',
   component: Input,
   tags: ['autodocs'],
   parameters: {
