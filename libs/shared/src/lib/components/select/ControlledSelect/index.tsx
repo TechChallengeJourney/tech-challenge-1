@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import SelectComponent, { SelectOption } from '../index';
+import BytebankSelect, { SelectOption } from '../index';
 
 interface ControlledSelectProps {
   name: string;
@@ -8,7 +8,7 @@ interface ControlledSelectProps {
   options: SelectOption[];
 }
 
-export const BytebankSelect: React.FC<ControlledSelectProps> = ({
+export const BytebankSelectController: React.FC<ControlledSelectProps> = ({
   name,
   label,
   options,
@@ -19,7 +19,7 @@ export const BytebankSelect: React.FC<ControlledSelectProps> = ({
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <SelectComponent
+        <BytebankSelect
           value={field.value ?? ''}
           onChange={(value) => field.onChange(value)}
           label={label}

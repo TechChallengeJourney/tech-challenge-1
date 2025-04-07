@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
-import Input from './index';
+import BytebankInput from './index';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as DocBlock from '@storybook/blocks';
 
 export default {
-  title: 'Components/InputField',
-  component: Input,
+  title: 'Components/BytebankInput',
+  component: BytebankInput,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -22,9 +22,9 @@ export default {
       ),
     },
   },
-} as Meta<typeof Input>;
+} as Meta<typeof BytebankInput>;
 
-const Template: StoryFn<typeof Input> = (args) => {
+const Template: StoryFn<typeof BytebankInput> = (args) => {
   const [value, setValue] = useState('');
 
   const handleChange = (e: any) => {
@@ -34,7 +34,7 @@ const Template: StoryFn<typeof Input> = (args) => {
   return (
     <ThemeProvider theme={createTheme()}>
       <CssBaseline />
-      <Input {...args} value={value} onChange={handleChange} />
+      <BytebankInput {...args} value={value} onChange={handleChange} />
     </ThemeProvider>
   );
 };

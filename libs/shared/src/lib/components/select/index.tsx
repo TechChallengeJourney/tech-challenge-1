@@ -22,7 +22,7 @@ export interface SelectProps {
   helperText?: string;
 }
 
-export default function SelectComponent({
+export default function BytebankSelect({
   value,
   onChange,
   label,

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
-import SelectComponent, { SelectOption } from './index';
+import BytebankSelect, { SelectOption } from './index';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as DocBlock from '@storybook/blocks';
 
 export default {
-  title: 'Components/SelectComponent',
-  component: SelectComponent,
+  title: 'Components/BytebankSelect',
+  component: BytebankSelect,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -22,14 +22,14 @@ export default {
       ),
     },
   },
-} as Meta<typeof SelectComponent>;
+} as Meta<typeof BytebankSelect>;
 
 const options: SelectOption[] = [
   { label: 'Pessoa Física', value: 'pf' },
   { label: 'Pessoa Jurídica', value: 'pj' },
 ];
 
-const Template: StoryFn<typeof SelectComponent> = (args) => {
+const Template: StoryFn<typeof BytebankSelect> = (args) => {
   const [value, setValue] = useState('');
 
   const handleChange = (event: any) => {
@@ -39,7 +39,7 @@ const Template: StoryFn<typeof SelectComponent> = (args) => {
   return (
     <ThemeProvider theme={createTheme()}>
       <CssBaseline />
-      <SelectComponent {...args} value={value} onChange={handleChange} />
+      <BytebankSelect {...args} value={value} onChange={handleChange} />
     </ThemeProvider>
   );
 };
