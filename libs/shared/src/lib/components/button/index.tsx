@@ -17,7 +17,14 @@ export interface BytebankButtonProps {
   /**
    * A cor do botão
    */
-  color: 'primary' | 'secondary' | 'tertiary'| 'success' | 'error' | 'info' | 'warning';
+  color:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'success'
+    | 'error'
+    | 'info'
+    | 'warning';
   /**
    * O estilo do botão
    */
@@ -39,7 +46,12 @@ export function BytebankButton({
 
   return (
     <div className={`bytebank-button bytebank-button--${color}`}>
-      <ColorButton variant={variant} color={color} onClick={sendSubmit}>
+      <ColorButton
+        type="submit"
+        variant={variant}
+        color={color}
+        onClick={sendSubmit}
+      >
         {label}
       </ColorButton>
     </div>

@@ -48,6 +48,6 @@ export const Tertiary: Story = {
   args: {
     label: 'Label',
     color: 'tertiary',
-    variant: 'contained',
+    variant: "text",
   },
 };
