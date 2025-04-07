@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
-import Input from './index';
+import SelectComponent, { SelectOption } from './index';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import * as DocBlock from '@storybook/blocks';
 
 export default {
-  title: 'Components/InputField',
-  component: Input,
+  title: 'Components/SelectComponent',
+  component: SelectComponent,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -22,37 +22,40 @@ export default {
       ),
     },
   },
-} as Meta<typeof Input>;
+} as Meta<typeof SelectComponent>;
 
-const Template: StoryFn<typeof Input> = (args) => {
+const options: SelectOption[] = [
+  { label: 'Pessoa Física', value: 'pf' },
+  { label: 'Pessoa Jurídica', value: 'pj' },
+];
+
+const Template: StoryFn<typeof SelectComponent> = (args) => {
   const [value, setValue] = useState('');
 
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
+  const handleChange = (event: any) => {
+    setValue(event.target.value);
   };
 
   return (
     <ThemeProvider theme={createTheme()}>
       <CssBaseline />
-      <Input {...args} value={value} onChange={handleChange} />
+      <SelectComponent {...args} value={value} onChange={handleChange} />
     </ThemeProvider>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  label: 'Nome',
-  placeholder: 'Digite seu nome',
-  type: 'text',
+  label: 'Tipo de Pessoa',
+  options,
   error: false,
   helperText: '',
 };
 
 export const WithError = Template.bind({});
 WithError.args = {
-  label: 'Email',
-  placeholder: 'Digite seu email',
-  type: 'email',
+  label: 'Tipo de Pessoa',
+  options,
   error: true,
-  helperText: 'Email inválido',
+  helperText: 'Selecione um tipo válido',
 };
