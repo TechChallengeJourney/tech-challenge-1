@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .menu-item {
+        padding: 16px 0;
+        text-decoration: none;
+        color: var(--color-black);
+        min-width: 126px;
+
+        &.active {
+            font-weight: bold;
+            color: var(--mui-palette-success-main);
+        }
+
+        &:first-of-type {
+            padding-top: 0px;
+        }
+    }
+}
