@@ -6,7 +6,13 @@
         "runtime": "automatic",
         "useBuiltIns": "usage"
       }
-    ]
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic",
+      },
+    ],
   ],
   "plugins": []
 }
