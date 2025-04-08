@@ -1,10 +1,11 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
-import { BytebankButton, defaultTheme as theme } from '@bytebank/shared';
+import { BytebankButton, Modal, defaultTheme as theme } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
 
 import { BytebankInput } from '@bytebank/shared';
+import React from 'react';
 
 type FormValues = {
   name: string;
@@ -22,6 +23,8 @@ export default function Index() {
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
+
+  const [modal, setModal] = React.useState<boolean>(false)
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,6 +56,8 @@ export default function Index() {
           </Box>
         </form>
       </FormProvider>
+      <Modal>
+      </Modal>
     </ThemeProvider>
   );
 }
