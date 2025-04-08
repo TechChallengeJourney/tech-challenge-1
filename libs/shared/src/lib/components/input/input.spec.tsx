@@ -12,6 +12,8 @@ const Wrapper = ({ children }) => {
 describe('Input', () => {
     it('render bytebankInput component correctly', () => {
         const { baseElement } = render(<Wrapper><BytebankInput name="nome" label="nome"  /></Wrapper>);
-        expect(baseElement).toBeDefined();
+        const inputElement = baseElement.querySelector('.bytebank-input');
+        
+        expect(inputElement?.className).toBe('bytebank-input'); 
     });
 });
