@@ -1,13 +1,10 @@
-import React from 'react'
 import './style.scss';
+import { Box, Modal, ModalProps } from '@mui/material';
 
-
-export function Modal() {
-
-
-return (
-    <div>
-      <p>Modal</p>
-    </div>
-  )
+export function BytebankModal({ onClose, open, children }: ModalProps) {
+  return (
+    <Modal open={open} onClose={onClose}>
+      <Box className="bytebank-modal">{children}</Box>
+    </Modal>
+  );
 }

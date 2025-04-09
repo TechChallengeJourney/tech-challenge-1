@@ -1,5 +1,19 @@
 @import '../../styles/variables.scss';
 
-p {
-  color: red;
+.bytebank-modal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 100vh;
+  width: 400px;
+  background-color: var(--mui-palette-tertiary-light);
+  box-shadow: 24px;
+  padding: 8px;
+}
+
+.bytebank-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
