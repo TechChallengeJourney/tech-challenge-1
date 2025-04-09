@@ -6,9 +6,9 @@ describe('BytebankText', () => {
   it('should render the label correctly', () => {
     const label = "The quick brown fox jumps over the lazy dog";
     const color = "primary";
-    const type = "md";
+    const variant = "md";
 
-    render(<BytebankText label={label} color={color} type={type} />);
+    render(<BytebankText label={label} color={color} variant={variant} />);
 
     const textElement = screen.getByText(label);
     expect(textElement).toBeInTheDocument();

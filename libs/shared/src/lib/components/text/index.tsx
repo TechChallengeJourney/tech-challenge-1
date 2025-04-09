@@ -11,17 +11,17 @@ export interface BytebankTextProps {
     | 'error'
     | 'info'
     | 'warning';
-  type?: 'xs' | 'sm' | 'md' | 'lg';
+  variant?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 export function BytebankText({
   label,
   color = 'primary',
-  type = 'sm',
+  variant = 'sm',
 }: BytebankTextProps) {
   return (
     <Box>
-      <Typography variant={type} color={color}>
+      <Typography variant={variant} color={color}>
         {label}
       </Typography>
     </Box>
