@@ -1,9 +1,16 @@
 'use client';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 export interface BytebankTextProps {
   label: string;
-  color?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'error' | 'info' | 'warning';
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'success'
+    | 'error'
+    | 'info'
+    | 'warning';
   type?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
@@ -13,10 +20,10 @@ export function BytebankText({
   type = 'sm',
 }: BytebankTextProps) {
   return (
-    <div className={`bytebank-text bytebank-text--${color}`}>
+    <Box>
       <Typography variant={type} color={color}>
         {label}
       </Typography>
-    </div>
+    </Box>
   );
 }
