@@ -34,7 +34,6 @@ export default {
 
 const TextsTemplate: Story<{variant: string, label: string}> = ({variant = 'lg', label = 'Bytebank Dynamic Heading'}) => (
   <>
-    <ThemeProvider theme={defaultTheme}>
       <Box sx={{ margin: 2 }}> 
         <Typography variant={variant}>{label}</Typography>
       </Box>
@@ -50,13 +49,11 @@ const TextsTemplate: Story<{variant: string, label: string}> = ({variant = 'lg',
       <Box sx={{ margin: 2 }}>
         <Typography variant="xs">Text</Typography> (xs)
       </Box>
-    </ThemeProvider>
   </>
 );
 
 const SpacingTemplate: Story = () => (
   <>
-    <ThemeProvider theme={defaultTheme}>
       <Box paddingBottom={defaultTheme.spacing(1)}>
         <Box padding={defaultTheme.spacing(1)} sx={{ backgroundColor: defaultTheme.palette.grey[100] }}>
           <Typography variant="md">Espaçamento</Typography> 8px
@@ -84,7 +81,6 @@ const SpacingTemplate: Story = () => (
       </Box>
       <Box padding={defaultTheme.spacing(2)} sx={{ height: '2rem', backgroundColor: defaultTheme.palette.grey[700] }}>
       </Box>
-    </ThemeProvider>
   </>
 );
 

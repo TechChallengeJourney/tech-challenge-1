@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import Input from './index';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import * as DocBlock from '@storybook/blocks';
 
 export default {
@@ -32,10 +30,7 @@ const Template: StoryFn<typeof Input> = (args) => {
   };
 
   return (
-    <ThemeProvider theme={createTheme()}>
-      <CssBaseline />
-      <Input {...args} value={value} onChange={handleChange} />
-    </ThemeProvider>
+    <Input {...args} value={value} onChange={handleChange} />
   );
 };
 
