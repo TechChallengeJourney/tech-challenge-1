@@ -1,18 +1,16 @@
-import styles from './style.scss';
-
 export interface BytebankIllustrationProps {
   name: string;
-  size?: 'sm' | 'md' |'lg' | 'auto';
+  variant?: 'sm' | 'md' |'lg' | 'auto';
 }
-enum BytebankIllustrationSize {
+enum BytebankIllustrationVariant {
   'sm' = '60px',
   'md' = '160px',
   'lg' = '220px',
   'auto' = 'auto'
 }
-export function BytebankIllustration({name, size = 'auto'}: BytebankIllustrationProps) {
+export function BytebankIllustration({name, variant = 'auto'}: BytebankIllustrationProps) {
   const path: string = name ? `/images/${name}.png` : '';
   return (
-    <img src={path} width={BytebankIllustrationSize[size]}/>
+    <img src={path} width={BytebankIllustrationVariant[variant]}/>
   );
 }
