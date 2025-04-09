@@ -17,6 +17,21 @@ export default {
           <DocBlock.Controls />
           <DocBlock.Stories />
 
+          <Box>
+            <Typography variant="h5" gutterBottom>
+              Illustration Variants
+            </Typography>
+            <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="flex-end" gap={5}>
+              {['card-holding', 'card-saving', 'login', 'register', 'error'].map((name) => (
+                <Box key={name} display="flex" alignItems="center" flexDirection="column">
+                  <BytebankIllustration name={name} size="md" />
+                  <Typography variant="caption" style={{ marginTop: '8px' }}>
+                    {name}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
         </>
       ),
     },
@@ -36,8 +51,6 @@ const createStory = ({ name = 'card-holding', size = 'md' }): Story<BytebankIllu
   const Template: Story<BytebankIllustrationProps> = (args: BytebankIllustrationProps) => (
       <BytebankIllustration {...args} />
   );
-
-  // Set default args for the story
   Template.args = {
       name,
       size
@@ -47,14 +60,10 @@ const createStory = ({ name = 'card-holding', size = 'md' }): Story<BytebankIllu
 };
 
 const illustrationStories: { [key: string]: Story<BytebankIllustrationProps> } = {};
-const templates = [ 'card-holding', 'card-saving', 'login', 'register', 'error'];
+const templates = [ 'card-holding'];
 
 templates.forEach((name) => {
   illustrationStories[`${name}`] = createStory({ name, size: 'md' });
 });
 
 export const cardHolding = illustrationStories[templates[0]];
-export const cardSaving = illustrationStories[templates[1]];
-export const login = illustrationStories[templates[2]];
-export const register = illustrationStories[templates[3]];
-export const pageError = illustrationStories[templates[4]];
