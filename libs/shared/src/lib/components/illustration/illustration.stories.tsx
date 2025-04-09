@@ -27,13 +27,13 @@ export default {
     },
     size: {
       control: 'select',
-      options: ['lg', 'md', 'sm'],
+      options: ['auto', 'sm', 'md', 'lg'],
     },
   },
 } as Meta;
 
 const createStory = ({ name = 'card-holding', size = 'md' }): Story<BytebankIllustrationProps> => {
-  const Template: Story<BytebankIllustrationProps> = (args) => (
+  const Template: Story<BytebankIllustrationProps> = (args: BytebankIllustrationProps) => (
       <BytebankIllustration {...args} />
   );
 
