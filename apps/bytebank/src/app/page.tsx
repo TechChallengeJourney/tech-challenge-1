@@ -2,7 +2,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
-  BytebankModal,
+  BytebankIllustration,
   defaultTheme as theme,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -57,6 +57,8 @@ export default function Index() {
           </Box>
         </form>
       </FormProvider>
+
+      <BytebankIllustration name="card-holding" variant="md" />
     </ThemeProvider>
   );
 }
