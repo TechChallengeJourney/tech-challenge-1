@@ -3,7 +3,7 @@ import { create } from '@storybook/theming/create';
 export default create({
   base: 'light',
   brandTitle: 'Bytebank | Storybook',
-  brandImage: 'logo.png',
+  brandImage: 'images/logo.png',
   brandTarget: '_self',
   colorPrimary: '#52cc68',
   colorSecondary: '#4b9c4f',

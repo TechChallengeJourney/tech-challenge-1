@@ -1,6 +1,6 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
-import { BytebankButton, defaultTheme as theme } from '@bytebank/shared';
+import { BytebankButton, BytebankIllustration, defaultTheme as theme } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
 
@@ -53,6 +53,9 @@ export default function Index() {
           </Box>
         </form>
       </FormProvider>
+
+
+      <BytebankIllustration name="error" />
     </ThemeProvider>
   );
 }
