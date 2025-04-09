@@ -47,7 +47,7 @@ const createStory = ({ name = 'card-holding', size = 'md' }): Story<BytebankIllu
 };
 
 const illustrationStories: { [key: string]: Story<BytebankIllustrationProps> } = {};
-const templates = [ 'card-holding', 'card-saving', 'error'];
+const templates = [ 'card-holding', 'card-saving', 'login', 'register', 'error'];
 
 templates.forEach((name) => {
   illustrationStories[`${name}`] = createStory({ name, size: 'md' });
@@ -55,4 +55,6 @@ templates.forEach((name) => {
 
 export const cardHolding = illustrationStories[templates[0]];
 export const cardSaving = illustrationStories[templates[1]];
-export const pageError = illustrationStories[templates[2]];
+export const login = illustrationStories[templates[2]];
+export const register = illustrationStories[templates[3]];
+export const pageError = illustrationStories[templates[4]];
