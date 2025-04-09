@@ -2,9 +2,9 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { BytebankButton, defaultTheme as theme } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { BytebankInput } from '@bytebank/shared';
+import { BytebankInput, BytebankText } from '@bytebank/shared';
 
 type FormValues = {
   name: string;
@@ -41,9 +41,7 @@ export default function Index() {
 
           <Box>
             <Box marginBottom={theme.spacing(4)}>
-              <Typography variant="lg" color="primary">
-                Eu sou um título
-              </Typography>
+              <BytebankText type="lg" color="primary" label='Eu sou um título' />               
             </Box>
             <BytebankButton
               label="Concluir transação"
