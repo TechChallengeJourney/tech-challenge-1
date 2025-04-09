@@ -55,7 +55,7 @@ export default function Index() {
       </FormProvider>
 
 
-      <BytebankIllustration name="card-holding" size="md" />
+      <BytebankIllustration name="card-holding" variant="md" />
     </ThemeProvider>
   );
 }
