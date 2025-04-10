@@ -4,11 +4,6 @@ import * as DocBlock from '@storybook/blocks';
 import { BytebankCard, BytebankCardProps } from '.';
 import { palette } from '../../styles/palette';
 
-const cardDetails = {
-  name: 'Joana da Silva',
-  cardNumber: '12234565665773',
-  expirationDate: '12/2029',
-};
 export default {
   title: 'Components/Card',
   tags: ['autodocs'],
@@ -54,13 +49,16 @@ export default {
     variant: {
       control: 'select',
       options: ['elevation', 'outlined'],
-
     },
+    radius: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    }
   },
 } as Meta;
 
-const CardTemplate: Story<BytebankCardProps> = ({ variant }: BytebankCardProps) => (
-  <BytebankCard variant={variant}>
+const CardTemplate: Story<BytebankCardProps> = ({ variant, radius }: BytebankCardProps) => (
+  <BytebankCard variant={variant} radius={radius}>
     <Box p={2} gap={4}>
       <Typography variant="h4" style={{ marginTop: '8px' }}>
         Eu sou um card
