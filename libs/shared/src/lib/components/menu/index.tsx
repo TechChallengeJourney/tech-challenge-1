@@ -2,7 +2,6 @@
 import './style.scss';
 import { useTheme } from '@mui/material/styles';
 
-import { Divider } from '../divider';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, Drawer, Typography } from '@mui/material';
