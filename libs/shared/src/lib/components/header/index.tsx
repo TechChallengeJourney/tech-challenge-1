@@ -2,19 +2,18 @@
 import './style.scss';
 
 import { AppBar, Box, Container } from '@mui/material';
-import { Divider } from '../divider';
-import { MenuComponent, Route } from '../menu';
+import { BytebankMenu, Route } from '../menu';
 import Link from 'next/link';
 
 interface HeaderProps {
-    logged?: boolean;
+    // logged?: boolean; será implementado no futuro
     routes: Route[]
 }
 
 export function BytebankHeader({
-    logged = false,
     routes
 }: HeaderProps) {
+
     return (
         <AppBar className="header" position="static">
             <Container maxWidth="md" className="container">
@@ -24,7 +23,7 @@ export function BytebankHeader({
                             <img src="/logo.png" className='logo' alt="Bytebank logo" />
                         </Link>
                     </Box>
-                    <MenuComponent routes={routes} />
+                    <BytebankMenu routes={routes} />
                 </Box>
             </Container>
         </AppBar>
