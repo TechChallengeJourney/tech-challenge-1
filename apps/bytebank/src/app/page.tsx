@@ -1,10 +1,13 @@
 'use client';
 import { ThemeProvider } from '@mui/material/styles';
-import { BytebankButton, BytebankIllustration, defaultTheme as theme } from '@bytebank/shared';
+import {
+  BytebankButton,
+  BytebankCardBank,
+  BytebankInput,
+  defaultTheme as theme,
+} from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
-
-import { BytebankInput } from '@bytebank/shared';
 
 type FormValues = {
   name: string;
@@ -19,6 +22,11 @@ export default function Index() {
     },
   });
 
+  const cardDetails = {
+    name: 'Joana da Silva',
+    cardNumber: '12234565665773',
+    expirationDate: '12/2029',
+  };
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
@@ -53,9 +61,16 @@ export default function Index() {
           </Box>
         </form>
       </FormProvider>
-
-
-      <BytebankIllustration name="card-holding" variant="md" />
+      <br />
+      <BytebankCardBank
+        variant="physical"
+        details={cardDetails}
+      ></BytebankCardBank>{' '}
+      <br />
+      <BytebankCardBank
+        variant="virtual"
+        details={cardDetails}
+      ></BytebankCardBank>
     </ThemeProvider>
   );
 }

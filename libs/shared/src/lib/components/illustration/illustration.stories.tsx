@@ -18,9 +18,7 @@ export default {
           <DocBlock.Stories />
 
           <Box>
-            <Typography variant="h5" gutterBottom>
-              Illustration Variants
-            </Typography>
+          <Typography variant="h5" gutterBottom>Lista de ilustrações</Typography>
             <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="flex-end" gap={5}>
               {['card-holding', 'card-saving', 'login', 'register', 'error'].map((name) => (
                 <Box key={name} display="flex" alignItems="center" flexDirection="column">
