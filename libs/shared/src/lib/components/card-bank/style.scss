@@ -1,6 +1,7 @@
 .card-bank{
     &--container {
         max-width: 25em;
+        width: 100%;
         min-width: max-content;
         &__card {
             height: 13em;

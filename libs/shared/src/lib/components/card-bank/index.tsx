@@ -26,7 +26,7 @@ export function BytebankCardBank({ variant = 'physical', details }: BytebankCard
               <Box display='flex' flexDirection={'column'}>
                 <BytebankIllustration name="platinum" variant="auto" />
                 <Box display='flex' flexDirection={'column'} marginTop={4}>
-                  <Typography variant="sm" fontWeight={500} paddingBottom={2}>**** **** **** {details.cardNumber.slice(-4)}</Typography>
+                  <Typography variant="sm" fontWeight={500} paddingBottom={1}>**** **** **** {details.cardNumber.slice(-4)}</Typography>
                   <Typography variant="sm" fontWeight={200}>{details.name}</Typography>
                   <Typography variant="sm" fontWeight={200}>{details.expirationDate}</Typography>
                 </Box>
