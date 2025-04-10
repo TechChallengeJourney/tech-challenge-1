@@ -7,7 +7,6 @@ const meta = {
     component: BytebankHeader,
     tags: ['autodocs'],
     parameters: {
-
         docs: {
             page: () =>
                 <>
@@ -16,6 +15,8 @@ const meta = {
 
                     <DocBlock.Primary />
                     <DocBlock.Controls />
+
+                    <DocBlock.Stories />
                 </>
         }
     }
@@ -54,6 +55,7 @@ export const Desktop: Story = {
 export const Mobile: Story = {
     args: {
         routes: routes,
+        mobile: true
     },
     parameters: {
         viewport: {

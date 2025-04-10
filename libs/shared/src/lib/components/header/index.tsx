@@ -7,11 +7,13 @@ import Link from 'next/link';
 
 interface HeaderProps {
     // logged?: boolean; será implementado no futuro
-    routes: Route[]
+    routes: Route[],
+    mobile?: boolean
 }
 
 export function BytebankHeader({
-    routes
+    routes,
+    mobile
 }: HeaderProps) {
 
     return (
@@ -20,10 +22,10 @@ export function BytebankHeader({
                 <Box display={'flex'} flexDirection={'row'} gap={4} sx={{ flexGrow: 1 }} height="100%">
                     <Box display="flex" alignItems="center">
                         <Link href="/">
-                            <img src="/logo.png" className='logo' alt="Bytebank logo" />
+                            <img src="/images/logo.png" className='logo' alt="Bytebank logo" />
                         </Link>
                     </Box>
-                    <BytebankMenu routes={routes} />
+                    <BytebankMenu routes={routes} mobile={mobile} />
                 </Box>
             </Container>
         </AppBar>

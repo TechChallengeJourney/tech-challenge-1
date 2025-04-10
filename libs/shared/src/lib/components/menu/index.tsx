@@ -15,10 +15,11 @@ export interface Route {
   route: string;
 }
 interface MenuProps {
-  routes: Route[];
+    routes: Route[];
+    mobile?: boolean;
 }
 
-export function BytebankMenu({ routes }: MenuProps) {
+export function BytebankMenu({ routes, mobile }: MenuProps) {
     const theme = useTheme();
     const pathName = usePathname();
 
@@ -31,13 +32,13 @@ export function BytebankMenu({ routes }: MenuProps) {
     const mappedRoutes = (
         routes.map(route => (
             <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} href={route.route} key={route.route}>
-                <Typography variant="sm" textTransform="capitalize" fontWeight="600" color={'success'}>{route.name}</Typography>
+                <Typography variant="sm" textTransform="capitalize" fontWeight="600" color={'success'} >{route.name}</Typography>
             </Link>
         ))
     )
 
     return (
-        <Box display="flex" gap={2} alignItems="center" style={{ fontFamily: theme.typography.fontFamily }}>
+        <Box className={mobile ? 'mobile' : ''} display="flex" gap={2} alignItems="center" style={{ fontFamily: theme.typography.fontFamily }}>
             <Box className="menu-mobile" alignItems="center">
                 <IconButton
                     aria-label="open menu"
