@@ -1,55 +1,65 @@
-import { Meta, Story } from '@storybook/react';
-import { BytebankModal } from './index';
-import * as DocBlock from '@storybook/blocks';
+import { Meta, StoryObj } from '@storybook/react';
+import { BytebankModal, BytebankModalProps } from './index';
+import { useState } from 'react';
 import { BytebankButton } from '../button';
-import React from 'react';
 
-const meta: Meta<typeof BytebankModal> = {
+const meta: Meta<BytebankModalProps> = {
   title: 'Components/Modal',
   component: BytebankModal,
   tags: ['autodocs'],
-  parameters: {
-    docs: {
-      page: () => (
-        <>
-          <DocBlock.Title />
-          <DocBlock.Description />
-
-          <DocBlock.Primary />
-          <DocBlock.Controls />
-
-          <DocBlock.Title>Variações</DocBlock.Title>
-          <DocBlock.Stories />
-        </>
-      ),
-    },
-  },
   argTypes: {
-    open: {
-      control: 'boolean',
+    open: { control: 'boolean' },
+    title: { control: 'text' },
+    illustration: {
+      control: {
+        type: 'select',
+      },
+      options: ['register', 'login'],
     },
+    illustrationSize: {
+      control: {
+        type: 'radio',
+      },
+      options: ['auto', 'sm', 'md', 'lg'],
+    },
+    onClose: { description: '' },
   },
 };
 
 export default meta;
 
-const ModalTemplate: Story = () => {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <>
-      <BytebankModal open={open} onClose={() => setOpen(false)}>
-        <>
-          <h1>teste</h1>
-        </>
-      </BytebankModal>
-      <BytebankButton
-        label="Abre modal"
-        variant="contained"
-        color="primary"
-        sendSubmit={() => setOpen(true)}
-      />
-    </>
-  );
-};
+type Story = StoryObj<BytebankModalProps>;
 
-export const Modal = ModalTemplate.bind({});
+export const Default: Story = {
+  args: {
+    open: false,
+    title: 'Este é o titulo do modal',
+    illustration: 'register',
+    illustrationSize: 'lg',
+  },
+  render: (args) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <BytebankButton
+          label="Abrir Modal"
+          color="primary"
+          variant="contained"
+          sendSubmit={() => setOpen(true)}
+        />
+        <BytebankModal
+          title={args.title}
+          illustration={args.illustration}
+          open={open}
+          illustrationSize={args.illustrationSize}
+          onClose={() => setOpen(false)}
+        >
+          <p style={{ marginTop: 16, textAlign: 'center' }}>
+            Aqui vai o conteúdo do modal.
+          </p>
+        </BytebankModal>
+      </>
+    );
+  },
+};
