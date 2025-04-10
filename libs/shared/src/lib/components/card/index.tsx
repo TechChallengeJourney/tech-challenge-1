@@ -1,16 +1,15 @@
-import { Card, Box, CardContent, Grid2 } from '@mui/material';
-import { defaultTheme } from '../../shared';
+import { Card } from '@mui/material';
 
-export function BytebankCard({ children }) {
+export interface BytebankCardProps {
+  bgcolor?: string;
+  variant?: 'elevation' | 'outlined';
+  className?: string;
+  children?: React.ReactNode;
+}
+export function BytebankCard({ bgcolor = '#FFF', variant = 'outlined', children, className }: BytebankCardProps) {
   return (
-    <Card variant="contained">
-      <Box padding={defaultTheme.spacing(2)}>
-        <CardContent>
-
-          <Grid2></Grid2>
-          {children}
-        </CardContent>
-      </Box>
+    <Card variant={variant} sx={{ 'background': bgcolor }}  className={className}>
+      {children}
     </Card>
   );
 }

@@ -1,10 +1,10 @@
+import React from 'react';
 import { render } from '@testing-library/react';
+import { BytebankCard } from './index';
 
-import Card from './card';
-
-describe('Card', () => {
+describe('BytebankCard', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Card />);
+    const { baseElement } = render(<BytebankCard />);
     expect(baseElement).toBeTruthy();
   });
 });
