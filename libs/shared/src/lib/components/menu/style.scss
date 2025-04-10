@@ -1,14 +1,15 @@
 @import '../../styles/variables.scss';
 
-.container {
+.menu {
     display: flex;
-    flex-direction: column;
     text-align: center;
+    align-items: center;
+    height: 100%;
 
     .menu-item {
         padding: 16px 0;
         text-decoration: none;
-        color: var(--color-black);
+        color: var(--mui-palette-color-black);
         min-width: 126px;
 
         &.active {
