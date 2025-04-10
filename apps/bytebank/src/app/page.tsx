@@ -24,36 +24,35 @@ export default function Index() {
   };
 
   return (
-    <div></div>
-    // <ThemeProvider theme={theme}>
-    //   <FormProvider {...methods}>
-    //     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-    //       <BytebankInput
-    //         name="name"
-    //         label="Nome"
-    //         placeholder="Digite seu nome"
-    //       />
-    //       <BytebankInput
-    //         name="email"
-    //         label="Email"
-    //         placeholder="Digite seu email"
-    //         type="email"
-    //       />
+    <ThemeProvider theme={theme}>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+          <BytebankInput
+            name="name"
+            label="Nome"
+            placeholder="Digite seu nome"
+          />
+          <BytebankInput
+            name="email"
+            label="Email"
+            placeholder="Digite seu email"
+            type="email"
+          />
 
-    //       <Box>
-    //         <Box marginBottom={theme.spacing(4)}>
-    //           <Typography variant="lg" color="primary">
-    //             Eu sou um título
-    //           </Typography>
-    //         </Box>
-    //         <BytebankButton
-    //           label="Concluir transação"
-    //           color="primary"
-    //           variant="contained"
-    //         />
-    //       </Box>
-    //     </form>
-    //   </FormProvider>
-    // </ThemeProvider>
+          <Box>
+            <Box marginBottom={theme.spacing(4)}>
+              <Typography variant="lg" color="primary">
+                Eu sou um título
+              </Typography>
+            </Box>
+            <BytebankButton
+              label="Concluir transação"
+              color="primary"
+              variant="contained"
+            />
+          </Box>
+        </form>
+      </FormProvider>
+    </ThemeProvider>
   );
 }

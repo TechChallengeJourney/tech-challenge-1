@@ -1,4 +1,5 @@
 .header {
+    display: flex;
     flex-grow: 1;
     height: 96px;
     background-color: var(--mui-palette-color-black) !important;
@@ -8,7 +9,10 @@
     }
 }
 
-.logo {
-    width: auto !important;
-    height: auto !important;
+.container {
+    height: 100%;
 }
+
+// .logo {
+//     ma
+// }

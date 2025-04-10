@@ -1,24 +1,28 @@
 @import '../../styles/variables.scss';
 
-.menu {
+.menu-desktop {
     display: flex;
-    text-align: center;
-    align-items: center;
+    
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
+
+.menu-mobile {
+    display: none;
     height: 100%;
 
-    .menu-item {
-        padding: 16px 0;
-        text-decoration: none;
-        color: var(--mui-palette-color-black);
-        min-width: 126px;
+    @media (max-width: 600px) {
+        display: flex;
+    }
+}
 
-        &.active {
-            font-weight: bold;
-            color: var(--mui-palette-success-main);
-        }
+.menu-item {
+    padding: 16px 0;
+    text-decoration: none;
 
-        &:first-of-type {
-            padding-top: 0px;
-        }
+    &.active {
+        font-weight: bold;
+        color: var(--mui-palette-success-main);
     }
 }

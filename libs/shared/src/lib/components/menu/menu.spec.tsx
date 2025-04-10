@@ -4,7 +4,8 @@ import { MenuComponent } from './index';
 
 describe('Menu', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<MenuComponent />);
+    const routes = []
+    const { baseElement } = render(<MenuComponent routes={routes} />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,6 +1,6 @@
+import BytebankWrapper from './wrapper';
 import './global.scss';
 
-import { AppWrapper } from '@bytebank/shared';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <AppWrapper>{children}</AppWrapper>
+                <BytebankWrapper>{children}</BytebankWrapper>
             </body>
         </html>
     );
