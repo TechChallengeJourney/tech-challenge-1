@@ -1,4 +1,3 @@
-import BytebankWrapper from './wrapper';
 import './global.scss';
 
 import { Metadata } from 'next';
