@@ -3,16 +3,19 @@ import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
   BytebankCardBank,
-  BytebankInput,
   BytebankText,
+  BytebankInputController,
+  BytebankSelectController,
   defaultTheme as theme,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
 
+
 type FormValues = {
   name: string;
   email: string;
+  tipo: string;
 };
 
 export default function Index() {
@@ -20,6 +23,7 @@ export default function Index() {
     defaultValues: {
       name: '',
       email: '',
+      tipo: '',
     },
   });
 
@@ -32,20 +36,31 @@ export default function Index() {
     console.log('Form data:', data);
   };
 
+  const selectOptions = [
+    { label: 'Pessoa Física', value: 'pf' },
+    { label: 'Pessoa Jurídica', value: 'pj' },
+  ];
+
   return (
     <ThemeProvider theme={theme}>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-          <BytebankInput
+          <BytebankInputController
             name="name"
             label="Nome"
             placeholder="Digite seu nome"
           />
-          <BytebankInput
+          <BytebankInputController
             name="email"
             label="Email"
             placeholder="Digite seu email"
             type="email"
+          />
+
+          <BytebankSelectController
+            name="tipo"
+            label="Tipo de pessoa"
+            options={selectOptions}
           />
 
           <Box>
