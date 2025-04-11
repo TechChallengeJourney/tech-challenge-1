@@ -18,7 +18,7 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "67eb3090a6d57e78bdb83f6d",
+  "neverConnectToCloud": true,
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -91,6 +91,10 @@
       "application": {
         "style": "scss",
         "linter": "eslint"
+      },
+      "library": {
+        "style": "scss",
+        "unitTestRunner": "jest"
       }
     },
     "@nrwl/nest:library": {
@@ -99,9 +103,8 @@
     },
     "@nx/react": {
       "library": {
-        "unitTestRunner": "none"
+        "unitTestRunner": "jest"
       }
     }
-  },
-  "neverConnectToCloud": true
+  }
 }

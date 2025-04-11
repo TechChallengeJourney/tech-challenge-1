@@ -2,13 +2,16 @@
 import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
-  BytebankSelectController,
+  BytebankCardBank,
   defaultTheme as theme,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box, Typography } from '@mui/material';
 
-import { BytebankInputController } from '@bytebank/shared';
+import {
+  BytebankInputController,
+  BytebankSelectController,
+} from '@bytebank/shared';
 
 type FormValues = {
   name: string;
@@ -25,6 +28,11 @@ export default function Index() {
     },
   });
 
+  const cardDetails = {
+    name: 'Joana da Silva',
+    cardNumber: '12234565665773',
+    expirationDate: '12/2029',
+  };
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
@@ -70,6 +78,16 @@ export default function Index() {
           </Box>
         </form>
       </FormProvider>
+      <br />
+      <BytebankCardBank
+        variant="physical"
+        details={cardDetails}
+      ></BytebankCardBank>{' '}
+      <br />
+      <BytebankCardBank
+        variant="virtual"
+        details={cardDetails}
+      ></BytebankCardBank>
     </ThemeProvider>
   );
 }
