@@ -4,13 +4,13 @@ import { BytebankText } from './index';
 
 describe('BytebankText', () => {
   it('should render the label correctly', () => {
-    const label = "The quick brown fox jumps over the lazy dog";
+    const children = "The quick brown fox jumps over the lazy dog";
     const color = "primary";
     const variant = "md";
 
-    render(<BytebankText label={label} color={color} variant={variant} />);
+    render(<BytebankText  color={color} variant={variant}>{children}</BytebankText>);
 
-    const textElement = screen.getByText(label);
+    const textElement = screen.getByText(children);
     expect(textElement).toBeInTheDocument();
   });
 });

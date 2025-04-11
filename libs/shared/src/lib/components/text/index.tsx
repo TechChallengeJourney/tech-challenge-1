@@ -2,7 +2,7 @@
 import { Typography, Box } from '@mui/material';
 
 export interface BytebankTextProps {
-  label: string;
+  children: string;
   color?:
     | 'primary'
     | 'secondary'
@@ -15,14 +15,14 @@ export interface BytebankTextProps {
 }
 
 export function BytebankText({
-  label,
+  children,
   color = 'primary',
   variant = 'sm',
 }: BytebankTextProps) {
   return (
     <Box>
       <Typography variant={variant} color={color}>
-        {label}
+        {children}
       </Typography>
     </Box>
   );

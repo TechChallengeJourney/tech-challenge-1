@@ -50,7 +50,7 @@ export default function Index() {
 
           <Box>
             <Box marginBottom={theme.spacing(4)}>
-              <BytebankText variant="lg" color="primary" label='Eu sou um título' />               
+              <BytebankText variant="lg" color="primary">Eu sou um título</BytebankText>      
             </Box>
             <BytebankButton
               label="Concluir transação"
