@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.menu-desktop {
+    display: flex;
+    
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
+
+.menu-mobile {
+    display: none;
+    height: 100%;
+
+    @media (max-width: 600px) {
+        display: flex;
+    }
+}
+
+.menu-item {
+    padding: 16px 0;
+    text-decoration: none;
+
+    &.active {
+        font-weight: bold;
+        color: var(--mui-palette-success-main);
+    }
+}
