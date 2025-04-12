@@ -1,7 +1,7 @@
-import BytebankWrapper from './wrapper';
 import './global.scss';
 
 import { Metadata } from 'next';
+import BytebankWrapper from './wrapper';
 
 export const metadata: Metadata = {
     title: 'Bytebank',
