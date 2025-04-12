@@ -3,14 +3,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
   BytebankCardBank,
-  BytebankText,
-  BytebankInputController,
+  BytebankModal,
   BytebankSelectController,
+  BytebankInputController,
   defaultTheme as theme,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
-
+import React from 'react';
 
 type FormValues = {
   name: string;
@@ -32,10 +32,12 @@ export default function Index() {
     cardNumber: '12234565665773',
     expirationDate: '12/2029',
   };
+  
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
 
+  const [open, setOpen] = React.useState(false);
   const selectOptions = [
     { label: 'Pessoa Física', value: 'pf' },
     { label: 'Pessoa Jurídica', value: 'pj' },
@@ -43,48 +45,62 @@ export default function Index() {
 
   return (
     <ThemeProvider theme={theme}>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-          <BytebankInputController
-            name="name"
-            label="Nome"
-            placeholder="Digite seu nome"
-          />
-          <BytebankInputController
-            name="email"
-            label="Email"
-            placeholder="Digite seu email"
-            type="email"
-          />
+      <Box width="100%" display="flex" flexDirection="column" gap={4}>
+        <BytebankCardBank
+          variant="physical"
+          details={cardDetails}
+        ></BytebankCardBank>
+        <BytebankCardBank
+          variant="virtual"
+          details={cardDetails}
+        ></BytebankCardBank>
+        <BytebankButton
+          sendSubmit={() => setOpen(true)}
+          label="Abrir Modal"
+          color="primary"
+          variant="outlined"
+        />
+      </Box>
 
-          <BytebankSelectController
-            name="tipo"
-            label="Tipo de pessoa"
-            options={selectOptions}
-          />
+      <BytebankModal
+        illustrationSize="lg"
+        title="Preencha os campos abaixo para criar sua conta corrente!"
+        illustration="register"
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <>
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+              <BytebankInputController
+                name="name"
+                label="Nome"
+                placeholder="Digite seu nome"
+              />
+              <BytebankInputController
+                name="email"
+                label="Email"
+                placeholder="Digite seu email"
+                type="email"
+              />
 
-          <Box>
-            <Box marginBottom={theme.spacing(4)}>
-              <BytebankText variant="lg" color="primary">Eu sou um título</BytebankText>      
-            </Box>
-            <BytebankButton
-              label="Concluir transação"
-              color="primary"
-              variant="contained"
-            />
-          </Box>
-        </form>
-      </FormProvider>
-      <br />
-      <BytebankCardBank
-        variant="physical"
-        details={cardDetails}
-      ></BytebankCardBank>{' '}
-      <br />
-      <BytebankCardBank
-        variant="virtual"
-        details={cardDetails}
-      ></BytebankCardBank>
+              <BytebankSelectController
+                name="tipo"
+                label="Tipo de pessoa"
+                options={selectOptions}
+              />
+
+              <Box>
+                <BytebankButton
+                  label="Concluir transação"
+                  color="primary"
+                  variant="contained"
+                />
+              </Box>
+            </form>
+          </FormProvider>
+        </>
+      </BytebankModal>
     </ThemeProvider>
   );
 }
