@@ -7,6 +7,7 @@ import { BytebankMenu } from './components/menu';
 import { BytebankHeader } from './components/header';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
+import { BytebankModal } from './components/modal/index';
 import defaultTheme from './themes/default.theme';
 
 export {
@@ -19,5 +20,6 @@ export {
   BytebankCardBank,
   BytebankHeader,
   BytebankMenu,
+  BytebankModal,
   defaultTheme,
 };
