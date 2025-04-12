@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.menu-item {
+    padding: 16px 0;
+    text-decoration: none;
+    color: var(--mui-palette-color-black);
+    min-width: 126px;
+
+    &.active {
+        font-weight: bold;
+        color: var(--mui-palette-success-main);
+    }
+}
+
+.menu-desktop {
+    display: flex;
+    
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
+
+.menu-mobile {
+    display: none;
+    
+    @media (max-width: 600px) {
+        display: flex;
+    }
+}
+
+.mobile {
+    .menu-mobile {
+        display: flex !important;
+    }
+    .menu-desktop {
+        display: none !important;
+    }
+}
+

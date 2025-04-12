@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 export interface BytebankIllustrationProps {
   /**
    * O nome da ilustração
@@ -14,11 +16,13 @@ enum BytebankIllustrationVariant {
   'sm' = '60px',
   'md' = '160px',
   'lg' = '220px',
-  'auto' = 'auto'
+  'auto' = 'fit-content'
 }
 export function BytebankIllustration({name, variant = 'auto'}: BytebankIllustrationProps) {
   const path: string = name ? `/images/${name}.png` : '';
   return (
-    <img src={path} width={BytebankIllustrationVariant[variant]}/>
+    <Box sx={{width: BytebankIllustrationVariant[variant], height: variant === 'auto' ? 'fit-content' : null}}>
+      <img src={path} alt='' width={BytebankIllustrationVariant[variant]} />
+    </Box>
   );
 }

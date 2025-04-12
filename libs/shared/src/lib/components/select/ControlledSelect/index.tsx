@@ -1,19 +1,17 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import Input from '../index';
+import BytebankSelect, { SelectOption } from '../index';
 
-interface ControlledInputProps {
+interface ControlledSelectProps {
   name: string;
   label: string;
-  type?: string;
-  placeholder?: string;
+  options: SelectOption[];
 }
 
-export const BytebankInputController: React.FC<ControlledInputProps> = ({
+export const BytebankSelectController: React.FC<ControlledSelectProps> = ({
   name,
   label,
-  type = 'text',
-  placeholder,
+  options,
 }) => {
   const { control } = useFormContext();
   return (
@@ -21,12 +19,11 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <Input
-          value={field.value}
-          onChange={field.onChange}
+        <BytebankSelect
+          value={field.value ?? ''}
+          onChange={(value) => field.onChange(value)}
           label={label}
-          type={type}
-          placeholder={placeholder}
+          options={options}
           error={!!error}
           helperText={error?.message}
         />

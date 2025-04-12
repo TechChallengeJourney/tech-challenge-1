@@ -11,7 +11,7 @@ export interface InputProps {
   helperText?: string;
 }
 
-export default function Input({
+export default function BytebankInput({
   value,
   onChange,
   label,

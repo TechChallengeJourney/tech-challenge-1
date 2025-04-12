@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    flex-grow: 1;
+    height: 96px;
+    background-color: var(--mui-palette-color-black) !important;
+
+    &--logged {
+        background-color: var(--mui-palette-primary-main) !important;
+    }
+}
+
+.container {
+    height: 100%;
+
+    @media (max-width: 600px) {
+        & > div {
+            justify-content: space-between;
+        }
+    }
+}
