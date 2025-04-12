@@ -1,12 +1,11 @@
 'use client';
-import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
   BytebankCardBank,
   BytebankModal,
   BytebankSelectController,
   BytebankInputController,
-  defaultTheme as theme,
+  BytebankProvider,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
@@ -32,7 +31,7 @@ export default function Index() {
     cardNumber: '12234565665773',
     expirationDate: '12/2029',
   };
-  
+
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
@@ -44,63 +43,59 @@ export default function Index() {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box width="100%" display="flex" flexDirection="column" gap={4}>
-        <BytebankCardBank
-          variant="physical"
-          details={cardDetails}
-        ></BytebankCardBank>
-        <BytebankCardBank
-          variant="virtual"
-          details={cardDetails}
-        ></BytebankCardBank>
-        <BytebankButton
-          sendSubmit={() => setOpen(true)}
-          label="Abrir Modal"
-          color="primary"
-          variant="outlined"
-        />
-      </Box>
+    <>
+      <BytebankProvider>
+        <Box width="100%" p={2} display="flex" flexDirection="column" gap={4}>
+          <BytebankCardBank
+            variant="physical"
+            details={cardDetails}
+          ></BytebankCardBank>
+          <BytebankCardBank
+            variant="virtual"
+            details={cardDetails}
+          ></BytebankCardBank>
+          <BytebankButton
+            sendSubmit={() => setOpen(true)}
+            label="Abrir Modal"
+            color="primary"
+            variant="outlined" />
+        </Box><BytebankModal
+          illustrationSize="lg"
+          title="Preencha os campos abaixo para criar sua conta corrente!"
+          illustration="register"
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          <>
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+                <BytebankInputController
+                  name="name"
+                  label="Nome"
+                  placeholder="Digite seu nome" />
+                <BytebankInputController
+                  name="email"
+                  label="Email"
+                  placeholder="Digite seu email"
+                  type="email" />
 
-      <BytebankModal
-        illustrationSize="lg"
-        title="Preencha os campos abaixo para criar sua conta corrente!"
-        illustration="register"
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-              <BytebankInputController
-                name="name"
-                label="Nome"
-                placeholder="Digite seu nome"
-              />
-              <BytebankInputController
-                name="email"
-                label="Email"
-                placeholder="Digite seu email"
-                type="email"
-              />
+                <BytebankSelectController
+                  name="tipo"
+                  label="Tipo de pessoa"
+                  options={selectOptions} />
 
-              <BytebankSelectController
-                name="tipo"
-                label="Tipo de pessoa"
-                options={selectOptions}
-              />
+                <Box>
+                  <BytebankButton
+                    label="Concluir transação"
+                    color="primary"
+                    variant="contained" />
+                </Box>
+              </form>
+            </FormProvider>
+          </>
+        </BytebankModal>
+      </BytebankProvider>
 
-              <Box>
-                <BytebankButton
-                  label="Concluir transação"
-                  color="primary"
-                  variant="contained"
-                />
-              </Box>
-            </form>
-          </FormProvider>
-        </>
-      </BytebankModal>
-    </ThemeProvider>
+    </>
   );
 }

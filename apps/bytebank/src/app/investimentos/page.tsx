@@ -1,8 +1,12 @@
 'use client';
 
+import { BytebankProvider } from "@bytebank/shared";
+
 export default function Investimentos() {
 
   return (
-    <div>Investimentos</div>
+    <BytebankProvider>
+      Investimentos
+    </BytebankProvider>
   );
 }

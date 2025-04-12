@@ -32,7 +32,7 @@ export function BytebankMenu({ routes, mobile }: MenuProps) {
     const mappedRoutes = (
         routes.map(route => (
             <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} href={route.route} key={route.route}>
-                <Typography variant="sm" textTransform="capitalize" fontWeight="600" color={'success'} >{route.name}</Typography>
+                <Typography variant="sm" textTransform="capitalize" fontWeight="500" color={'success'} >{route.name}</Typography>
             </Link>
         ))
     )

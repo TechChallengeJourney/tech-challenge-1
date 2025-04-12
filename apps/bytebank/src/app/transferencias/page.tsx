@@ -1,8 +1,9 @@
 'use client';
+import { BytebankProvider } from "@bytebank/shared";
 
 export default function Transferencias() {
 
   return (
-    <div>Transferencias</div>
+    <BytebankProvider>Transferencias</BytebankProvider>
   );
 }
