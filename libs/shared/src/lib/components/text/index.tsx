@@ -12,16 +12,18 @@ export interface BytebankTextProps {
     | 'info'
     | 'warning';
   variant?: 'xs' | 'sm' | 'md' | 'lg';
+  fontSize?: string;
 }
 
 export function BytebankText({
   children,
   color = 'primary',
   variant = 'sm',
+  fontSize = '16px',
 }: BytebankTextProps) {
   return (
     <Box>
-      <Typography variant={variant} color={color}>
+      <Typography fontSize={fontSize} variant={variant} color={color}>
         {children}
       </Typography>
     </Box>

@@ -8,6 +8,7 @@ import { BytebankHeader } from './components/header';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
+import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 
 export {
@@ -22,4 +23,5 @@ export {
   BytebankMenu,
   BytebankModal,
   defaultTheme,
+  BytebankExtract,
 };

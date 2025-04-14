@@ -7,6 +7,7 @@ import {
   BytebankSelectController,
   BytebankInputController,
   defaultTheme as theme,
+  BytebankExtract,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
@@ -17,6 +18,40 @@ type FormValues = {
   email: string;
   tipo: string;
 };
+
+interface BytebankExtractProps {
+  month: string;
+  data: BytebankExtractPropsData[];
+}
+
+interface BytebankExtractPropsData {
+  date: Date;
+  type: 'Depósito' | 'Saque' | 'Transferência';
+  value: number;
+}
+
+const extract: BytebankExtractProps[] = [
+  {
+    month: 'Abril',
+    data: [
+      {
+        date: new Date(),
+        type: 'Depósito',
+        value: 1.25,
+      },
+      {
+        date: new Date(),
+        type: 'Saque',
+        value: -30,
+      },
+      {
+        date: new Date(),
+        type: 'Transferência',
+        value: 40,
+      },
+    ],
+  },
+];
 
 export default function Index() {
   const methods = useForm<FormValues>({
@@ -32,7 +67,7 @@ export default function Index() {
     cardNumber: '12234565665773',
     expirationDate: '12/2029',
   };
-  
+
   const onSubmit = (data: FormValues) => {
     console.log('Form data:', data);
   };
@@ -101,6 +136,8 @@ export default function Index() {
           </FormProvider>
         </>
       </BytebankModal>
+
+      <BytebankExtract extract={extract} />
     </ThemeProvider>
   );
 }
