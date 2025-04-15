@@ -8,7 +8,7 @@ import { BytebankHeader } from './components/header';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
-import { BytebankProvider } from './components/provider';
+import *  as BytebankProvider from './components/provider';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 

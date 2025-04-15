@@ -10,26 +10,11 @@ export interface ProviderRouteProps {
     route: string;
 }
 
-const routes: ProviderRouteProps[] = [
-    {
-        name: 'investimentos',
-        route: 'investimentos'
-    },
-    {
-        name: 'transferências',
-        route: 'transferencias'
-    },
-    {
-        name: 'outros',
-        route: 'outros'
-    },
-];
-
-export function BytebankProvider({ canNavigate = true, children }: { canNavigate?: boolean, children: React.ReactNode }) {
+export function BytebankProvider({ canNavigate = true, routes = [], children }: { routes?: ProviderRouteProps[]; canNavigate?: boolean, children: React.ReactNode }) {
     return (
         <>
         <ThemeProvider theme={defaultTheme}>
-            {canNavigate && <BytebankHeader routes={routes} />}
+            {canNavigate ? <BytebankHeader routes={routes} /> : ''}
             <Container>
                 <Box display={"flex"} minHeight="100vh"> {children} </Box>
             </Container>

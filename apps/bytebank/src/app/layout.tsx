@@ -15,7 +15,7 @@ const RootLayout = ({ children,
     return (
         <html lang="pt-br">
             <body>
-                {children}
+                <main>{children}</main>
             </body>
         </html>
     );
