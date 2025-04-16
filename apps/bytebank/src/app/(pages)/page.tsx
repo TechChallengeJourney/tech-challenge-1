@@ -56,8 +56,10 @@ export default function Index() {
           sendSubmit={() => setOpen(true)}
           label="Abrir Modal"
           color="primary"
-          variant="outlined" />
-      </Box><BytebankModal
+          variant="outlined"
+        />
+      </Box>
+      <BytebankModal
         illustrationSize="lg"
         title="Preencha os campos abaixo para criar sua conta corrente!"
         illustration="register"
@@ -70,23 +72,27 @@ export default function Index() {
               <BytebankInputController
                 name="name"
                 label="Nome"
-                placeholder="Digite seu nome" />
+                placeholder="Digite seu nome"
+              />
               <BytebankInputController
                 name="email"
                 label="Email"
                 placeholder="Digite seu email"
-                type="email" />
+                type="email"
+              />
 
               <BytebankSelectController
                 name="tipo"
                 label="Tipo de pessoa"
-                options={selectOptions} />
+                options={selectOptions}
+              />
 
               <Box>
                 <BytebankButton
                   label="Concluir transação"
                   color="primary"
-                  variant="contained" />
+                  variant="contained"
+                />
               </Box>
             </form>
           </FormProvider>
