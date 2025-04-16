@@ -9,6 +9,7 @@ import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
 import *  as BytebankProvider from './components/provider';
+import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 
@@ -23,7 +24,8 @@ export {
     BytebankHeader,
     BytebankMenu,
     BytebankModal,
+    BytebankExtract,
     BytebankProvider,
     defaultTheme,
-    palette
+    palette,
 };
