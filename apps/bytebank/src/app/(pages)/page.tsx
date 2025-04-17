@@ -1,13 +1,11 @@
 'use client';
-import { ThemeProvider } from '@mui/material/styles';
 import {
   BytebankButton,
   BytebankCardBank,
   BytebankModal,
   BytebankSelectController,
   BytebankInputController,
-  defaultTheme as theme,
-  BytebankExtract,
+  BytebankExtract
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
@@ -79,8 +77,8 @@ export default function Index() {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box width="100%" display="flex" flexDirection="column" gap={4}>
+    <>
+      <Box width="100%" p={2} display="flex" flexDirection="column" gap={4}>
         <BytebankCardBank
           variant="physical"
           details={cardDetails}
@@ -96,7 +94,6 @@ export default function Index() {
           variant="outlined"
         />
       </Box>
-
       <BytebankModal
         illustrationSize="lg"
         title="Preencha os campos abaixo para criar sua conta corrente!"
@@ -136,8 +133,7 @@ export default function Index() {
           </FormProvider>
         </>
       </BytebankModal>
-
       <BytebankExtract extract={extract} />
-    </ThemeProvider>
+    </>
   );
 }

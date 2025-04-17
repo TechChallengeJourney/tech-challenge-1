@@ -3,14 +3,7 @@ import { Typography, Box } from '@mui/material';
 
 export interface BytebankTextProps {
   children: string;
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
+  color?: string;
   variant?: 'xs' | 'sm' | 'md' | 'lg';
   fontSize?: string;
 }
