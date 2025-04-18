@@ -13,6 +13,7 @@ export interface BytebankTextProps {
     | 'warning';
   variant?: 'xs' | 'sm' | 'md' | 'lg';
   fontSize?: string;
+  className?: string;
 }
 
 export function BytebankText({
@@ -20,10 +21,11 @@ export function BytebankText({
   color = 'primary',
   variant = 'sm',
   fontSize = '16px',
+  className = '',
 }: BytebankTextProps) {
   return (
     <Box>
-      <Typography fontSize={fontSize} variant={variant} color={color}>
+      <Typography className={className} fontSize={fontSize} variant={variant} color={color}>
         {children}
       </Typography>
     </Box>

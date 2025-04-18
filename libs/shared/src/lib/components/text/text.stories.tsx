@@ -5,23 +5,23 @@ import { BytebankText, BytebankTextProps } from './index';
 const SIMPLE_TEXT = 'The quick brown fox jumps over the lazy dog';
 
 const meta = {
-    title: 'Components/Text',
-    component: BytebankText,
-    tags: ['autodocs'],
-    parameters: {
-        docs: {
-            page: () => (
-                <>
-                    <DocBlock.Title />
-                    <DocBlock.Description />
-                    <DocBlock.Primary />
-                    <DocBlock.Controls />
-                    <DocBlock.Title>Variações</DocBlock.Title>
-                    <DocBlock.Stories />
-                </>
-            ),
-        },
+  title: 'Components/Text',
+  component: BytebankText,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <DocBlock.Title />
+          <DocBlock.Description />
+          <DocBlock.Primary />
+          <DocBlock.Controls />
+          <DocBlock.Title>Variações</DocBlock.Title>
+          <DocBlock.Stories />
+        </>
+      ),
     },
+  },
 } satisfies Meta<typeof BytebankText>;
 
 export default meta;
@@ -29,50 +29,49 @@ export default meta;
 type Story = StoryObj<BytebankTextProps>;
 
 export const Primary: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'primary',
-        type: 'sm',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'primary',
+    variant: 'sm',
+  },
 };
 
 export const Secondary: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'secondary',
-        type: 'md',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'secondary',
+    variant: 'md',
+  },
 };
 
 export const Tertiary: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'tertiary',
-        type: 'lg',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'tertiary',
+    variant: 'lg',
+  },
 };
 
-
 export const Success: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'success',
-        type: 'sm',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'success',
+    variant: 'sm',
+  },
 };
 
 export const Warning: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'warning',
-        type: 'sm',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'warning',
+    variant: 'sm',
+  },
 };
 
 export const Error: Story = {
-    args: {
-        label: SIMPLE_TEXT,
-        color: 'error',
-        type: 'sm',
-    },
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'error',
+    variant: 'sm',
+  },
 };
