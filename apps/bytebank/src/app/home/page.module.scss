@@ -12,17 +12,16 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  padding: 2rem;
 }
 
 .valueProposition {
+  margin-top: 42px;
   width: 300px; // Tamanho fixo padrão
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   text-align: center;
-  padding: 1.5rem;
 }
 
 @media (min-width: 768px) and (max-width: 819px) {
@@ -36,16 +35,34 @@
   white-space: normal;
   text-overflow: unset;
   overflow: visible;
+
+  @media (min-width: 1024px) {
+    flex: 1;
+    display: block;
+    width: 270px;
+    align-self: flex-end;
+  }
 }
 
 .banner {
+  margin-top: 24px;
+  margin-bottom: 42px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: auto;
-  text-align: center;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 0;
+    justify-content: center;
+    text-align: left; // desktop: lado a lado
+    align-self: center;
+  }
 }
+
+
 
 .illustration {
   width: 90vw !important;
@@ -56,5 +73,9 @@
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  @media (min-width: 1024px) {
+    width: 661px;
   }
 }
