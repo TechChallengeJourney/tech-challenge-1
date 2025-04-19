@@ -6,6 +6,8 @@ import { styled } from '@mui/material';
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     tertiary: true;
+    black: true;
+    white: true;
   }
 }
 
@@ -24,7 +26,9 @@ export interface BytebankButtonProps {
     | 'success'
     | 'error'
     | 'info'
-    | 'warning';
+    | 'warning'
+    | 'black'
+    | 'white';
   /**
    * O estilo do botão
    */
