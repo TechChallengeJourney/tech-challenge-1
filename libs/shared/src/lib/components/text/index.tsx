@@ -1,19 +1,11 @@
 'use client';
-import { Typography, Box } from '@mui/material';
+import { Typography, TypographyProps, Box } from '@mui/material';
 
-export interface BytebankTextProps {
+export interface BytebankTextProps extends TypographyProps {
   children: string;
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning';
-  variant?: 'xs' | 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'error' | 'info' | 'dark' | 'light';
+  variant?: 'h1' | 'xs' | 'sm' | 'md' | 'lg';
   fontSize?: string;
-  className?: string;
 }
 
 export function BytebankText({
@@ -21,11 +13,16 @@ export function BytebankText({
   color = 'primary',
   variant = 'sm',
   fontSize = '16px',
-  className = '',
+  ...props // Captura todas as props adicionais do Typography
 }: BytebankTextProps) {
   return (
     <Box>
-      <Typography className={className} fontSize={fontSize} variant={variant} color={color}>
+      <Typography
+        {...props}
+        fontSize={fontSize}
+        variant={variant}
+        color={color}
+      >
         {children}
       </Typography>
     </Box>

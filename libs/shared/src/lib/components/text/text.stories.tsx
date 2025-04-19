@@ -28,11 +28,24 @@ export default meta;
 
 type Story = StoryObj<BytebankTextProps>;
 
+
+export const H1: Story = {
+  args: {
+    children: SIMPLE_TEXT,
+    color: 'dark',
+    variant: 'h1', 
+    align: 'center', // Propriedade do Material UI
+    gutterBottom: true, // Propriedade do Material UI
+  },
+};
+
 export const Primary: Story = {
   args: {
     children: SIMPLE_TEXT,
     color: 'primary',
     variant: 'sm',
+    align: 'center', // Propriedade do Material UI
+    gutterBottom: true, // Propriedade do Material UI
   },
 };
 
@@ -41,6 +54,9 @@ export const Secondary: Story = {
     children: SIMPLE_TEXT,
     color: 'secondary',
     variant: 'md',
+    align: 'left', // Propriedade do Material UI
+    gutterBottom: false, // Propriedade do Material UI
+    noWrap: true, // Propriedade do Material UI
   },
 };
 
@@ -49,6 +65,8 @@ export const Tertiary: Story = {
     children: SIMPLE_TEXT,
     color: 'tertiary',
     variant: 'lg',
+    align: 'left', // Propriedade do Material UI
+    paragraph: true, // Propriedade do Material UI
   },
 };
 
@@ -57,14 +75,19 @@ export const Success: Story = {
     children: SIMPLE_TEXT,
     color: 'success',
     variant: 'sm',
+    align: 'right', // Propriedade do Material UI
+    paragraph: true, // Propriedade do Material UI
   },
 };
 
-export const Warning: Story = {
+export const Info: Story = {
   args: {
     children: SIMPLE_TEXT,
-    color: 'warning',
-    variant: 'sm',
+    color: 'info',
+    variant: 'md',
+    align: 'justify', // Propriedade do Material UI
+    gutterBottom: true, // Propriedade do Material UI
+    noWrap: false, // Propriedade do Material UI
   },
 };
 
@@ -72,6 +95,20 @@ export const Error: Story = {
   args: {
     children: SIMPLE_TEXT,
     color: 'error',
-    variant: 'sm',
+    variant: 'lg',
+    align: 'inherit', // Propriedade do Material UI
+    gutterBottom: true, // Propriedade do Material UI
+    paragraph: false, // Propriedade do Material UI
   },
 };
+
+export const Light: Story = {
+    args: {
+      children: SIMPLE_TEXT,
+      color: 'light',
+      variant: 'lg',
+      align: 'inherit', // Propriedade do Material UI
+      gutterBottom: true, // Propriedade do Material UI
+      paragraph: false, // Propriedade do Material UI
+    },
+  };
