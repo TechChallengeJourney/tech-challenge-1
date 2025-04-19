@@ -13,7 +13,7 @@ export function BytebankText({
   color,
   variant,
   fontSize,
-  ...props // Captura todas as props adicionais do Typography
+  ...props // Captura todas as props adicionais do Typography, caso a prop utilizada não funcione adicione a esse componente aqui.
 }: BytebankTextProps) {
   return (
     <Box>
