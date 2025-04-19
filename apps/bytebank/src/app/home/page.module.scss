@@ -51,6 +51,12 @@
   }
 }
 
+.bannerText {
+  @extend .text;
+  width: 100%;
+  max-width: 434px;
+}
+
 
 .banner {
   margin-top: 24px;

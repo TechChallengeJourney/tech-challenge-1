@@ -12,7 +12,12 @@ export default function Home() {
   const renderBanner = () => {
     return (
       <div className={styles.banner}>
-        <BytebankText className={styles.text} variant="lg" color="primary">
+        <BytebankText
+          className={styles.bannerText}
+          variant="md"
+          color="dark"
+          sx={{ fontWeight: 600 }}
+        >
           Experimente mais liberdade no controle da sua vida financeira. Crie
           sua conta com a gente!
         </BytebankText>
@@ -30,7 +35,9 @@ export default function Home() {
       <div className={styles.valuePropositionWrapper}>
         <div className={styles.valueProposition}>
           <CardGiftcardOutlined color="success" sx={{ fontSize: 80 }} />
-          <BytebankText color="success">Conta e cartão gratuitos</BytebankText>
+          <BytebankText color="success" variant="md" fontWeight={600}>
+            Conta e cartão gratuitos
+          </BytebankText>
           <BytebankText className={styles.text}>
             Isso mesmo, nossa conta é digital, sem custo fixo e mais que isso:
             sem tarifa de manutenção.
@@ -66,7 +73,9 @@ export default function Home() {
   return (
     <div className={styles.homePage}>
       {renderBanner()}
-      <BytebankText>Vantagens do nosso banco:</BytebankText>
+      <BytebankText variant="md" color="dark" sx={{ fontWeight: 600 }}>
+        Vantagens do nosso banco:
+      </BytebankText>
       {renderValuePropositionBlock()}
     </div>
   );
