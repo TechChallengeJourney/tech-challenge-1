@@ -10,9 +10,9 @@ export interface BytebankTextProps extends TypographyProps {
 
 export function BytebankText({
   children,
-  color = 'primary',
-  variant = 'sm',
-  fontSize = '16px',
+  color,
+  variant,
+  fontSize,
   ...props // Captura todas as props adicionais do Typography
 }: BytebankTextProps) {
   return (
