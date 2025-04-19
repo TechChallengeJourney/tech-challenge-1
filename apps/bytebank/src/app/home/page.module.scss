@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  justify-items: center;
-  align-self: center;
   text-align: center;
 }
 
@@ -16,7 +14,7 @@
 
 .valueProposition {
   margin-top: 42px;
-  width: 300px; // Tamanho fixo padrão
+  width: 300px; /* Tamanho fixo padrão */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,22 +25,32 @@
 @media (min-width: 768px) and (max-width: 819px) {
   .valueProposition {
     width: calc(33.33% - 1rem);
+    max-width: calc(33.33% - 1rem); /* Garantir que o texto e conteúdo não estiquem */
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) { /* Ajustes para iPad Pro 12.9 (modo retrato) */
+  .valueProposition {
+    width: calc(50% - 1rem); /* Dois itens por linha no iPad Pro 12.9 */
+    max-width: calc(50% - 1rem); /* Garantir que o conteúdo dentro não estique */
   }
 }
 
 .text {
-  width: 100vw;
   white-space: normal;
-  text-overflow: unset;
   overflow: visible;
+  line-height: 1.5;
+  display: block;
+  word-wrap: break-word;
+  margin-bottom: 24px;
+  width: 100%; /* Isso garante que o texto não ultrapasse o tamanho do container */
+  max-width: 270px; /* Limita a largura do texto */
 
-  @media (min-width: 1024px) {
-    flex: 1;
-    display: block;
-    width: 270px;
+  @media (min-width: 1366px) {
     align-self: flex-end;
   }
 }
+
 
 .banner {
   margin-top: 24px;
@@ -53,21 +61,18 @@
   justify-content: center;
   height: auto;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1366px) {
     flex-direction: row;
-    gap: 0;
     justify-content: center;
-    text-align: left; // desktop: lado a lado
     align-self: center;
+    text-align: left;
   }
 }
 
-
-
 .illustration {
-  width: 90vw !important;
+  width: 90vw;
   max-width: 500px;
-  margin: 0 auto;
+  margin-top: 24px;
 
   img {
     width: 100%;
@@ -75,7 +80,7 @@
     display: block;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1366px) {
     width: 661px;
   }
 }
