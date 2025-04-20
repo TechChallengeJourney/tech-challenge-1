@@ -1,7 +1,8 @@
 'use client';
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 import './style.scss';
 import { styled } from '@mui/material';
+import Link from 'next/link';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
@@ -34,20 +35,22 @@ export interface BytebankButtonProps {
    */
   variant?: 'contained' | 'text' | 'outlined';
   sendSubmit?: () => void;
+  href?: string;
 }
+
+const ColorButton = styled(Button)<ButtonProps>(() => ({
+  '&.MuiButton-containedTertiary:hover': {
+    color: 'white',
+  },
+}));
 
 export function BytebankButton({
   label,
   color,
   variant,
   sendSubmit,
+  href,
 }: BytebankButtonProps) {
-  const ColorButton = styled(Button)(() => ({
-    '&.MuiButton-containedTertiary:hover': {
-      color: 'white',
-    },
-  }));
-
   return (
     <div className={`bytebank-button bytebank-button--${color}`}>
       <ColorButton
@@ -55,6 +58,8 @@ export function BytebankButton({
         variant={variant}
         color={color}
         onClick={sendSubmit}
+        component={href ? Link : 'button'}
+        href={href}
       >
         {label}
       </ColorButton>

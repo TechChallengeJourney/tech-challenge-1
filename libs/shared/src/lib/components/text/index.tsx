@@ -3,8 +3,8 @@ import { Typography, TypographyProps, Box } from '@mui/material';
 
 export interface BytebankTextProps extends TypographyProps {
   children: string;
-  color?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'error' | 'info' | 'dark' | 'light';
-  variant?: 'h1' | 'xs' | 'sm' | 'md' | 'lg';
+  color?: string;
+  variant?: 'xs' | 'sm' | 'md' | 'lg' | 'h1';
   fontSize?: string;
 }
 
