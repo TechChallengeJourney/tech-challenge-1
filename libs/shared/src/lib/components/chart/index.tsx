@@ -6,19 +6,15 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 interface BytebankChartProps {
   series: number[];
+  labels?: string[];
 }
 
-export function BytebankChart({ series }: BytebankChartProps) {
+export function BytebankChart({ series, labels }: BytebankChartProps) {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'pie',
     },
-    labels: [
-      'Fundos de investimento',
-      'Tesouro Direto',
-      'Previdência Privada',
-      'Bolsa de Valores',
-    ],
+    labels,
     colors: ['#2567F9', '#8F3CFF', '#FF3C82', '#F1823D'],
     responsive: [
       {
@@ -35,9 +31,5 @@ export function BytebankChart({ series }: BytebankChartProps) {
     ],
   };
 
-  return (
-    <div className="w-full max-w-md mx-auto">
-      <Chart options={options} series={series} type="pie" width="100%" />
-    </div>
-  );
+  return <Chart options={options} series={series} type="pie" width="100%" />;
 }

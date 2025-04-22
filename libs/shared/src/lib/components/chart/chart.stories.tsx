@@ -15,5 +15,11 @@ type Story = StoryObj<typeof BytebankChart>;
 export const Default: Story = {
   args: {
     series: [35, 25, 20, 20],
+    labels: [
+      'Fundos de investimento',
+      'Tesouro Direto',
+      'Previdência Privada',
+      'Bolsa de Valores',
+    ],
   },
 };

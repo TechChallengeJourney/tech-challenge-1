@@ -5,7 +5,8 @@ import {
   BytebankModal,
   BytebankSelectController,
   BytebankInputController,
-  BytebankExtract
+  BytebankExtract,
+  BytebankChart,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
@@ -134,6 +135,15 @@ export default function Index() {
         </>
       </BytebankModal>
       <BytebankExtract extract={extract} />
+      <BytebankChart
+        series={[12, 32, 24, 33]}
+        labels={[
+          'Fundos de investimento',
+          'Tesouro Direto',
+          'Previdência Privada',
+          'Bolsa de Valores',
+        ]}
+      />
     </>
   );
 }
