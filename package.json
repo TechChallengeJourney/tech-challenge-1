@@ -14,9 +14,11 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
-    "next": "^15.3.0",
+    "apexcharts": "^4.6.0",
     "date-fns": "^4.1.0",
+    "next": "^15.3.0",
     "react": "19.0.0",
+    "react-apexcharts": "^1.7.0",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.55.0"
   },
