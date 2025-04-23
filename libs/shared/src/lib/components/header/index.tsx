@@ -6,7 +6,7 @@ import { BytebankMenu, Route } from '../menu';
 import Link from 'next/link';
 import { BytebankButton } from '../button';
 import { localStorageKeys } from '../../enum';
-import { AuthPermission } from '../../utils';
+import { useLocalStorageState } from '../../hooks/use-localstorage-state';
 
 interface HeaderProps {
   // logged?: boolean; será implementado no futuro
@@ -15,15 +15,18 @@ interface HeaderProps {
 }
 
 export function BytebankHeader({ routes, mobile }: HeaderProps) {
+  const [isAuth, setIsAuth] = useLocalStorageState<boolean>(
+    localStorageKeys.AUTH_PERMISSION,
+    false
+  );
   const Login = () => {
-    window.location.reload();
-    localStorage.setItem(localStorageKeys.AUTH_PERMISSION, 'true');
+    setIsAuth(false);
   };
 
   const Logout = () => {
-    window.location.reload();
-    localStorage.setItem(localStorageKeys.AUTH_PERMISSION, 'false');
+    setIsAuth(true);
   };
+
   return (
     <AppBar className="header" position="static">
       <Container maxWidth="md" className="container">
@@ -45,7 +48,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
             </Link>
           </Box>
           <BytebankMenu routes={routes} mobile={mobile} />
-          {!AuthPermission() ? (
+          {isAuth ? (
             <BytebankButton
               sendSubmit={Login}
               label="Login"
