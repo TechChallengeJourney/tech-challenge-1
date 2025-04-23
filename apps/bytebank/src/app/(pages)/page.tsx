@@ -5,7 +5,7 @@ import {
   BytebankModal,
   BytebankSelectController,
   BytebankInputController,
-  BytebankExtract
+  BytebankExtract,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
