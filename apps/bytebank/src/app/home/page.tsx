@@ -3,6 +3,7 @@
 import { ReactElement } from 'react';
 import { useMediaQuery } from '@mui/material';
 import { useTheme, Theme } from '@mui/material/styles';
+import { Box } from '@mui/material';
 import {
   CardGiftcardOutlined,
   AssuredWorkload,
@@ -57,8 +58,8 @@ export default function Home(): ReactElement {
         color="black"
         sx={{ fontWeight: 600 }}
       >
-        Experimente mais liberdade no controle da sua vida financeira.
-        Crie sua conta com a gente!
+        Experimente mais liberdade no controle da sua vida financeira. Crie sua
+        conta com a gente!
       </BytebankText>
 
       <BytebankIllustration
@@ -78,14 +79,20 @@ export default function Home(): ReactElement {
           color="black"
           label="Abrir conta"
           variant="contained"
-          href="/open-account"
-        />
-        <BytebankButton
-          variant="outlined"
-          color="black"
-          label="Já tenho conta"
-          href="/login"
-        />
+          // TODO: chamar modal de abertura de conta(signup)
+            sendSubmit={() => {
+            alert("Chamar modal aqui (signup)");
+            }}
+          />
+          <BytebankButton
+            variant="outlined"
+            color="black"
+            label="Já tenho conta"
+          // TODO: chamar modal de acesso a conta(login)
+          sendSubmit={() => {
+            alert("Chamar modal aqui (login)");
+            }}
+          />
       </div>
     );
   };
@@ -98,17 +105,35 @@ export default function Home(): ReactElement {
         Vantagens do nosso banco:
       </BytebankText>
 
-      <div className={styles.valuePropositionWrapper}>
+      <Box
+        display="flex"
+        sx={{
+          flexDirection: {
+            xs: 'column', 
+            sm: 'row', 
+            md: 'row', 
+          },
+          gap: {
+            xs: 2, 
+            sm: 3, 
+            md: 4,
+          },
+        }}
+        justifyContent="center"
+        alignItems="center"
+        gap={2}
+        flexWrap="wrap"
+      >
         {BENEFITS.map(({ icon, title, description }, index) => (
-          <div key={index} className={styles.valueProposition}>
+          <Box key={index} className={styles.valueProposition}>
             {icon}
             <BytebankText variant="sm" color="success" sx={{ fontWeight: 600 }}>
               {title}
             </BytebankText>
             <BytebankText className={styles.text}>{description}</BytebankText>
-          </div>
+          </Box>
         ))}
-      </div>
+      </Box>
     </>
   );
 

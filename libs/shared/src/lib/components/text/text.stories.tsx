@@ -32,7 +32,7 @@ type Story = StoryObj<BytebankTextProps>;
 export const H1: Story = {
   args: {
     children: SIMPLE_TEXT,
-    color: 'dark',
+    color: 'black',
     variant: 'h1', 
     align: 'center', // Propriedade do Material UI
     gutterBottom: true, // Propriedade do Material UI
@@ -105,7 +105,7 @@ export const Error: Story = {
 export const Light: Story = {
     args: {
       children: SIMPLE_TEXT,
-      color: 'light',
+      color: 'white',
       variant: 'lg',
       align: 'inherit', // Propriedade do Material UI
       gutterBottom: true, // Propriedade do Material UI

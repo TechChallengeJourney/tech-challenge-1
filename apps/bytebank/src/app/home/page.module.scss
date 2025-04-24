@@ -19,13 +19,6 @@
   margin-bottom: 32px;
 }
 
-.valuePropositionWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
 .valueProposition {
   margin-top: 42px;
   width: 300px;
@@ -38,8 +31,7 @@
 
 @media (min-width: 768px) and (max-width: 819px) {
   .valueProposition {
-    width: calc(33.33% - 1rem);
-    max-width: calc(33.33% - 1rem);
+    width: 'calc(50% - 1rem)',
   }
 }
 
