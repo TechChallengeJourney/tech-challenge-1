@@ -1,143 +1,146 @@
 'use client';
+import { ReactElement } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import {
+  BytebankText,
+  BytebankIllustration,
   BytebankButton,
-  BytebankCardBank,
-  BytebankModal,
-  BytebankSelectController,
-  BytebankInputController,
-  defaultTheme as theme,
-  BytebankExtract,
 } from '@bytebank/shared';
-import { useForm, FormProvider } from 'react-hook-form';
+import {
+  CardGiftcardOutlined,
+  AssuredWorkload,
+  StarBorderOutlined,
+  DevicesOtherOutlined,
+} from '@mui/icons-material';
 import { Box } from '@mui/material';
-import React from 'react';
+import { useMediaQuery } from '@mui/material';
+import { useTheme, Theme } from '@mui/material/styles';
+import styles from './page.module.scss';
 
-type FormValues = {
-  name: string;
-  email: string;
-  tipo: string;
-};
-
-interface BytebankExtractProps {
-  month: string;
-  data: BytebankExtractPropsData[];
-}
-
-interface BytebankExtractPropsData {
-  date: Date;
-  type: 'Depósito' | 'Saque' | 'Transferência';
-  value: number;
-}
-
-const extract: BytebankExtractProps[] = [
+const BENEFITS = [
   {
-    month: 'Abril',
-    data: [
-      {
-        date: new Date(),
-        type: 'Depósito',
-        value: 1.25,
-      },
-      {
-        date: new Date(),
-        type: 'Saque',
-        value: -30,
-      },
-      {
-        date: new Date(),
-        type: 'Transferência',
-        value: 40,
-      },
-    ],
+    icon: <CardGiftcardOutlined color="success" sx={{ fontSize: 80 }} />,
+    title: 'Conta e cartão gratuitos',
+    description:
+      'Isso mesmo, nossa conta é digital, sem custo fixo e mais que isso: sem tarifa de manutenção.',
+  },
+  {
+    icon: <AssuredWorkload color="success" sx={{ fontSize: 80 }} />,
+    title: 'Saques sem custo',
+    description:
+      'Você pode sacar gratuitamente 4x por mês de qualquer Banco 24h.',
+  },
+  {
+    icon: <StarBorderOutlined color="success" sx={{ fontSize: 80 }} />,
+    title: 'Programa de pontos',
+    description:
+      'Você pode acumular pontos com suas compras no crédito sem pagar mensalidade!',
+  },
+  {
+    icon: <DevicesOtherOutlined color="success" sx={{ fontSize: 80 }} />,
+    title: 'Seguro Dispositivos',
+    description:
+      'Seus dispositivos móveis (computador e laptop) protegidos por uma mensalidade simbólica.',
   },
 ];
 
 export default function Index() {
-  const methods = useForm<FormValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-      tipo: '',
-    },
-  });
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const cardDetails = {
-    name: 'Joana da Silva',
-    cardNumber: '12234565665773',
-    expirationDate: '12/2029',
+  const renderBanner = (): ReactElement => (
+    <div className={styles.banner}>
+      <BytebankText
+        className={styles.bannerText}
+        variant="md"
+        color="black"
+        sx={{ fontWeight: 600 }}
+      >
+        Experimente mais liberdade no controle da sua vida financeira. Crie sua
+        conta com a gente!
+      </BytebankText>
+
+      <BytebankIllustration
+        className={styles.illustration}
+        variant="auto"
+        name="graphic"
+      />
+    </div>
+  );
+
+  const renderMobileButtons = (): ReactElement | null => {
+    if (!isMobile) return null;
+
+    return (
+      <div className={styles.mobileButtonsWrapper}>
+        <BytebankButton
+          color="black"
+          label="Abrir conta"
+          variant="contained"
+          // TODO: chamar modal de abertura de conta(signup)
+          sendSubmit={() => {
+            alert('Chamar modal aqui (signup)');
+          }}
+        />
+        <BytebankButton
+          variant="outlined"
+          color="black"
+          label="Já tenho conta"
+          // TODO: chamar modal de acesso a conta(login)
+          sendSubmit={() => {
+            alert('Chamar modal aqui (login)');
+          }}
+        />
+      </div>
+    );
   };
 
-  const onSubmit = (data: FormValues) => {
-    console.log('Form data:', data);
-  };
+  const renderValuePropositionBlock = (): ReactElement => (
+    <>
+      {renderMobileButtons()}
 
-  const [open, setOpen] = React.useState(false);
-  const selectOptions = [
-    { label: 'Pessoa Física', value: 'pf' },
-    { label: 'Pessoa Jurídica', value: 'pj' },
-  ];
+      <BytebankText variant="h1" color="black" sx={{ fontWeight: 600 }}>
+        Vantagens do nosso banco:
+      </BytebankText>
+
+      <Box
+        display="flex"
+        sx={{
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+            md: 'row',
+          },
+          gap: {
+            xs: 2,
+            sm: 3,
+            md: 4,
+          },
+        }}
+        justifyContent="center"
+        alignItems="center"
+        gap={2}
+        flexWrap="wrap"
+      >
+        {BENEFITS.map(({ icon, title, description }, index) => (
+          <Box key={index} className={styles.valueProposition}>
+            {icon}
+            <BytebankText variant="sm" color="success" sx={{ fontWeight: 600 }}>
+              {title}
+            </BytebankText>
+            <BytebankText className={styles.text}>{description}</BytebankText>
+          </Box>
+        ))}
+      </Box>
+    </>
+  );
 
   return (
     <ThemeProvider theme={theme}>
-      <Box width="100%" display="flex" flexDirection="column" gap={4}>
-        <BytebankCardBank
-          variant="physical"
-          details={cardDetails}
-        ></BytebankCardBank>
-        <BytebankCardBank
-          variant="virtual"
-          details={cardDetails}
-        ></BytebankCardBank>
-        <BytebankButton
-          sendSubmit={() => setOpen(true)}
-          label="Abrir Modal"
-          color="primary"
-          variant="outlined"
-        />
-      </Box>
-
-      <BytebankModal
-        illustrationSize="lg"
-        title="Preencha os campos abaixo para criar sua conta corrente!"
-        illustration="register"
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-              <BytebankInputController
-                name="name"
-                label="Nome"
-                placeholder="Digite seu nome"
-              />
-              <BytebankInputController
-                name="email"
-                label="Email"
-                placeholder="Digite seu email"
-                type="email"
-              />
-
-              <BytebankSelectController
-                name="tipo"
-                label="Tipo de pessoa"
-                options={selectOptions}
-              />
-
-              <Box>
-                <BytebankButton
-                  label="Concluir transação"
-                  color="primary"
-                  variant="contained"
-                />
-              </Box>
-            </form>
-          </FormProvider>
-        </>
-      </BytebankModal>
-
-      <BytebankExtract extract={extract} />
+      <div className={styles.contentWrapper}>
+        {renderBanner()}
+        {renderValuePropositionBlock()}
+      </div>
     </ThemeProvider>
   );
 }
