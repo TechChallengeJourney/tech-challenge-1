@@ -1,23 +1,27 @@
 'use client';
-import { ReactElement } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
 import {
-  BytebankText,
-  BytebankIllustration,
   BytebankButton,
+  BytebankIllustration,
+  BytebankText,
 } from '@bytebank/shared';
 import {
-  CardGiftcardOutlined,
   AssuredWorkload,
-  StarBorderOutlined,
+  CardGiftcardOutlined,
   DevicesOtherOutlined,
+  StarBorderOutlined,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import { useMediaQuery } from '@mui/material';
-import { useTheme, Theme } from '@mui/material/styles';
+import { Box, useMediaQuery } from '@mui/material';
+import { Theme, ThemeProvider, useTheme } from '@mui/material/styles';
+import { ReactElement } from 'react';
 import styles from './page.module.scss';
 
-const BENEFITS = [
+type Benefit = {
+  icon: ReactElement;
+  title: string;
+  description: string;
+};
+
+const BENEFITS: Benefit[] = [
   {
     icon: <CardGiftcardOutlined color="success" sx={{ fontSize: 80 }} />,
     title: 'Conta e cartão gratuitos',
@@ -44,7 +48,7 @@ const BENEFITS = [
   },
 ];
 
-export default function Index() {
+export default function Index(): ReactElement  {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -77,7 +81,7 @@ export default function Index() {
           color="black"
           label="Abrir conta"
           variant="contained"
-          // TODO: chamar modal de abertura de conta(signup)
+          // TODO: chamar modal/fazer lógica de abertura de conta(signup)
           sendSubmit={() => {
             alert('Chamar modal aqui (signup)');
           }}
@@ -86,7 +90,7 @@ export default function Index() {
           variant="outlined"
           color="black"
           label="Já tenho conta"
-          // TODO: chamar modal de acesso a conta(login)
+          // TODO: chamar modal/fazer lógica de acesso a conta(login)
           sendSubmit={() => {
             alert('Chamar modal aqui (login)');
           }}
@@ -122,7 +126,7 @@ export default function Index() {
         gap={2}
         flexWrap="wrap"
       >
-        {BENEFITS.map(({ icon, title, description }, index) => (
+        {BENEFITS.map(({ icon, title, description }: Benefit, index: number) => (
           <Box key={index} className={styles.valueProposition}>
             {icon}
             <BytebankText variant="sm" color="success" sx={{ fontWeight: 600 }}>

@@ -1,5 +1,5 @@
+import * as DocBlock from '@storybook/blocks';
 import { Meta, StoryObj } from '@storybook/react';
-import  * as DocBlock from '@storybook/blocks';
 import { BytebankButton } from './index';
 
 const meta = {
