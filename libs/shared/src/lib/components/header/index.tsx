@@ -6,7 +6,7 @@ import { BytebankMenu, Route } from '../menu';
 import Link from 'next/link';
 import { BytebankButton } from '../button';
 import { localStorageKeys } from '../../enum';
-import { useLocalStorageState } from '../../hooks/use-localstorage-state';
+import { useLocalStorageState } from '../../hooks/useLocalstorageState';
 
 interface HeaderProps {
   // logged?: boolean; será implementado no futuro

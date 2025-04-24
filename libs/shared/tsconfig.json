@@ -8,9 +8,7 @@
   ],
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx",
-    "target": "ESNext",
-    "module": "ESNext"
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx"
   }
 }
