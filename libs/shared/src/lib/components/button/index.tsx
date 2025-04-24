@@ -1,7 +1,6 @@
 'use client';
 import { styled } from '@mui/material';
 import Button, { ButtonProps } from '@mui/material/Button';
-import Link from 'next/link';
 import './style.scss';
 
 declare module '@mui/material/Button' {
@@ -56,7 +55,6 @@ export function BytebankButton({
         variant={variant}
         color={color}
         onClick={sendSubmit}
-        component={href ? Link : 'button'}
       >
         {label}
       </ColorButton>

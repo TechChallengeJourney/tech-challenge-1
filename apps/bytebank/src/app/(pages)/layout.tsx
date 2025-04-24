@@ -4,6 +4,10 @@ import '../global.scss';
 
 const routes: Provider.ProviderRouteProps[] = [
     {
+        name: 'inicio',
+        route: '/'
+    },
+    {
         name: 'investimentos',
         route: 'investimentos'
     },

@@ -11,7 +11,7 @@ import {
   StarBorderOutlined,
 } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
-import { Theme, ThemeProvider, useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
 import styles from './page.module.scss';
 
@@ -140,11 +140,9 @@ export default function Index(): ReactElement  {
   );
 
   return (
-    <ThemeProvider theme={theme}>
       <div className={styles.contentWrapper}>
         {renderBanner()}
         {renderValuePropositionBlock()}
       </div>
-    </ThemeProvider>
   );
 }
