@@ -1,5 +1,5 @@
 'use client';
-import { Typography, TypographyProps, Box } from '@mui/material';
+import { Box, Typography, TypographyProps } from '@mui/material';
 
 export interface BytebankTextProps extends TypographyProps {
   children: string;

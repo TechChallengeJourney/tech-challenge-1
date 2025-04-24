@@ -1,23 +1,24 @@
 import './global.scss';
 
 import { Metadata } from 'next';
-import BytebankWrapper from './wrapper';
 
 export const metadata: Metadata = {
     title: 'Bytebank',
     description: 'Projeto desenvolvido para fins educacionais.',
 };
 
-export default function RootLayout({
-    children,
+const RootLayout = ({ children,
 }: {
     children: React.ReactNode;
-}) {
+}) => {
+
     return (
-        <html lang="en">
+        <html lang="pt-br">
             <body>
-                <BytebankWrapper>{children}</BytebankWrapper>
+                <main>{children}</main>
             </body>
         </html>
     );
 }
+
+export default RootLayout;
