@@ -3,6 +3,8 @@ import {
   BytebankButton,
   BytebankIllustration,
   BytebankText,
+  BytebankProvider,
+  routes
 } from '@bytebank/shared';
 import {
   AssuredWorkload,
@@ -140,9 +142,11 @@ export default function Index(): ReactElement  {
   );
 
   return (
+    <BytebankProvider routes={routes}>
       <div className={styles.contentWrapper}>
         {renderBanner()}
         {renderValuePropositionBlock()}
       </div>
+    </BytebankProvider>
   );
 }
