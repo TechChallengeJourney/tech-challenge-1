@@ -8,11 +8,13 @@ import { BytebankHeader } from './components/header';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
-import * as BytebankProvider from './components/provider';
+import { BytebankProvider } from './components/provider';
 import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
+import { ProviderRouteProps } from './classes/models/provider-route';
+import { routes } from './classes/constants/routes.config';
 
 export {
   BytebankButton,
@@ -30,4 +32,8 @@ export {
   BytebankProvider,
   defaultTheme,
   palette,
+  routes
 };
+
+export type { ProviderRouteProps };
+

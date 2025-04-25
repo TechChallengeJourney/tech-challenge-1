@@ -11,17 +11,19 @@ export interface BytebankIllustrationProps {
    * @default md
    */
   variant?: 'sm' | 'md' |'lg' | 'auto';
+  className?: string;
 }
 enum BytebankIllustrationVariant {
   'sm' = '60px',
   'md' = '160px',
   'lg' = '220px',
-  'auto' = 'fit-content'
+  'auto' = 'fit-content',
+  'className' = ''
 }
-export function BytebankIllustration({name, variant = 'auto'}: BytebankIllustrationProps) {
+export function BytebankIllustration({name, variant = 'auto', className}: BytebankIllustrationProps) {
   const path: string = name ? `/images/${name}.png` : '';
   return (
-    <Box sx={{width: BytebankIllustrationVariant[variant], height: variant === 'auto' ? 'fit-content' : null}}>
+    <Box className={className} sx={{width: BytebankIllustrationVariant[variant], height: variant === 'auto' ? 'fit-content' : null}}>
       <img src={path} alt='' width={BytebankIllustrationVariant[variant]} />
     </Box>
   );

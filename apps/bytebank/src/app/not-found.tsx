@@ -1,5 +1,5 @@
 'use client';
-import { BytebankIllustration, BytebankButton, BytebankText, palette, BytebankProvider as Provider } from "@bytebank/shared";
+import { BytebankButton, BytebankIllustration, BytebankProvider, BytebankText, palette } from "@bytebank/shared";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +10,7 @@ export default function NotFound() {
 
   return (
     <>
-      <Provider.BytebankProvider canNavigate={false}>
+      <BytebankProvider canNavigate={false}>
         <Box display={"flex"} flexDirection={"column"} alignItems={"center"} justifyContent={"center"} flexGrow={1} gap={2}>
           <BytebankIllustration name={"error"} />
 
@@ -21,7 +21,7 @@ export default function NotFound() {
             <BytebankButton label="Voltar ao início" variant={"contained"} color={"secondary"} sendSubmit={() => handleRedirect()} />
           </Box>
         </Box>
-      </Provider.BytebankProvider>
+      </BytebankProvider>
     </>
   );
 }

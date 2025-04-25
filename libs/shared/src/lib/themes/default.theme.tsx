@@ -59,6 +59,20 @@ defaultTheme = createTheme(defaultTheme, {
       },
       name: 'tertiary',
     }),
+    black: defaultTheme.palette.augmentColor({
+      color: {
+        main: palette['black.main'],
+        contrastText: palette['white.main'],
+      },
+      name: 'black',
+    }),
+    white: defaultTheme.palette.augmentColor({
+      color: {
+        main: palette['white.main'],
+        contrastText: palette['black.main']
+      },
+      name: 'white',
+    }),
   },
   cssVariables: true,
 });
