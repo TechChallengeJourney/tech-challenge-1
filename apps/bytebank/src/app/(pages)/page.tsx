@@ -6,6 +6,7 @@ import {
   BytebankSelectController,
   BytebankInputController,
   BytebankExtract,
+  BytebankCardContent,
 } from '@bytebank/shared';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Box } from '@mui/material';
@@ -76,9 +77,15 @@ export default function Index() {
     { label: 'Pessoa Jurídica', value: 'pj' },
   ];
 
+  const selectCardOptions = [
+    { label: 'Câmbio de Moeda', value: 'cambio' },
+    { label: 'DOC/TED', value: 'docted' },
+    { label: 'Empréstimo e Financiamento', value: 'emprestimo' },
+  ];
+
   return (
     <>
-      <Box width="100%" p={2} display="flex" flexDirection="column" gap={4}>
+      <Box p={2} display="flex" flexDirection="column" gap={4}>
         <BytebankCardBank
           variant="physical"
           details={cardDetails}
@@ -94,6 +101,30 @@ export default function Index() {
           variant="outlined"
         />
       </Box>
+      <BytebankCardContent title="Nova transação">
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+            <BytebankSelectController
+              name="tipo"
+              label="Selecione o tipo de transação"
+              options={selectCardOptions}
+            />
+            <BytebankInputController
+              name="valor"
+              label="Valor"
+              type="number"
+              placeholder="Digite seu nome"
+            />
+            <Box>
+              <BytebankButton
+                label="Concluir transação"
+                color="primary"
+                variant="contained"
+              />
+            </Box>
+          </form>
+        </FormProvider>
+      </BytebankCardContent>
       <BytebankModal
         illustrationSize="lg"
         title="Preencha os campos abaixo para criar sua conta corrente!"

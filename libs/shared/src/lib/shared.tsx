@@ -8,6 +8,7 @@ import { BytebankHeader } from './components/header';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
+import { BytebankCardContent } from './components/card-content';
 import * as BytebankProvider from './components/provider';
 import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
@@ -16,6 +17,7 @@ import { BytebankChart } from './components/chart';
 
 export {
   BytebankButton,
+  BytebankCardContent,
   BytebankInputController,
   BytebankSelectController,
   BytebankText,
