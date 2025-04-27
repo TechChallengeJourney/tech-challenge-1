@@ -33,7 +33,7 @@ export interface BytebankButtonProps {
    * O estilo do botão
    */
   variant?: 'contained' | 'text' | 'outlined';
-  sendSubmit?: () => void;
+  sendSubmit?: any;
 }
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
