@@ -21,6 +21,8 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
   const [snackbarData, setSnackbarData] = useState<{ severity: AlertColor, message: string; } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [isLoginLoading, setLoginLoading] = useState(false);
+  const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [user, setUser] = useSession<User>('user');
   const isLogged = !!(user);
@@ -41,6 +43,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
   });
 
   const handleRegister = async (data: {name: string, email: string; password: string;}) => {
+    setRegisterLoading(true);
     const response = await fetch('/api/register', {
       method: 'POST',
       headers: {
@@ -57,9 +60,12 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
       const responseError = await response.json() as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
     }
+    setRegisterLoading(false);
     setSnackbarOpen(true);
   };
+
   const handleLogin = async (data: {email: string; password: string;}) => {
+    setLoginLoading(true);
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -76,6 +82,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
       const responseError = await response.json() as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
     }
+    setLoginLoading(false);
     setSnackbarOpen(true);
   };
 
@@ -110,11 +117,12 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
               <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
               <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
               <Box display={'flex'} pt={2} justifyContent={'center'}>
-                <BytebankButton label={'Criar conta'} color={'secondary'} variant={'contained'} fullWidth></BytebankButton>
+                <BytebankButton label={'Criar conta'} color={'secondary'} variant={'contained'} loading={isRegisterLoading} fullWidth></BytebankButton>
               </Box>
             </form>
           </FormProvider>
-          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText> <Link component="button" variant="sm" color={'secondary'}
+          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText> 
+          <Link component="button" variant="sm" color={'secondary'}
             onClick={handleLoginModal}>Fazer login</Link>
           </Box>
         </>
@@ -132,7 +140,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
               <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
               <Box display={'flex'} gap={2} flexDirection={'column'} justifyContent={'center'}>
                 <Link component="button" variant="sm" color={'secondary'}>Esqueceu sua senha?</Link>
-                <BytebankButton label={'Entrar'} color={'secondary'} variant={'contained'} fullWidth></BytebankButton>
+                <BytebankButton label={'Entrar'} color={'secondary'} variant={'contained'} loading={isLoginLoading} fullWidth></BytebankButton>
               </Box>
             </form>
           </FormProvider>
