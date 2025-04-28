@@ -33,7 +33,7 @@ export interface BytebankButtonProps {
    * O estilo do botão
    */
   variant?: 'contained' | 'text' | 'outlined';
-  sendSubmit?: any;
+  sendSubmit?: () => void;
 }
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
@@ -47,6 +47,7 @@ export function BytebankButton({
   color,
   variant,
   sendSubmit,
+  ...props
 }: BytebankButtonProps) {
   return (
     <div className={`bytebank-button bytebank-button--${color}`}>
@@ -55,6 +56,7 @@ export function BytebankButton({
         variant={variant}
         color={color}
         onClick={sendSubmit}
+        {...props}
       >
         {label}
       </ColorButton>

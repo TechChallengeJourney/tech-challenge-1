@@ -7,11 +7,8 @@
   transform: translate(-50%, 0);
   height: 100vh;
   background-color: var(--mui-palette-tertiary-light);
-  padding: 2rem 6.25rem 0px 6.25rem;
-
-  p {
-    margin-top: 1rem;
-  }
+  padding: 2vw 4vw 0 4vw;
+  min-width: 35%;
 
   @media (max-width: 720px) {
     padding: 2rem 4.75rem 0px 4.75rem;

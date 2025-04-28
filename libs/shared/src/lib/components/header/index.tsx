@@ -1,19 +1,18 @@
 'use client';
 import './style.scss';
 
-import { AppBar, Box, Container } from '@mui/material';
+import { AppBar, Box, Container, Link } from '@mui/material';
 import { BytebankMenu, Route } from '../menu';
-import Link from 'next/link';
 import { BytebankButton } from '../button';
-import { localStorageKeys } from '../../classes/enums/local-storage';
-import { useLocalStorageState } from '../../hooks/useLocalstorageState';
 import { ReactElement, useState } from 'react';
 import { BytebankModal } from '../modal';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BytebankInputController } from '../input/ControlledInput';
+import useSession from '../../hooks/use-session';
+import { User } from '../../classes/models/user';
+import { BytebankText } from '../text';
 
 interface HeaderProps {
-  // logged?: boolean; será implementado no futuro
   routes: Route[];
   mobile?: boolean;
 }
@@ -21,66 +20,67 @@ interface HeaderProps {
 
 export function BytebankHeader({ routes, mobile }: HeaderProps) {
   const [openModal, setOpenModal] = useState(false);
-  const methods = useForm<any>({
+  const [user, setUser] = useSession<User>('user');
+  const isLogged = !!(user);
+
+  const methods = useForm<User>({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-const handleSubmit = async (data: any) => {
-  return await fetch('/api/auth', {
+const handleLogin = async (data: User) => {
+  const response = await fetch('/api/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data)
     });
-};
 
-const handleLogin = (data: any) => {
-  console.log(data)
-  handleSubmit(data).then(res =>{ 
-  if(res.status === 200) {    
-    setIsAuth(false);
-    handleCloseModal();
-  } else {
-    // adicionar mensagem de erro para o usuário
-  }
-})}
+    if (response.ok) {
+      const userData = await response.json();
+      setUser<User>(userData);
+      closeModal();
+    } else {
+      // Handle login failure
+    }
+};
 
   const renderLoginModal = (isOpen: boolean): ReactElement => (
     <>
-      <BytebankModal title={'Login'} illustration={'login'} illustrationSize={'md'} open={isOpen} onClose={() => handleCloseModal()}>
+      <BytebankModal title={'Login'} illustration={'login'} illustrationSize={'md'} open={isOpen} onClose={() => closeModal()}>
+        <>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(handleLogin)} noValidate>
             <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
             <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
-            <Box pt={2} width={'100%'}>
-            <BytebankButton label={'Entrar'} color={'secondary'} variant={'contained'}></BytebankButton>
+            <Box pt={2}>
+            <BytebankButton label={'Entrar'} color={'secondary'} variant={'contained'} fullWidth></BytebankButton>
             </Box>
           </form>
         </FormProvider>
+        <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Não tem uma conta?</BytebankText> <Link component="button" variant="sm" color={'secondary'}
+      onClick={() => {
+        console.info("open register modal");
+      }}>Crie uma agora!</Link>
+      </Box>
+        </>
       </BytebankModal>
     </>
   );
 
-  const handleCloseModal = () => {
+  const closeModal = () => {
     setOpenModal(false);
   };
-
-  const [isAuth, setIsAuth] = useLocalStorageState<boolean>(
-    localStorageKeys.AUTH_PERMISSION,
-    false
-  );
-
 
   const openLoginModal = () => {
     setOpenModal(true);
   };
 
   const Logout = () => {
-    setIsAuth(true);
+    setUser<User>(null);
   };
 
   return (
@@ -105,18 +105,18 @@ const handleLogin = (data: any) => {
               </Link>
             </Box>
             <BytebankMenu routes={routes} mobile={mobile} />
-            {isAuth ? (
+            {!isLogged ? (
               <BytebankButton
                 sendSubmit={openLoginModal}
                 label="Login"
-                color="primary"
+                color="secondary"
                 variant="contained"
               />
             ) : (
               <BytebankButton
                 sendSubmit={Logout}
                 label="Logout"
-                color="primary"
+                color="secondary"
                 variant="outlined"
               />
             )}
