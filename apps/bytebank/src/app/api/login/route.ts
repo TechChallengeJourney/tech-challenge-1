@@ -1,11 +1,5 @@
 import { NextResponse } from 'next/server';
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const fetchUsers = async () => {
-  const res = await fetch(`${apiUrl}/users`);
-  const users = await res.json();
-  return users;
-};
+import { fetchUsers } from '../users';
 
 export async function POST(request: Request) {
   try {

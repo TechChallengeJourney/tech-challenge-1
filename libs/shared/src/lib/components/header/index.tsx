@@ -17,23 +17,50 @@ interface HeaderProps {
   mobile?: boolean;
 }
 
-
 export function BytebankHeader({ routes, mobile }: HeaderProps) {
   const [snackbarData, setSnackbarData] = useState<{ severity: AlertColor, message: string; } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [user, setUser] = useSession<User>('user');
   const isLogged = !!(user);
 
-  const methods = useForm<{email: string; password: string;}>({
+  const loginMethods = useForm<{email: string; password: string;}>({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
+  const registerMethods = useForm<{name: string; email: string; password: string;}>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
+
+  const handleRegister = async (data: {name: string, email: string; password: string;}) => {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      const res = await response.json() as {message: string};
+      setSnackbarData({ severity: 'success', message: res.message });
+      closeRegisterModal();
+    } else {
+      const responseError = await response.json() as { error: string };
+      setSnackbarData({ severity: 'error', message: responseError.error });
+    }
+    setSnackbarOpen(true);
+  };
   const handleLogin = async (data: {email: string; password: string;}) => {
-    const response = await fetch('/api/auth', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +71,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
     if (response.ok) {
       const userData = await response.json();
       setUser<User>(userData);
-      closeModal();
+      closeLoginModal();
     } else {
       const responseError = await response.json() as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
@@ -72,12 +99,35 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
     ) : null;
   }
 
+  const renderRegisterModal = (isOpen: boolean): ReactElement => (
+    <>
+      <BytebankModal title={'Criar uma conta'} illustration={'register'} illustrationSize={'lg'} open={isOpen} onClose={() => closeRegisterModal()}>
+        <>
+          <BytebankText>Preencha os campos abaixo para criar sua conta corrente!</BytebankText>
+          <FormProvider {...registerMethods}>
+            <form onSubmit={registerMethods.handleSubmit(handleRegister)}>
+              <BytebankInputController name="name" type="text" label="Nome" placeholder="Digite seu nome" />
+              <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
+              <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
+              <Box display={'flex'} pt={2} justifyContent={'center'}>
+                <BytebankButton label={'Criar conta'} color={'secondary'} variant={'contained'} fullWidth></BytebankButton>
+              </Box>
+            </form>
+          </FormProvider>
+          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText> <Link component="button" variant="sm" color={'secondary'}
+            onClick={handleLoginModal}>Fazer login</Link>
+          </Box>
+        </>
+      </BytebankModal>
+    </>
+  );
+
   const renderLoginModal = (isOpen: boolean): ReactElement => (
     <>
-      <BytebankModal title={'Login'} illustration={'login'} illustrationSize={'md'} open={isOpen} onClose={() => closeModal()}>
+      <BytebankModal title={'Login'} illustration={'login'} illustrationSize={'lg'} open={isOpen} onClose={() => closeLoginModal()}>
         <>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(handleLogin)} noValidate>
+          <FormProvider {...loginMethods}>
+            <form onSubmit={loginMethods.handleSubmit(handleLogin)}>
               <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
               <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
               <Box display={'flex'} gap={2} flexDirection={'column'} justifyContent={'center'}>
@@ -87,22 +137,30 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
             </form>
           </FormProvider>
           <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Não tem uma conta?</BytebankText> <Link component="button" variant="sm" color={'secondary'}
-            onClick={() => {
-              console.info("open register modal");
-            }}>Crie uma agora!</Link>
+            onClick={handleRegisterModal}>Crie uma agora!</Link>
           </Box>
         </>
       </BytebankModal>
     </>
   );
 
-  const closeModal = () => {
-    setOpenModal(false);
+  const closeLoginModal = () => {
+    loginMethods.reset();
+    setOpenLoginModal(false);
   };
 
-  const openLoginModal = () => {
-    setOpenModal(true);
+  const closeRegisterModal = () => {
+    registerMethods.reset();
+    setOpenRegisterModal(false);
   };
+
+  const handleLoginModal = () => {
+    setOpenLoginModal(true);
+  };
+
+  const handleRegisterModal = () => {
+    setOpenRegisterModal(true);
+  }
 
   const Logout = () => {
     setUser<User>(null);
@@ -130,13 +188,22 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
               </Link>
             </Box>
             <BytebankMenu routes={routes} mobile={mobile} />
+            
             {!isLogged ? (
+              <Box display={'flex'} flex={'none'} gap={2}>
               <BytebankButton
-                sendSubmit={openLoginModal}
-                label="Login"
-                color="secondary"
+                sendSubmit={handleRegisterModal}
+                label="Crie uma conta"
+                color="success"
                 variant="contained"
               />
+              <BytebankButton
+                sendSubmit={handleLoginModal}
+                label="Entre"
+                color="success"
+                variant="outlined"
+              />
+              </Box>
             ) : (
               <BytebankButton
                 sendSubmit={Logout}
@@ -148,7 +215,8 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
           </Box>
         </Container>
       </AppBar>
-      {renderLoginModal(openModal)}
+      {renderRegisterModal(openRegisterModal)}
+      {renderLoginModal(openLoginModal)}
       {renderSnackbar()}
     </>
   );
