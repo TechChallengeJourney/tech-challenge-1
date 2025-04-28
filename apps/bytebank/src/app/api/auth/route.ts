@@ -18,12 +18,10 @@ export async function POST(request: Request) {
     );
 
     if (user) {
-      // In a real app, generate and return a token
-
       return NextResponse.json(user, { status: 200 });
     } else {
       return NextResponse.json(
-        { error: 'Failed to authenticate user' },
+        { error: 'E-mail ou senha incorretos, verifique suas credenciais e tente novamente, por favor!' },
         { status: 401 }
       );
     }

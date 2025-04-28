@@ -11,7 +11,7 @@ declare module '@mui/material/Button' {
   }
 }
 
-export interface BytebankButtonProps {
+export interface BytebankButtonProps extends ButtonProps {
   /**
    * O texto do botão
    */
