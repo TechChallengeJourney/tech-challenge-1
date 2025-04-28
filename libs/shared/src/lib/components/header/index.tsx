@@ -155,10 +155,12 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
   };
 
   const handleLoginModal = () => {
+    closeRegisterModal();
     setOpenLoginModal(true);
   };
 
   const handleRegisterModal = () => {
+    closeLoginModal();
     setOpenRegisterModal(true);
   }
 
