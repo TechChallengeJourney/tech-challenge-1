@@ -34,7 +34,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
     },
   });
 
-  const registerMethods = useForm<{name: string; email: string; password: string;}>({
+  const registerMethods = useForm<Partial<User>>({
     defaultValues: {
       name: '',
       email: '',
@@ -42,7 +42,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
     },
   });
 
-  const handleRegister = async (data: {name: string, email: string; password: string;}) => {
+  const handleRegister = async (data: Partial<User>) => {
     setRegisterLoading(true);
     const response = await fetch('/api/register', {
       method: 'POST',
