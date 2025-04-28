@@ -26,6 +26,6 @@ export async function POST(request: Request) {
       );
     }
   } catch (error) {
-    return NextResponse.json({ error: 'Failed request' }, { status: 500 });
+    return NextResponse.json({ error: 'Ocorreu um erro, tente novamente mais tarde por favor!' }, { status: 500 });
   }
 }

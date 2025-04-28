@@ -47,7 +47,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
       closeModal();
     } else {
       const responseError = await response.json() as { error: string };
-      setSnackbarData({ severity: 'error', message: responseError.error || 'Ocorreu um erro, tente novamente por favor!' });
+      setSnackbarData({ severity: 'error', message: responseError.error });
     }
     setSnackbarOpen(true);
   };
