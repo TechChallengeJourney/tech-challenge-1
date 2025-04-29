@@ -1,8 +1,19 @@
 import { ProviderRouteProps } from "../models/provider-route";
 
-export const routes: ProviderRouteProps[] = [
+export const unloggedRoutes: ProviderRouteProps[] = [
     {
-        name: 'inicio',
+        name: 'Sobre',
+        route: '/'
+    },
+    {
+        name: 'Serviços',
+        route: '#servicos'
+    },
+];
+
+export const loggedRoutes: ProviderRouteProps[] = [
+    {
+        name: 'início',
         route: '/'
     },
     {

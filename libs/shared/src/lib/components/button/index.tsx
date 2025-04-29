@@ -11,7 +11,7 @@ declare module '@mui/material/Button' {
   }
 }
 
-export interface BytebankButtonProps {
+export interface BytebankButtonProps extends ButtonProps {
   /**
    * O texto do botão
    */
@@ -36,7 +36,7 @@ export interface BytebankButtonProps {
   sendSubmit?: () => void;
 }
 
-const ColorButton = styled(Button)<ButtonProps>(() => ({
+const ButtonColor = styled(Button)<ButtonProps>(() => ({
   '&.MuiButton-containedTertiary:hover': {
     color: 'white',
   },
@@ -47,17 +47,19 @@ export function BytebankButton({
   color,
   variant,
   sendSubmit,
+  ...props
 }: BytebankButtonProps) {
   return (
     <div className={`bytebank-button bytebank-button--${color}`}>
-      <ColorButton
+      <ButtonColor
         type="submit"
         variant={variant}
         color={color}
         onClick={sendSubmit}
+        {...props}
       >
         {label}
-      </ColorButton>
+      </ButtonColor>
     </div>
   );
 }
