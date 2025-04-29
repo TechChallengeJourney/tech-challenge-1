@@ -1,7 +1,7 @@
 'use client';
 import './style.scss';
 
-import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar } from '@mui/material';
+import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar, MenuItem, Typography, Menu, IconButton, Avatar } from '@mui/material';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
 import { ReactElement, useState } from 'react';
@@ -18,6 +18,7 @@ interface HeaderProps {
 }
 
 export function BytebankHeader({ mobile }: HeaderProps) {
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [snackbarData, setSnackbarData] = useState<{ severity: AlertColor, message: string; } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -26,6 +27,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [user, setUser] = useSession<User | null>('user');
   const isLogged = !!(user);
+  const settings = [{name: 'Minha conta', action: () => console.log('open minha conta')}, {name: 'Sair', action: () => handleLogout()}];
 
   const loginMethods = useForm<{email: string; password: string;}>({
     defaultValues: {
@@ -41,7 +43,8 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       password: '',
     },
   });
-
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
   const handleRegister = async (data: Partial<User>) => {
     setRegisterLoading(true);
     const response = await fetch('/api/register', {
@@ -152,6 +155,37 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     </>
   );
 
+  const renderMenuSettings = () => {
+    return (<>
+    <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="Remy Sharp" />
+          </IconButton>
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem key={setting.name} onClick={setting.action}>
+              <Typography sx={{ textAlign: 'center' }}>{setting.name}</Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+      </>)
+  }
   const closeLoginModal = () => {
     loginMethods.reset();
     setOpenLoginModal(false);
@@ -172,9 +206,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     setOpenRegisterModal(true);
   }
 
-  const Logout = () => {
-    setUser(null);
-  };
+  const handleLogout = (): void => setUser(null);
 
   return (
     <>
@@ -198,7 +230,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
               </Link>
             </Box>
             <BytebankMenu isLogged={isLogged} routes={isLogged ? loggedRoutes : unloggedRoutes} mobile={mobile} />
-            
+
             {!isLogged ? (
               <Box display={'flex'} flex={'none'} gap={2}>
               <BytebankButton
@@ -214,14 +246,9 @@ export function BytebankHeader({ mobile }: HeaderProps) {
                 variant="outlined"
               />
               </Box>
-            ) : (
-              <BytebankButton
-                sendSubmit={Logout}
-                label="Sair"
-                color="secondary"
-                variant="outlined"
-              />
-            )}
+            ) : ''
+        }
+        {renderMenuSettings()}
           </Box>
         </Container>
       </AppBar>
