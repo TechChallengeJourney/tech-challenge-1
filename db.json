@@ -1,10 +1,10 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "Mario da Costa",
-        "email": "mario.costa@gmail.com",
-        "password": "password1"
-      }
-    ]
-  }
+  "users": [
+    {
+      "id": "0eec",
+      "name": "Fábio de Souza",
+      "email": "teste@gmail.com",
+      "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
+    }
+  ]
+}

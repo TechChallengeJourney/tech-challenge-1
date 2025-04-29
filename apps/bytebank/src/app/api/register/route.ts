@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { addUser, fetchUsers } from '../users';
+import bcrypt from 'bcrypt';
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +17,8 @@ export async function POST(request: Request) {
       );
     }
     
-    const response = await addUser(userData);
+    const password = await bcrypt.hash(userData.password, 10);
+    const response = await addUser({...userData, password});
 
     if (response.ok) {
       return NextResponse.json({data: userData, message: 'Usuário criado com sucesso!'}, { status: 200 });

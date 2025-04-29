@@ -1,18 +1,25 @@
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcrypt';
 import { fetchUsers } from '../users';
+import { User } from '@bytebank/shared';
 
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
     const users = await fetchUsers();
 
-    const user = users.find(
-      (user: { email: string; password: string }) =>
-        user.email === email && user.password === password
-    );
+    const user = users.find((user: User) => user.email === email);
 
     if (user) {
-      return NextResponse.json(user, { status: 200 });
+      const passwordMatches = await bcrypt.compare(password, user.password);
+      if(passwordMatches) {
+        return NextResponse.json(user, { status: 200 });
+      } else {
+        return NextResponse.json(
+          { error: 'Senha incorreta, verifique-a e tente novamente, por favor!' },
+          { status: 401 }
+        );
+      }
     } else {
       return NextResponse.json(
         { error: 'E-mail ou senha incorretos, verifique suas credenciais e tente novamente, por favor!' },
