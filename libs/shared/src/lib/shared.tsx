@@ -14,7 +14,6 @@ import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
 import { ProviderRouteProps } from './classes/models/provider-route';
-import { routes } from './classes/constants/routes.config';
 import { User } from './classes/models/user';
 
 export {

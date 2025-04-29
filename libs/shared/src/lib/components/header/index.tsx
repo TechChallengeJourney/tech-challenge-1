@@ -2,13 +2,13 @@
 import './style.scss';
 
 import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar } from '@mui/material';
-import { BytebankMenu, Route } from '../menu';
+import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
 import { ReactElement, useState } from 'react';
 import { BytebankModal } from '../modal';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BytebankInputController } from '../input/ControlledInput';
-import useSession from '../../hooks/use-session';
+import { useSession } from '../../hooks/use-session';
 import { User } from '../../classes/models/user';
 import { BytebankText } from '../text';
 import { loggedRoutes , unloggedRoutes } from '../../classes/constants/routes.config';
@@ -24,7 +24,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
-  const [user, setUser] = useSession<User>('user');
+  const [user, setUser] = useSession<User | null>('user');
   const isLogged = !!(user);
 
   const loginMethods = useForm<{email: string; password: string;}>({
@@ -75,8 +75,8 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     });
 
     if (response.ok) {
-      const userData = await response.json();
-      setUser<User>(userData);
+      const userData = await response.json() as User;
+      setUser(userData);
       closeLoginModal();
     } else {
       const responseError = await response.json() as { error: string };
@@ -173,7 +173,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   }
 
   const Logout = () => {
-    setUser<User>(null);
+    setUser(null);
   };
 
   return (

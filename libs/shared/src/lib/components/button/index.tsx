@@ -36,7 +36,7 @@ export interface BytebankButtonProps extends ButtonProps {
   sendSubmit?: () => void;
 }
 
-const ColorButton = styled(Button)<ButtonProps>(() => ({
+const ButtonColor = styled(Button)<ButtonProps>(() => ({
   '&.MuiButton-containedTertiary:hover': {
     color: 'white',
   },
@@ -51,7 +51,7 @@ export function BytebankButton({
 }: BytebankButtonProps) {
   return (
     <div className={`bytebank-button bytebank-button--${color}`}>
-      <ColorButton
+      <ButtonColor
         type="submit"
         variant={variant}
         color={color}
@@ -59,7 +59,7 @@ export function BytebankButton({
         {...props}
       >
         {label}
-      </ColorButton>
+      </ButtonColor>
     </div>
   );
 }

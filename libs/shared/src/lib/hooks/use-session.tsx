@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const useSession = <T = unknown>(key: string) => {
+export const useSession = <T = unknown>(key: string): [T | null, (newValue: T) => void] => {
     const [value, setValue] = useState<T | null>(null);
 
     useEffect(() => {
@@ -19,5 +19,3 @@ const useSession = <T = unknown>(key: string) => {
 
     return [value, setSessionValue];
 };
-
-export default useSession;

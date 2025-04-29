@@ -1,18 +1,18 @@
 'use client';
 import './style.scss';
-import { useTheme } from '@mui/material/styles';
-
+import { styled, useTheme } from '@mui/material/styles';
 import { usePathname } from 'next/navigation';
-import { Box, Drawer, Typography, Link } from '@mui/material';
+import { Box, Drawer, Typography, Link, DrawerProps } from '@mui/material';
 import { useState } from 'react';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
+import { palette } from '../../shared';
 
 export interface Route {
   name: string;
   route: string;
 }
+
 interface MenuProps {
     routes: Route[];
     isLogged?: boolean;
@@ -22,12 +22,14 @@ interface MenuProps {
 export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
     const theme = useTheme();
     const pathName = usePathname();
+    const DrawerColor = styled(Drawer)<DrawerProps>(() => ({
+      '.MuiDrawer-paper': {
+        backgroundColor: !isLogged ? palette['black.main'] : palette['primary.main'],
+      },
+    }));
 
     const [open, setOpen] = useState(false);
-
-    const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
-    };
+    const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
 
     const mappedRoutes = (
         routes.map(route => (
@@ -36,7 +38,7 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
             </Link>
         ))
     )
-    
+
     return (
         <Box className={mobile ? 'mobile' : ''} display="flex" gap={2} alignItems="center" style={{ fontFamily: theme.typography.fontFamily }}>
             <Box className="menu-mobile" alignItems="center">
@@ -48,13 +50,13 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
                         height: 'fit-content'
                     }}
                 >
-                    <MenuIcon color={isLogged ? 'white' : 'success'} fontSize="large" />
+                    <MenuIcon htmlColor={!isLogged ? palette['success.main'] : palette['white.main']} fontSize="large" />
                 </IconButton>
-                <Drawer open={open} onClose={toggleDrawer(false)}>
+                <DrawerColor open={open} onClose={toggleDrawer(false)}>
                     <Box display="flex" flexDirection="column" p={2} onClick={toggleDrawer(false)}>
                         {mappedRoutes}
                     </Box>
-                </Drawer>
+                </DrawerColor>
             </Box>
             <Box className="menu-desktop" gap={2} justifyContent={'flex-start'} textAlign={'center'} minWidth={'40vw'}>
                 {mappedRoutes}
