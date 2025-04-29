@@ -33,7 +33,6 @@ export {
   BytebankProvider,
   defaultTheme,
   palette,
-  routes
 };
 
 export type { ProviderRouteProps, User };

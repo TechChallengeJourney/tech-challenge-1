@@ -3,8 +3,7 @@ import './style.scss';
 import { useTheme } from '@mui/material/styles';
 
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { Box, Drawer, Typography } from '@mui/material';
+import { Box, Drawer, Typography, Link } from '@mui/material';
 import { useState } from 'react';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,10 +15,11 @@ export interface Route {
 }
 interface MenuProps {
     routes: Route[];
+    isLogged?: boolean;
     mobile?: boolean;
 }
 
-export function BytebankMenu({ routes, mobile }: MenuProps) {
+export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
     const theme = useTheme();
     const pathName = usePathname();
 
@@ -31,12 +31,12 @@ export function BytebankMenu({ routes, mobile }: MenuProps) {
 
     const mappedRoutes = (
         routes.map(route => (
-            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} href={route.route} key={route.route}>
-                <Typography variant="sm" textTransform="capitalize" fontWeight="500" color={'success'} >{route.name}</Typography>
+            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} color={isLogged ? 'white' : 'success'} href={route.route} key={route.route}>
+                <Typography variant="sm" textTransform="capitalize">{route.name}</Typography>
             </Link>
         ))
     )
-
+    
     return (
         <Box className={mobile ? 'mobile' : ''} display="flex" gap={2} alignItems="center" style={{ fontFamily: theme.typography.fontFamily }}>
             <Box className="menu-mobile" alignItems="center">
@@ -48,7 +48,7 @@ export function BytebankMenu({ routes, mobile }: MenuProps) {
                         height: 'fit-content'
                     }}
                 >
-                    <MenuIcon color="success" fontSize="large" />
+                    <MenuIcon color={isLogged ? 'white' : 'success'} fontSize="large" />
                 </IconButton>
                 <Drawer open={open} onClose={toggleDrawer(false)}>
                     <Box display="flex" flexDirection="column" p={2} onClick={toggleDrawer(false)}>
@@ -56,7 +56,7 @@ export function BytebankMenu({ routes, mobile }: MenuProps) {
                     </Box>
                 </Drawer>
             </Box>
-            <Box className="menu-desktop" gap={2}>
+            <Box className="menu-desktop" gap={2} justifyContent={'flex-start'} textAlign={'center'} minWidth={'40vw'}>
                 {mappedRoutes}
             </Box>
         </Box>

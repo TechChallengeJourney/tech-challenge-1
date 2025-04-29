@@ -11,13 +11,13 @@ import { BytebankInputController } from '../input/ControlledInput';
 import useSession from '../../hooks/use-session';
 import { User } from '../../classes/models/user';
 import { BytebankText } from '../text';
+import { loggedRoutes , unloggedRoutes } from '../../classes/constants/routes.config';
 
 interface HeaderProps {
-  routes: Route[];
   mobile?: boolean;
 }
 
-export function BytebankHeader({ routes, mobile }: HeaderProps) {
+export function BytebankHeader({ mobile }: HeaderProps) {
   const [snackbarData, setSnackbarData] = useState<{ severity: AlertColor, message: string; } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -178,7 +178,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
 
   return (
     <>
-      <AppBar className="header" position="static">
+      <AppBar className={`header ${isLogged ? 'header--logged' : ''}`} position="static">
         <Container maxWidth="md" className="container">
           <Box
             display={'flex'}
@@ -197,7 +197,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
                 />
               </Link>
             </Box>
-            <BytebankMenu routes={routes} mobile={mobile} />
+            <BytebankMenu isLogged={isLogged} routes={isLogged ? loggedRoutes : unloggedRoutes} mobile={mobile} />
             
             {!isLogged ? (
               <Box display={'flex'} flex={'none'} gap={2}>
@@ -217,7 +217,7 @@ export function BytebankHeader({ routes, mobile }: HeaderProps) {
             ) : (
               <BytebankButton
                 sendSubmit={Logout}
-                label="Logout"
+                label="Sair"
                 color="secondary"
                 variant="outlined"
               />

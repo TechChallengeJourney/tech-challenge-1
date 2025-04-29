@@ -6,6 +6,10 @@
 
     &--logged {
         background-color: var(--mui-palette-primary-main) !important;
+
+        .logo {
+            filter: brightness(0) invert(1);
+        }
     }
 }
 
@@ -13,7 +17,7 @@
     height: 100%;
 
     @media (max-width: 600px) {
-        & > div {
+        &>div {
             justify-content: space-between;
         }
     }
