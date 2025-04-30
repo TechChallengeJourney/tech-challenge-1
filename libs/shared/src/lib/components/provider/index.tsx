@@ -4,13 +4,16 @@ import defaultTheme from '../../themes/default.theme';
 import { BytebankHeader } from '../header';
 import { Box } from '@mui/material';
 import { ProviderRouteProps } from '../../classes/models/provider-route';
+import { UserProvider } from '../../contexts/user.context';
 
 export function BytebankProvider({ canNavigate = true, children }: { routes?: ProviderRouteProps[]; canNavigate?: boolean, children: React.ReactNode }) {
     return (
         <>
             <ThemeProvider theme={defaultTheme}>
-                {canNavigate ? <BytebankHeader /> : ''}
-                <Box display={"flex"} minHeight="100vh"> {children} </Box>
+                <UserProvider>
+                    {canNavigate ? <BytebankHeader /> : ''}
+                    <Box display={"flex"} minHeight="100vh"> {children} </Box>
+                </UserProvider>
             </ThemeProvider>
         </>
     );

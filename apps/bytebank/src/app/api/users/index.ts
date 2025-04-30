@@ -9,7 +9,8 @@ export const fetchUsers = async () => {
 };
 
 export const addUser = async (newUser: User) => {
-  return await fetch(`${apiUrl}/users`, {method: 'POST',
+  return await fetch(`${apiUrl}/users`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
