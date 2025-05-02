@@ -1,28 +1,16 @@
 'use client';
-import { BytebankProvider as Provider } from '@bytebank/shared';
+import { BytebankProvider } from '@bytebank/shared';
 import '../global.scss';
-
-const routes: Provider.ProviderRouteProps[] = [
-    {
-        name: 'investimentos',
-        route: 'investimentos'
-    },
-    {
-        name: 'transferências',
-        route: 'transferencias'
-    },
-    {
-        name: 'outros',
-        route: 'outros'
-    },
-];
+import { Container } from '@mui/material';
 
 const RootLayout = ({ children,
 }: {
     children: React.ReactNode;
 }) => {
     return (
-        <Provider.BytebankProvider routes={routes}>{children}</Provider.BytebankProvider>
+        <BytebankProvider>
+            <Container>{children}</Container>
+        </BytebankProvider>
     );
 }
 

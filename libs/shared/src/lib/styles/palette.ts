@@ -20,5 +20,7 @@ export const palette = {
   "grey.600": "#757575",
   "grey.700": "#616161",
   "grey.800": "#424242",
-  "grey.900": "#212121"
+  "grey.900": "#212121",
+  "black.main": '#000000',
+  "white.main": '#ffffff',
 };

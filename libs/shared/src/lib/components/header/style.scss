@@ -4,8 +4,24 @@
     height: 96px;
     background-color: var(--mui-palette-color-black) !important;
 
+    .menu-settings {
+        height: 0; 
+        overflow: hidden;
+        visibility: hidden;
+    }
+
     &--logged {
         background-color: var(--mui-palette-primary-main) !important;
+
+        .logo {
+            filter: brightness(0) invert(1);
+        }
+
+        .menu-settings {
+            height: auto; 
+            overflow: auto;
+            visibility: visible;
+        }
     }
 }
 
@@ -13,7 +29,7 @@
     height: 100%;
 
     @media (max-width: 600px) {
-        & > div {
+        &>div {
             justify-content: space-between;
         }
     }

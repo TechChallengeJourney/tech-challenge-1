@@ -2,13 +2,10 @@
 
 .menu-item {
     padding: 16px 0;
-    text-decoration: none;
-    color: var(--mui-palette-color-black);
     min-width: 126px;
-
+    text-decoration: none !important;
     &.active {
         font-weight: bold;
-        color: var(--mui-palette-success-main);
     }
 }
 

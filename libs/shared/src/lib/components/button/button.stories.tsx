@@ -1,5 +1,5 @@
+import * as DocBlock from '@storybook/blocks';
 import { Meta, StoryObj } from '@storybook/react';
-import  * as DocBlock from '@storybook/blocks';
 import { BytebankButton } from './index';
 
 const meta = {
@@ -43,7 +43,6 @@ export const Secondary: Story = {
   },
 };
 
-
 export const Tertiary: Story = {
   args: {
     label: 'Label',
@@ -51,3 +50,20 @@ export const Tertiary: Story = {
     variant: "text",
   },
 };
+
+export const Contained: Story = {
+  args: {
+    label: 'Label',
+    color: 'black',
+    variant: "contained",
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    label: 'Label',
+    color: 'black',
+    variant: "outlined",
+  },
+};
+

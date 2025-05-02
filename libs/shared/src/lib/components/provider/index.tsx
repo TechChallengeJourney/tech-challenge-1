@@ -1,24 +1,20 @@
 'use client';
-
 import { ThemeProvider } from '@mui/material/styles';
 import defaultTheme from '../../themes/default.theme';
 import { BytebankHeader } from '../header';
-import { Container, Box } from '@mui/material';
+import { Box } from '@mui/material';
+import { ProviderRouteProps } from '../../classes/models/provider-route';
+import { UserProvider } from '../../contexts/user.context';
 
-export interface ProviderRouteProps {
-    name: string;
-    route: string;
-}
-
-export function BytebankProvider({ canNavigate = true, routes = [], children }: { routes?: ProviderRouteProps[]; canNavigate?: boolean, children: React.ReactNode }) {
+export function BytebankProvider({ canNavigate = true, children }: { routes?: ProviderRouteProps[]; canNavigate?: boolean, children: React.ReactNode }) {
     return (
         <>
-        <ThemeProvider theme={defaultTheme}>
-            {canNavigate ? <BytebankHeader routes={routes} /> : ''}
-            <Container>
-                <Box display={"flex"} minHeight="100vh"> {children} </Box>
-            </Container>
-        </ThemeProvider>
+            <ThemeProvider theme={defaultTheme}>
+                <UserProvider>
+                    {canNavigate ? <BytebankHeader /> : ''}
+                    <Box display={"flex"} minHeight="100vh"> {children} </Box>
+                </UserProvider>
+            </ThemeProvider>
         </>
     );
 }
