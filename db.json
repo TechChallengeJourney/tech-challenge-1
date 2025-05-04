@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "id": "0eec",
-      "name": "Fábio de Souza",
-      "email": "teste@gmail.com",
-      "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
+      "id": "c0d9",
+      "name": "João Silva",
+      "email": "joao@example.com",
+      "password": "$2b$10$o/Mf2ddrYpvIGPSxvgjms.x.UuO13ZjFHK4RCedrLC/lt8YwPv81i"
     }
   ]
 }
