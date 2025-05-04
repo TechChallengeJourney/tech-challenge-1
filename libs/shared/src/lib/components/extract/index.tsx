@@ -1,8 +1,11 @@
 'use client';
 import { BytebankText } from '../text';
-import { Box, Card } from '@mui/material';
+import { Alert, Box, Card } from '@mui/material';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+import { useUser } from '../../contexts/user.context';
+import { useSession } from '../../hooks/use-session';
+import { User } from '../../shared';
 
 export interface BytebankExtractProps {
   month: string;
@@ -15,21 +18,31 @@ interface BytebankExtractPropsData {
   value: number;
 }
 
+interface BytebankExtractJsonServer {
+  userId: string;
+  transactions: BytebankExtractPropsData[];
+}
+
 export function BytebankExtract() {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
+  const [sessionUser] = useSession<User>('user');
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const fetchExtract = async () => {
-    const res = await fetch(`${apiUrl}/extract`);
+    const res = await fetch(`${apiUrl}/extract?userId=${sessionUser?.id}`);
     const extract = await res.json();
-    return extract as BytebankExtractPropsData[];
+    return extract as BytebankExtractJsonServer[];
   };
 
   useEffect(() => {
     fetchExtract().then((res) => {
+      if (res.length === 0) {
+        return;
+      }
+      const resData = res[0].transactions;
       const agrupado: BytebankExtractProps[] = Object.values(
-        res.reduce((acc, item) => {
+        resData.reduce((acc, item) => {
           const dataObj = new Date(item.date);
           const mes = format(dataObj, 'MMMM');
 
@@ -49,7 +62,7 @@ export function BytebankExtract() {
 
       setExtract(agrupado);
     });
-  }, []);
+  }, [sessionUser]);
 
   const numeroFormatado = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
