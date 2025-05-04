@@ -4,7 +4,6 @@ import {
   BytebankIllustration,
   BytebankText,
   BytebankProvider,
-  BytebankExtract,
 } from '@bytebank/shared';
 import {
   AssuredWorkload,
@@ -71,7 +70,6 @@ export default function Index(): ReactElement {
         variant="auto"
         name="graphic"
       />
-      <BytebankExtract />
     </div>
   );
 
