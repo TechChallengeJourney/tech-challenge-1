@@ -4,6 +4,7 @@ import {
   BytebankIllustration,
   BytebankText,
   BytebankProvider,
+  BytebankExtract,
 } from '@bytebank/shared';
 import {
   AssuredWorkload,
@@ -49,7 +50,7 @@ const BENEFITS: Benefit[] = [
   },
 ];
 
-export default function Index(): ReactElement  {
+export default function Index(): ReactElement {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -70,6 +71,7 @@ export default function Index(): ReactElement  {
         variant="auto"
         name="graphic"
       />
+      <BytebankExtract />
     </div>
   );
 
@@ -127,15 +129,21 @@ export default function Index(): ReactElement  {
         gap={2}
         flexWrap="wrap"
       >
-        {BENEFITS.map(({ icon, title, description }: Benefit, index: number) => (
-          <Box key={index} className={styles.valueProposition}>
-            {icon}
-            <BytebankText variant="sm" color="success" sx={{ fontWeight: 600 }}>
-              {title}
-            </BytebankText>
-            <BytebankText className={styles.text}>{description}</BytebankText>
-          </Box>
-        ))}
+        {BENEFITS.map(
+          ({ icon, title, description }: Benefit, index: number) => (
+            <Box key={index} className={styles.valueProposition}>
+              {icon}
+              <BytebankText
+                variant="sm"
+                color="success"
+                sx={{ fontWeight: 600 }}
+              >
+                {title}
+              </BytebankText>
+              <BytebankText className={styles.text}>{description}</BytebankText>
+            </Box>
+          )
+        )}
       </Box>
     </>
   );
