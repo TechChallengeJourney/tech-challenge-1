@@ -2,6 +2,7 @@
 import { BytebankText } from '../text';
 import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
 
 export interface BytebankExtractProps {
   month: string;
@@ -14,11 +15,42 @@ interface BytebankExtractPropsData {
   value: number;
 }
 
-export function BytebankExtract({
-  extract,
-}: {
-  extract: BytebankExtractProps[];
-}) {
+export function BytebankExtract() {
+  const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const fetchExtract = async () => {
+    const res = await fetch(`${apiUrl}/extract`);
+    const extract = await res.json();
+    return extract as BytebankExtractPropsData[];
+  };
+
+  useEffect(() => {
+    fetchExtract().then((res) => {
+      const agrupado: BytebankExtractProps[] = Object.values(
+        res.reduce((acc, item) => {
+          const dataObj = new Date(item.date);
+          const mes = format(dataObj, 'MMMM');
+
+          if (!acc[mes]) {
+            acc[mes] = { month: mes, data: [] };
+          }
+
+          acc[mes].data.push({
+            date: dataObj,
+            type: item.type,
+            value: item.value,
+          });
+
+          return acc;
+        }, {} as Record<string, BytebankExtractProps>)
+      );
+
+      setExtract(agrupado);
+    });
+  }, []);
+
   const numeroFormatado = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -32,11 +64,14 @@ export function BytebankExtract({
           <Box
             width="100%"
             display="flex"
-            padding="10px"
+            padding="10px 10px 0px 10px"
             flexDirection="row"
+            boxSizing={'border-box'}
             fontWeight={600}
           >
-            <BytebankText color="primary">{itens.month}</BytebankText>
+            <BytebankText fontWeight={'bold'} color="primary">
+              {itens.month}
+            </BytebankText>
           </Box>
           {itens.data.map((item, index) => (
             <Box
@@ -53,10 +88,16 @@ export function BytebankExtract({
               paddingBottom={'20px'}
             >
               <Box width="80%" display="flex" flexDirection="column" gap="5px">
-                <BytebankText color={item.value < 0 ? 'error' : 'primary'}>
+                <BytebankText
+                  textAlign={'left'}
+                  color={item.value < 0 ? 'error' : 'primary'}
+                >
                   {item.type}
                 </BytebankText>
-                <BytebankText color={item.value < 0 ? 'error' : 'primary'}>
+                <BytebankText
+                  textAlign={'left'}
+                  color={item.value < 0 ? 'error' : 'primary'}
+                >
                   {numeroFormatado(item.value)}
                 </BytebankText>
               </Box>

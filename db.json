@@ -6,5 +6,22 @@
       "email": "teste@gmail.com",
       "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
     }
+  ],
+  "extract": [
+    {
+      "type": "Depósito",
+      "date": "Sat Sep 30 2023 21:00:00 GMT-0300",
+      "value": 1000
+    },
+    {
+      "type": "Depósito",
+      "date": "Tue Oct 31 2023 21:00:00 GMT-0300",
+      "value": 1000
+    },
+    {
+      "type": "Depósito",
+      "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
+      "value": 500
+    }
   ]
 }
