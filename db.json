@@ -5,6 +5,54 @@
       "name": "Fábio de Souza",
       "email": "teste@gmail.com",
       "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
+    },
+    {
+      "id": "a973",
+      "name": "felipe",
+      "email": "fetin80@gmail.com",
+      "password": "$2b$10$Giqv2h7Sqd1TJmCtbDeL2eb02SYCQYLWE0uuycDOf4kyFgLP43INO"
+    }
+  ],
+  "extract": [
+    {
+      "userId": "a973",
+      "transactions": [
+        {
+          "type": "Depósito",
+          "date": "Sat Sep 30 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Tue Oct 31 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
+          "value": 500
+        }
+      ]
+    },
+    {
+      "userId": "a974",
+      "transactions": [
+        {
+          "type": "Depósito",
+          "date": "Sat Sep 30 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Tue Oct 31 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
+          "value": 500
+        }
+      ]
     }
   ]
 }
