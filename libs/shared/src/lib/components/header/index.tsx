@@ -133,7 +133,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       const userData = (await response.json()) as User;
       setUser(userData);
       closeLoginModal();
-      setSessionUser(userData);
+      if (sessionUser === null) setSessionUser(userData);
     } else {
       const responseError = (await response.json()) as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
