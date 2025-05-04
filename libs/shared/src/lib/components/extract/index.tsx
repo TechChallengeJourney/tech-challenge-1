@@ -1,9 +1,8 @@
 'use client';
 import { BytebankText } from '../text';
-import { Alert, Box, Card } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { useUser } from '../../contexts/user.context';
 import { useSession } from '../../hooks/use-session';
 import { User } from '../../shared';
 
