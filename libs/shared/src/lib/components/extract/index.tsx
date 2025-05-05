@@ -23,7 +23,6 @@ export function BytebankExtract() {
 
   useEffect(() => {
     fetchExtract().then((res) => {
-      console.log(res, user);
       if (res.length === 0) {
         return;
       }
