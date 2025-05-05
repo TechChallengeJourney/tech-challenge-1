@@ -9,7 +9,7 @@ interface BytebankExtractPropsData {
   value: number;
 }
 
-export interface ExtractJsonProps {
+export interface ExtractProps {
   userId: string;
   transactions: BytebankExtractPropsData[];
 }

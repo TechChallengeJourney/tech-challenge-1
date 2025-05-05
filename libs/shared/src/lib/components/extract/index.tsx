@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from '../../contexts/user.context';
 import {
   BytebankExtractProps,
-  ExtractJsonProps,
+  ExtractProps,
 } from '../../classes/models/extract';
 
 export function BytebankExtract() {
@@ -18,7 +18,7 @@ export function BytebankExtract() {
   const fetchExtract = async () => {
     const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
     const extract = await res.json();
-    return extract as ExtractJsonProps[];
+    return extract as ExtractProps[];
   };
 
   useEffect(() => {
