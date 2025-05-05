@@ -1,16 +1,32 @@
 {
   "users": [
     {
-      "id": "0eec",
-      "name": "Fábio de Souza",
-      "email": "teste@gmail.com",
-      "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
-    },
+      "id": "c0d9",
+      "name": "João Silva",
+      "email": "joao@example.com",
+      "password": "$2b$10$o/Mf2ddrYpvIGPSxvgjms.x.UuO13ZjFHK4RCedrLC/lt8YwPv81i"
+    }
+  ],
+  "extract": [
     {
-      "id": "ac37",
-      "name": "Seila",
-      "email": "seila@seila.com",
-      "password": "$2b$10$rzC9RYvGLmDB9oYNY7Hd3ermxJ0oN0EWI/34mmhnukXu6mqj/Tbey"
+      "userId": "c0d9",
+      "transactions": [
+        {
+          "type": "Depósito",
+          "date": "Sat Sep 30 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Tue Oct 31 2023 21:00:00 GMT-0300",
+          "value": 1000
+        },
+        {
+          "type": "Depósito",
+          "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
+          "value": 500
+        }
+      ]
     }
   ]
 }
