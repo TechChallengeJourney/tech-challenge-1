@@ -51,7 +51,7 @@ export function BytebankExtract() {
     });
   }, [user]);
 
-  const numeroFormatado = (number: number) =>
+  const numberFormat = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
@@ -98,7 +98,7 @@ export function BytebankExtract() {
                   textAlign={'left'}
                   color={item.value < 0 ? 'error' : 'primary'}
                 >
-                  {numeroFormatado(item.value)}
+                  {numberFormat(item.value)}
                 </BytebankText>
               </Box>
               <Box>
