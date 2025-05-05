@@ -11,19 +11,26 @@ interface UserContextProps {
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [sessionUser] = useSession<User | null>('user');
-    const [user, setUser] = useState<User | null>(sessionUser);
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-        if (sessionUser !== null) {
-            setUser(sessionUser);
-          }
-          setLoading(false); 
-    }, [sessionUser]);
+  const [sessionUser, setSessionUser] = useSession<User | null>('user');
+  const [user, setUser] = useState<User | null>(sessionUser);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (sessionUser !== null) {
+      setUser(sessionUser);
+    } else {
+      setUser(null);
+    }
+    setLoading(false);
+  }, [sessionUser]);
+
+  const handleSetUser = (user: User | null) => {
+    setUser(user);
+    setSessionUser(user);
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading }}>
+    <UserContext.Provider value={{ user, setUser: handleSetUser, loading }}>
       {children}
     </UserContext.Provider>
   );
