@@ -5,6 +5,12 @@
       "name": "Fábio de Souza",
       "email": "teste@gmail.com",
       "password": "$2b$10$D82YwJMEHuj13ECK4JhpmeVgCMBDlUxyycBMZB1ylhPNja63oBEw."
+    },
+    {
+      "id": "ac37",
+      "name": "Seila",
+      "email": "seila@seila.com",
+      "password": "$2b$10$rzC9RYvGLmDB9oYNY7Hd3ermxJ0oN0EWI/34mmhnukXu6mqj/Tbey"
     }
   ]
 }
