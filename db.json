@@ -5,6 +5,18 @@
       "name": "João Silva",
       "email": "joao@example.com",
       "password": "$2b$10$o/Mf2ddrYpvIGPSxvgjms.x.UuO13ZjFHK4RCedrLC/lt8YwPv81i"
+    },
+    {
+      "id": "d200",
+      "name": "Dimitri",
+      "email": "dimitri@seila.com",
+      "password": "$2b$10$8Tj/fc5mUMbGlK8661xLne7HYPpkfiwL.YhVlGPHEdpiofwe3j/LS"
+    },
+    {
+      "id": "2591",
+      "name": "seila@seila.com",
+      "email": "seila@seila.com",
+      "password": "$2b$10$qL4bEpcU6LY1RL8Uxi85DuTFpQKTcRmkluz8urMthhZXYJaJ1fshG"
     }
   ],
   "extract": [
@@ -26,7 +38,8 @@
           "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
           "value": 500
         }
-      ]
+      ],
+      "id": "4a0e"
     }
   ]
 }

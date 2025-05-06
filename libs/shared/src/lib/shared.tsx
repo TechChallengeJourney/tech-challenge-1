@@ -15,9 +15,11 @@ import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
 import { ProviderRouteProps } from './classes/models/provider-route';
 import { User } from './classes/models/user';
+import { BytebankTransaction } from './components/card-transaction';
 
 export {
   BytebankButton,
+  BytebankTransaction,
   BytebankInputController,
   BytebankSelectController,
   BytebankText,

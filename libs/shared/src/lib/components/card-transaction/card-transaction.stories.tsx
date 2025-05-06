@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BytebankCardContent } from './index';
+import { BytebankTransaction } from './index';
 import { BytebankText } from '../text';
 import { Box } from '@mui/material';
 
-const meta: Meta<typeof BytebankCardContent> = {
-  title: 'Components/BytebankCardContent',
-  component: BytebankCardContent,
+const meta: Meta<typeof BytebankTransaction> = {
+  title: 'Components/BytebankTransaction',
+  component: BytebankTransaction,
   tags: ['autodocs'],
   argTypes: {
     title: { control: 'text', description: 'Título exibido no topo do card' },
@@ -14,7 +14,7 @@ const meta: Meta<typeof BytebankCardContent> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof BytebankCardContent>;
+type Story = StoryObj<typeof BytebankTransaction>;
 
 export const Default: Story = {
   args: {
