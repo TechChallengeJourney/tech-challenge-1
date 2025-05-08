@@ -14,7 +14,7 @@ export function BytebankProvider({ canNavigate = true, children }: { routes?: Pr
                 <UserProvider>
                     {canNavigate ? <BytebankHeader /> : ''}
                     <Box display={"flex"} minHeight="100vh"> {children} </Box>
-                    <BytebankFooter />
+                    {canNavigate ? <BytebankFooter /> : ''}
                 </UserProvider>
             </ThemeProvider>
         </>
