@@ -10,12 +10,6 @@ export interface BytebankExtractPropsData {
 }
 
 export interface ExtractProps {
-  id: string;
-  userId: string;
-  transactions: BytebankExtractPropsData[];
-}
-
-export interface IExtractProps {
   type: string;
   value: number;
   date: Date;

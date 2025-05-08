@@ -7,7 +7,6 @@ import { useUser } from '../../contexts/user.context';
 import {
   BytebankExtractProps,
   ExtractProps,
-  IExtractProps,
 } from '../../classes/models/extract';
 
 export function BytebankExtract() {
@@ -21,7 +20,7 @@ export function BytebankExtract() {
 
     const extract = await res.json();
 
-    return extract as IExtractProps[];
+    return extract as ExtractProps[];
   };
 
   useEffect(() => {
