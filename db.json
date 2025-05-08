@@ -5,18 +5,6 @@
       "name": "João Silva",
       "email": "joao@example.com",
       "password": "$2b$10$o/Mf2ddrYpvIGPSxvgjms.x.UuO13ZjFHK4RCedrLC/lt8YwPv81i"
-    },
-    {
-      "id": "d200",
-      "name": "Dimitri",
-      "email": "dimitri@seila.com",
-      "password": "$2b$10$8Tj/fc5mUMbGlK8661xLne7HYPpkfiwL.YhVlGPHEdpiofwe3j/LS"
-    },
-    {
-      "id": "2591",
-      "name": "seila@seila.com",
-      "email": "seila@seila.com",
-      "password": "$2b$10$qL4bEpcU6LY1RL8Uxi85DuTFpQKTcRmkluz8urMthhZXYJaJ1fshG"
     }
   ],
   "extract": [
@@ -34,9 +22,25 @@
           "value": 1000
         },
         {
+          "userId": "c0d9",
           "type": "Depósito",
           "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
           "value": 500
+        },
+        {
+          "type": "doc/ted",
+          "value": "123",
+          "date": "2025-05-08T00:32:58.567Z"
+        },
+        {
+          "type": "doc/ted",
+          "value": "123",
+          "date": "2025-05-08T00:34:46.283Z"
+        },
+        {
+          "type": "cambio moeda",
+          "value": "1234",
+          "date": "2025-05-08T01:46:10.268Z"
         }
       ],
       "id": "4a0e"

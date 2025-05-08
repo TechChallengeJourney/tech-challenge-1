@@ -15,6 +15,10 @@ import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
 import { ProviderRouteProps } from './classes/models/provider-route';
 import { User } from './classes/models/user';
+import {
+  ExtractProps,
+  BytebankExtractPropsData,
+} from './classes/models/extract';
 import { BytebankTransaction } from './components/card-transaction';
 
 export {
@@ -36,4 +40,9 @@ export {
   palette,
 };
 
-export type { ProviderRouteProps, User };
+export type {
+  ProviderRouteProps,
+  User,
+  ExtractProps,
+  BytebankExtractPropsData,
+};

@@ -1,3 +1,11 @@
+'use client';
+import { BytebankExtract, BytebankTransaction } from '@bytebank/shared';
+
 export default function Investimentos() {
-  return <p>Investimentos</p>;
+  return (
+    <>
+      <BytebankTransaction />
+      <BytebankExtract />
+    </>
+  );
 }

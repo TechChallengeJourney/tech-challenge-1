@@ -5,28 +5,38 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BytebankInputController } from '../input/ControlledInput';
 import { BytebankButton } from '../button';
 import { BytebankSelectController } from '../select/ControlledSelect';
+import { useUser } from '../../contexts/user.context';
 
 export interface IForm {
-  valor: string;
-  transacao: string;
+  type: string;
+  value: string;
 }
 
 export function BytebankTransaction() {
   const registerMethods = useForm<IForm>({
     defaultValues: {
-      transacao: '',
-      valor: '',
+      type: '',
+      value: '',
     },
   });
 
-  const handleTransaction = (data: IForm) => {
-    console.log(data);
+  const { user } = useUser();
+
+  const handleTransaction = async (data: IForm) => {
+    const response = await fetch('/api/extract', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
+    });
+    console.log(response);
   };
 
   const selectOptions = [
-    { label: 'Câmbio de Moeda', value: 'cambio moeda' },
-    { label: 'DOC/TED', value: 'doc/ted' },
-    { label: 'Empréstimo e Financeiro', value: 'emprestimo e financeiro' },
+    { label: 'Câmbio de Moeda', value: 'Câmbio de Moeda' },
+    { label: 'DOC/TED', value: 'DOC/TED' },
+    { label: 'Empréstimo e Financeiro', value: 'Empréstimo e Financeiro' },
   ];
 
   return (
@@ -37,14 +47,14 @@ export function BytebankTransaction() {
       <FormProvider {...registerMethods}>
         <form onSubmit={registerMethods.handleSubmit(handleTransaction)}>
           <BytebankSelectController
-            name="transacao"
+            name="type"
             label="Selecione o tipo de transação"
             options={selectOptions}
           />
-          <BytebankInputController name="valor" label="Valor" type="number" />
+          <BytebankInputController name="value" label="Valor" type="number" />
           <Box display={'flex'} pt={2} justifyContent={'center'}>
             <BytebankButton
-              label={'Criar conta'}
+              label={'Concluir transação'}
               color={'secondary'}
               variant={'contained'}
               // loading={isRegisterLoading}
