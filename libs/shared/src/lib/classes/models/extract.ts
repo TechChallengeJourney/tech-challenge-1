@@ -5,7 +5,7 @@ export interface BytebankExtractProps {
 
 export interface BytebankExtractPropsData {
   date: Date;
-  type: 'Depósito' | 'Saque' | 'Transferência';
+  type: string;
   value: number;
 }
 
@@ -13,4 +13,11 @@ export interface ExtractProps {
   id: string;
   userId: string;
   transactions: BytebankExtractPropsData[];
+}
+
+export interface IExtractProps {
+  type: string;
+  value: number;
+  date: Date;
+  userId: string;
 }

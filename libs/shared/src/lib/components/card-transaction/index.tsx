@@ -22,8 +22,10 @@ export function BytebankTransaction() {
 
   const { user } = useUser();
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const handleTransaction = async (data: IForm) => {
-    const response = await fetch('/api/extract', {
+    const response = await fetch(`${apiUrl}/extract`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

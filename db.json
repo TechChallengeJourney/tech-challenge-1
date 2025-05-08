@@ -9,41 +9,46 @@
   ],
   "extract": [
     {
+      "id": "32fc",
       "userId": "c0d9",
-      "transactions": [
-        {
-          "type": "Depósito",
-          "date": "Sat Sep 30 2023 21:00:00 GMT-0300",
-          "value": 1000
-        },
-        {
-          "type": "Depósito",
-          "date": "Tue Oct 31 2023 21:00:00 GMT-0300",
-          "value": 1000
-        },
-        {
-          "userId": "c0d9",
-          "type": "Depósito",
-          "date": "Thu Sep 14 2023 15:00:00 GMT-0300",
-          "value": 500
-        },
-        {
-          "type": "doc/ted",
-          "value": "123",
-          "date": "2025-05-08T00:32:58.567Z"
-        },
-        {
-          "type": "doc/ted",
-          "value": "123",
-          "date": "2025-05-08T00:34:46.283Z"
-        },
-        {
-          "type": "cambio moeda",
-          "value": "1234",
-          "date": "2025-05-08T01:46:10.268Z"
-        }
-      ],
-      "id": "4a0e"
+      "type": "Câmbio de Moeda",
+      "value": "20000",
+      "date": "2025-05-08T15:40:35.080Z"
+    },
+    {
+      "id": "9ba4",
+      "userId": "c0d9",
+      "type": "Câmbio de Moeda",
+      "value": "30000",
+      "date": "2025-05-08T15:40:55.111Z"
+    },
+    {
+      "id": "3c05",
+      "userId": "c0d9",
+      "type": "DOC/TED",
+      "value": "2",
+      "date": "2025-05-08T15:42:46.335Z"
+    },
+    {
+      "id": "1350",
+      "userId": "c0d9",
+      "type": "DOC/TED",
+      "value": "2",
+      "date": "2025-05-08T15:43:25.711Z"
+    },
+    {
+      "id": "d7cc",
+      "userId": "c0d9",
+      "type": "DOC/TED",
+      "value": "2",
+      "date": "2025-05-08T15:44:19.091Z"
+    },
+    {
+      "id": "1362",
+      "userId": "c0d9",
+      "type": "Empréstimo e Financeiro",
+      "value": "-10",
+      "date": "2025-05-08T15:55:11.915Z"
     }
   ]
 }
