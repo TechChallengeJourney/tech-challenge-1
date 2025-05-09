@@ -1,7 +1,12 @@
 .my-account {
     &__card {
-        background-image: url(/images/pixels-01.png) !important;
-        background-position-x: right !important;
-        background-repeat: no-repeat !important;
+        background-image: 
+        url('/images/pixels-04.png'), 
+        url('/images/pixels-03.png') !important;
+      background-position: 
+        right top, 
+        left bottom !important;
+      background-repeat: 
+        no-repeat, no-repeat !important;
     }
 }
