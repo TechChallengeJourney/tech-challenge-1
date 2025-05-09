@@ -7,7 +7,7 @@ export const unloggedRoutes: ProviderRouteProps[] = [
     },
     {
         name: 'Serviços',
-        route: '#servicos'
+        route: '/servicos'
     },
 ];
 
@@ -18,14 +18,14 @@ export const loggedRoutes: ProviderRouteProps[] = [
     },
     {
         name: 'investimentos',
-        route: 'investimentos'
+        route: '/investimentos'
     },
     {
         name: 'transferências',
-        route: 'transferencias'
+        route: '/transferencias'
     },
     {
         name: 'outros',
-        route: 'outros'
+        route: '/outros'
     },
 ];

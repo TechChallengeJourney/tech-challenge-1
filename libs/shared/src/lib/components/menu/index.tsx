@@ -35,9 +35,11 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
 
     const mappedRoutes = (
         routes.map(route => (
-            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} color={isLogged ? 'white' : 'success'} onClick={() => redirectTo(route.route)} key={route.route}>
-                <Typography variant="sm" textTransform="capitalize">{route.name}</Typography>
-            </Link>
+            <Typography key={route.route} variant="sm" textTransform="capitalize" className={`menu-item ${pathName === route.route ? 'active' : ''}`}>
+                <Link color={isLogged ? 'white' : 'success'} onClick={() => redirectTo(route.route)}>
+                {route.name}
+                </Link>
+            </Typography>
         ))
     )
 
