@@ -1,7 +1,7 @@
 'use client';
 import './style.scss';
 import { styled, useTheme } from '@mui/material/styles';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Box, Drawer, Typography, Link, DrawerProps } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,6 +20,7 @@ interface MenuProps {
 }
 
 export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
+    const router = useRouter();
     const theme = useTheme();
     const pathName = usePathname();
     const DrawerColor = styled(Drawer)<DrawerProps>(() => ({
@@ -30,10 +31,11 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
 
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
+    const redirectTo = (name: string) => router.push(name);
 
     const mappedRoutes = (
         routes.map(route => (
-            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} color={isLogged ? 'white' : 'success'} href={route.route} key={route.route}>
+            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} color={isLogged ? 'white' : 'success'} onClick={() => redirectTo(route.route)} key={route.route}>
                 <Typography variant="sm" textTransform="capitalize">{route.name}</Typography>
             </Link>
         ))
