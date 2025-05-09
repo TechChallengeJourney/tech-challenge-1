@@ -17,3 +17,13 @@ export const addUser = async (newUser: User) => {
     body: JSON.stringify(newUser),
   });
 };
+
+export const updateUser = async (userData: User) => {
+  return await fetch(`${apiUrl}/users/${userData.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+}

@@ -1,4 +1,5 @@
 'use client';
+import { Box, styled } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
 export interface InputProps {
@@ -20,9 +21,14 @@ export default function BytebankInput({
   error = false,
   helperText = '',
 }: InputProps) {
+  const TextFieldColor = styled(TextField)({
+      backgroundColor: '#FFF',
+      borderRadius: '5px'
+  });
+
   return (
-    <div className="bytebank-input">
-      <TextField
+    <Box className="bytebank-input">
+      <TextFieldColor
         value={value}
         onChange={onChange}
         label={label}
@@ -34,6 +40,6 @@ export default function BytebankInput({
         margin="normal"
         variant="outlined"
       />
-    </div>
+    </Box>
   );
 }

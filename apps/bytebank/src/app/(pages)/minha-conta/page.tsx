@@ -1,13 +1,19 @@
 'use client';
 import './style.scss';
 import { BytebankButton, BytebankCard, BytebankInputController, BytebankText, palette, User, useUser } from '@bytebank/shared';
-import { Box } from '@mui/material';
+import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 export default function Index(): ReactElement {
   const [isLoading, setLoading] = useState(false);
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  const [snackbarData, setSnackbarData] = useState<{
+      severity: AlertColor;
+      message: string;
+    } | null>(null);
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+
   const formMethods = useForm<Partial<User>>({
     defaultValues: {
       name: '', 
@@ -24,7 +30,51 @@ export default function Index(): ReactElement {
     });
   }, [user, formMethods]);
 
+  const handleUpdate = async (data: Partial<User>) => {
+    setLoading(true);
+    const response = await fetch('/api/users/' + user?.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({...data, id: user?.id}),
+    });
+
+    if (response.ok) {
+      const userData = (await response.json()) as User;
+      setUser(userData);
+    } else {
+      const responseError = (await response.json()) as { error: string };
+      setSnackbarData({ severity: 'error', message: responseError.error });
+    }
+    setLoading(false);
+    setSnackbarOpen(true);
+  };
+
+  const renderSnackbar = () => {
+      const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+        setSnackbarData(null);
+      };
+  
+      return snackbarData ? (
+        <>
+          <Snackbar
+            open={isSnackbarOpen}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          >
+            <Alert onClose={handleSnackbarClose} severity={snackbarData.severity}>
+              {snackbarData.message}
+            </Alert>
+          </Snackbar>
+        </>
+      ) : null;
+    };
+  
   return (
+    <>
     <Box mt={4} className='my-account'>
       <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
         <Box p={4}>
@@ -35,7 +85,7 @@ export default function Index(): ReactElement {
             </Box>
             <Box flex={'auto'}>
               <FormProvider {...formMethods}>
-                <form onSubmit={formMethods.handleSubmit((data) => { console.log(data) })}>
+                <form onSubmit={formMethods.handleSubmit(handleUpdate)}>
                   <BytebankInputController
                     name="name"
                     type="text"
@@ -70,5 +120,7 @@ export default function Index(): ReactElement {
         </Box>
       </BytebankCard>
     </Box>
+    {renderSnackbar()}
+    </>
   );
 }
