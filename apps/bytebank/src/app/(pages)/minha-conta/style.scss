@@ -8,5 +8,11 @@
         left bottom !important;
       background-repeat: 
         no-repeat, no-repeat !important;
+
+        &-image {
+            img {
+                width: 40vw;
+            }
+        }
     }
 }

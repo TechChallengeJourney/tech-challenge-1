@@ -30,8 +30,8 @@ export default function Index(): ReactElement {
         <Box p={4}>
           <BytebankText variant={'lg'}>Minha conta</BytebankText>
           <Box mt={4} display={'flex'} flexDirection={'row'}>
-            <Box>
-              <img src={'/images/my-account.png'} alt={'Imagem referente a minha conta.'} />
+            <Box className='my-account__card-image'>
+              <img src={'/images/my-account.svg'} alt={'Imagem referente a minha conta.'} />
             </Box>
             <Box flex={'auto'}>
               <FormProvider {...formMethods}>
