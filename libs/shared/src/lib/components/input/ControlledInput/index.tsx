@@ -22,8 +22,7 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Input
-          value={field.value}
-          onChange={field.onChange}
+          {...field}
           label={label}
           type={type}
           placeholder={placeholder}
