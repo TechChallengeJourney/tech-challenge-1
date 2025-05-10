@@ -1,3 +1,35 @@
+.container {
+    margin-top: 24px;
+    @media (min-width: 1024px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        justify-content: center;
+        align-items: start;
+    }
+}
+
+.extract {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    // margin-top: 32px;
+    width: 690px;
+    background-color: white;
+    
+    @media (min-width: 1024px) {
+        width: 282px;
+    }
+    @media (max-width: 1024px) {
+        margin-top: 39px;
+        width: 330px;
+    }
+}
+
+// .extractContent {
+//     padding: 180px;
+// }
+
 .alignRow {
     display: flex;
     flex-direction: row;
@@ -6,7 +38,6 @@
 .balanceContainer {
     display: flex;
     flex-direction: row;
-    // justify-content: space-between;
     align-items: flex-start;
     width: 100%;
     gap: 32px; // equivale a theme.spacing(4)

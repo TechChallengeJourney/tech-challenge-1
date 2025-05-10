@@ -2,6 +2,7 @@
 import { BytebankText } from '../text';
 import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
+import React from 'react'; // necessário para usar React.ReactNode
 
 export interface BytebankExtractProps {
   month: string;
@@ -16,8 +17,10 @@ interface BytebankExtractPropsData {
 
 export function BytebankExtract({
   extract,
+  title,
 }: {
   extract: BytebankExtractProps[];
+  title?: React.ReactNode;
 }) {
   const numeroFormatado = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
@@ -27,6 +30,12 @@ export function BytebankExtract({
 
   return (
     <>
+      {title && (
+        <Box padding="10px">
+          {title}
+        </Box>
+      )}
+
       {extract.map((itens, index) => (
         <Card key={index} sx={{ minWidth: 275 }}>
           <Box

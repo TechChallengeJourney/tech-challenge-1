@@ -109,7 +109,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Box>
+    <Box className={styles.container}>
       {firstCard()}
       <ExtractCardWrapper />
     </Box>
