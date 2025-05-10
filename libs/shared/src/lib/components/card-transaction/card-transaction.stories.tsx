@@ -1,30 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { BytebankTransaction } from './index';
-import { BytebankText } from '../text';
-import { Box } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
+import * as DocBlock from '@storybook/blocks';
+import { BytebankTransaction } from '.';
+import { UserProvider } from '../../contexts/user.context';
 
-const meta: Meta<typeof BytebankTransaction> = {
+export default {
   title: 'Components/BytebankTransaction',
-  component: BytebankTransaction,
   tags: ['autodocs'],
-  argTypes: {
-    title: { control: 'text', description: 'Título exibido no topo do card' },
-    children: { control: false, description: 'Conteúdo dentro do card' },
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <DocBlock.Title />
+          <DocBlock.Primary />
+          <DocBlock.Controls />
+        </>
+      ),
+    },
   },
-};
+} as Meta;
 
-export default meta;
-type Story = StoryObj<typeof BytebankTransaction>;
+const Template = () => (
+  <UserProvider>
+    <BytebankTransaction />
+  </UserProvider>
+);
 
-export const Default: Story = {
-  args: {
-    title: 'Título do Card',
-    children: (
-      <Box mt={2}>
-        <BytebankText fontSize="16px" color="gray">
-          Aqui vai o conteúdo do card.
-        </BytebankText>
-      </Box>
-    ),
-  },
+export const Default: StoryObj = {
+  render: Template,
 };

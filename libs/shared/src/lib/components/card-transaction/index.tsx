@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
 import { BytebankText } from '../text';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -6,6 +6,7 @@ import { BytebankInputController } from '../input/ControlledInput';
 import { BytebankButton } from '../button';
 import { BytebankSelectController } from '../select/ControlledSelect';
 import { useUser } from '../../contexts/user.context';
+import { useState } from 'react';
 
 export interface IForm {
   type: string;
@@ -13,6 +14,11 @@ export interface IForm {
 }
 
 export function BytebankTransaction() {
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState<{
+    severity: AlertColor;
+    message: string;
+  } | null>(null);
   const registerMethods = useForm<IForm>({
     defaultValues: {
       type: '',
@@ -24,15 +30,44 @@ export function BytebankTransaction() {
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+  const isValidFields = () => {
+    if (registerMethods.getValues('type').trim() === '') return false;
+    if (registerMethods.getValues('value').trim() === '') return false;
+
+    return true;
+  };
+
   const handleTransaction = async (data: IForm) => {
-    const response = await fetch(`${apiUrl}/extract`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
-    });
-    console.log(response);
+    if (isValidFields()) {
+      const response = await fetch(`${apiUrl}/extract`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
+      });
+      registerMethods.setValue('type', '');
+      registerMethods.setValue('value', '');
+      if (response.ok) {
+        setSnackbarData({
+          severity: 'success',
+          message: 'Transação adicionada com sucesso!!',
+        });
+        setSnackbarOpen(true);
+      } else {
+        setSnackbarData({
+          severity: 'error',
+          message: 'Algo deu errado. Por favor, aguarde e tente novamente.!!',
+        });
+        setSnackbarOpen(true);
+      }
+    } else {
+      setSnackbarOpen(true);
+      setSnackbarData({
+        severity: 'error',
+        message: 'Preencha todos os campos!!',
+      });
+    }
   };
 
   const selectOptions = [
@@ -41,8 +76,29 @@ export function BytebankTransaction() {
     { label: 'Empréstimo e Financeiro', value: 'Empréstimo e Financeiro' },
   ];
 
+  const renderSnackBar = () => {
+    return snackbarData ? (
+      <>
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={6000}
+          onClose={() => setSnackbarOpen(false)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Alert
+            onClose={() => 'handleClose que eu apaguei'}
+            severity={snackbarData.severity}
+          >
+            {snackbarData.message}
+          </Alert>
+        </Snackbar>
+      </>
+    ) : null;
+  };
+
   return (
     <Box className="bytebank-card-content">
+      {renderSnackBar()}
       <BytebankText fontSize="25px" color="black">
         Nova transação
       </BytebankText>
@@ -59,9 +115,8 @@ export function BytebankTransaction() {
               label={'Concluir transação'}
               color={'secondary'}
               variant={'contained'}
-              // loading={isRegisterLoading}
               fullWidth
-            ></BytebankButton>
+            />
           </Box>
         </form>
       </FormProvider>
