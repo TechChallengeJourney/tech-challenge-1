@@ -67,10 +67,12 @@ const Home: React.FC = () => {
 
         {/* Lado direito */}
         <Box className={styles.rightBlock}>
-          <BytebankText color="white" sx={{ fontWeight: 600 }} variant="sm">
-            Saldo
-          </BytebankText>
-          {renderVisibilityIconsBalance()}
+          <div className={styles.balanceAccountWrapper}>
+            <BytebankText color="white" sx={{ fontWeight: 600 }} variant="sm">
+              Saldo
+            </BytebankText>
+            {renderVisibilityIconsBalance()}
+          </div>
           <Divider style={{ backgroundColor: 'white' }} />
           <div className={styles.balanceAccountData}>
             <BytebankText color="white" sx={{ lineHeight: '32px' }}>

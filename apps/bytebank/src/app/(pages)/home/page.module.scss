@@ -31,13 +31,29 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    @media (max-width: 599px) {
+        margin: 16px;
+    }
 }
 
 .rightBlock {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    // max-width: 100%;
+
+    margin: 50px;
+
+    @media (min-width: 600px) {
+        margin-top: 92px;
+    }
+
+}
+
+.balanceAccountWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
 }
 
 
