@@ -17,7 +17,9 @@ export function BytebankExtract() {
 
   const fetchExtract = async () => {
     const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
+
     const extract = await res.json();
+
     return extract as ExtractProps[];
   };
 
@@ -26,9 +28,8 @@ export function BytebankExtract() {
       if (res.length === 0) {
         return;
       }
-      const resData = res[0].transactions;
       const agrupado: BytebankExtractProps[] = Object.values(
-        resData.reduce((acc, item) => {
+        res.reduce((acc, item) => {
           const dataObj = new Date(item.date);
           const mes = format(dataObj, 'MMMM');
 

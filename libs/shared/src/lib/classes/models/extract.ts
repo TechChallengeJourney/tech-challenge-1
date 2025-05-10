@@ -3,13 +3,15 @@ export interface BytebankExtractProps {
   data: BytebankExtractPropsData[];
 }
 
-interface BytebankExtractPropsData {
+export interface BytebankExtractPropsData {
   date: Date;
-  type: 'Depósito' | 'Saque' | 'Transferência';
+  type: string;
   value: number;
 }
 
 export interface ExtractProps {
+  type: string;
+  value: number;
+  date: Date;
   userId: string;
-  transactions: BytebankExtractPropsData[];
 }
