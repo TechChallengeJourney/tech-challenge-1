@@ -5,6 +5,7 @@ import { BytebankCardBank } from './components/card-bank';
 import { BytebankInputController } from './components/input/ControlledInput';
 import { BytebankMenu } from './components/menu';
 import { BytebankHeader } from './components/header';
+import { BytebankFooter } from './components/footer';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
@@ -25,6 +26,7 @@ export {
   BytebankCard,
   BytebankCardBank,
   BytebankHeader,
+  BytebankFooter,
   BytebankMenu,
   BytebankModal,
   BytebankExtract,

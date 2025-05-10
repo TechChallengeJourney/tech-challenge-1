@@ -1,17 +1,17 @@
 'use client';
 import './style.scss';
 
-import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar, MenuItem, Typography, Menu, IconButton, Avatar } from '@mui/material';
+import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar, MenuItem, Typography, Menu, IconButton, Avatar, LinearProgress } from '@mui/material';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
 import { ReactElement, useState } from 'react';
 import { BytebankModal } from '../modal';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BytebankInputController } from '../input/ControlledInput';
-import { useSession } from '../../hooks/use-session';
 import { User } from '../../classes/models/user';
 import { BytebankText } from '../text';
-import { loggedRoutes , unloggedRoutes } from '../../classes/constants/routes.config';
+import { loggedRoutes, unloggedRoutes } from '../../classes/constants/routes.config';
+import { useUser } from '../../contexts/user.context';
 
 interface HeaderProps {
   mobile?: boolean;
@@ -25,11 +25,11 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
-  const [user, setUser] = useSession<User | null>('user');
+  const { user, setUser, loading } = useUser();
   const isLogged = !!(user);
-  const settings = [{name: 'Minha conta', action: () => console.log('open minha conta')}, {name: 'Sair', action: () => handleLogout()}];
+  const settings = [{ name: 'Minha conta', action: () => handleCloseUserMenu() }, { name: 'Sair', action: () => handleLogout() }];
 
-  const loginMethods = useForm<{email: string; password: string;}>({
+  const loginMethods = useForm<{ email: string; password: string; }>({
     defaultValues: {
       email: '',
       password: '',
@@ -43,8 +43,34 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       password: '',
     },
   });
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
+  const closeLoginModal = () => {
+    loginMethods.reset();
+    setOpenLoginModal(false);
+  };
+
+  const closeRegisterModal = () => {
+    registerMethods.reset();
+    setOpenRegisterModal(false);
+  };
+
+  const handleLoginModal = () => {
+    closeRegisterModal();
+    setOpenLoginModal(true);
+  };
+
+  const handleRegisterModal = () => {
+    closeLoginModal();
+    setOpenRegisterModal(true);
+  }
+
+  const handleLogout = (): void => {
+    handleCloseUserMenu();
+    setUser(null);
+  }
+
   const handleRegister = async (data: Partial<User>) => {
     setRegisterLoading(true);
     const response = await fetch('/api/register', {
@@ -56,7 +82,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     });
 
     if (response.ok) {
-      const res = await response.json() as {message: string};
+      const res = await response.json() as { message: string };
       setSnackbarData({ severity: 'success', message: res.message });
       closeRegisterModal();
     } else {
@@ -67,7 +93,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     setSnackbarOpen(true);
   };
 
-  const handleLogin = async (data: {email: string; password: string;}) => {
+  const handleLogin = async (data: { email: string; password: string; }) => {
     setLoginLoading(true);
     const response = await fetch('/api/login', {
       method: 'POST',
@@ -124,9 +150,9 @@ export function BytebankHeader({ mobile }: HeaderProps) {
               </Box>
             </form>
           </FormProvider>
-          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText> 
-          <Link component="button" variant="sm" color={'secondary'}
-            onClick={handleLoginModal}>Fazer login</Link>
+          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText>
+            <Link component="button" variant="sm" color={'secondary'}
+              onClick={handleLoginModal}>Fazer login</Link>
           </Box>
         </>
       </BytebankModal>
@@ -157,10 +183,10 @@ export function BytebankHeader({ mobile }: HeaderProps) {
 
   const renderMenuSettings = () => {
     return (<>
-    <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" />
-          </IconButton>
+      <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Avatar alt="Remy Sharp" />
+        </IconButton>
         <Menu
           sx={{ mt: '45px' }}
           id="menu-appbar"
@@ -184,74 +210,59 @@ export function BytebankHeader({ mobile }: HeaderProps) {
           ))}
         </Menu>
       </Box>
-      </>)
+    </>)
   }
-  const closeLoginModal = () => {
-    loginMethods.reset();
-    setOpenLoginModal(false);
-  };
-
-  const closeRegisterModal = () => {
-    registerMethods.reset();
-    setOpenRegisterModal(false);
-  };
-
-  const handleLoginModal = () => {
-    closeRegisterModal();
-    setOpenLoginModal(true);
-  };
-
-  const handleRegisterModal = () => {
-    closeLoginModal();
-    setOpenRegisterModal(true);
-  }
-
-  const handleLogout = (): void => setUser(null);
 
   return (
     <>
-      <AppBar className={`header ${isLogged ? 'header--logged' : ''}`} position="static">
-        <Container maxWidth="md" className="container">
-          <Box
-            display={'flex'}
-            flexDirection={'row'}
-            gap={4}
-            sx={{ flexGrow: 1 }}
-            height="100%"
-            alignItems="center"
-          >
-            <Box display="flex" alignItems="center">
-              <Link href="/">
-                <img
-                  src="/images/logo.png"
-                  className="logo"
-                  alt="Bytebank logo"
-                />
-              </Link>
-            </Box>
-            <BytebankMenu isLogged={isLogged} routes={isLogged ? loggedRoutes : unloggedRoutes} mobile={mobile} />
-
-            {!isLogged ? (
-              <Box display={'flex'} flex={'none'} gap={2}>
-              <BytebankButton
-                sendSubmit={handleRegisterModal}
-                label="Crie uma conta"
-                color="success"
-                variant="contained"
-              />
-              <BytebankButton
-                sendSubmit={handleLoginModal}
-                label="Entre"
-                color="success"
-                variant="outlined"
-              />
+      {loading ? (
+        <LinearProgress color={'primary'} />
+      ) : (
+        <AppBar className={`header ${isLogged ? 'header--logged' : ''}`} position="static">
+          <Container maxWidth="md" className="container">
+            <Box
+              display={'flex'}
+              flexDirection={'row'}
+              gap={4}
+              sx={{ flexGrow: 1 }}
+              height="100%"
+              alignItems="center"
+            >
+              <Box display="flex" alignItems="center">
+                <Link href="/">
+                  <img
+                    src="/images/logo.png"
+                    className="logo"
+                    alt="Bytebank logo"
+                  />
+                </Link>
               </Box>
-            ) : ''
-        }
-        {renderMenuSettings()}
-          </Box>
-        </Container>
-      </AppBar>
+              <BytebankMenu isLogged={isLogged} routes={isLogged ? loggedRoutes : unloggedRoutes} mobile={mobile} />
+
+              {!isLogged ? (
+                <Box display={'flex'} flex={'none'} gap={2}>
+                  <BytebankButton
+                    sendSubmit={handleRegisterModal}
+                    label="Crie uma conta"
+                    color="success"
+                    variant="contained"
+                  />
+                  <BytebankButton
+                    sendSubmit={handleLoginModal}
+                    label="Entre"
+                    color="success"
+                    variant="outlined"
+                  />
+                </Box>
+              ) : ''
+              }
+              {renderMenuSettings()}
+            </Box>
+          </Container>
+        </AppBar>
+      )
+      }
+
       {renderRegisterModal(openRegisterModal)}
       {renderLoginModal(openLoginModal)}
       {renderSnackbar()}

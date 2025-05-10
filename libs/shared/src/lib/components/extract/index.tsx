@@ -4,25 +4,55 @@ import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
 import React from 'react'; // necessário para usar React.ReactNode
 
-export interface BytebankExtractProps {
-  month: string;
-  data: BytebankExtractPropsData[];
-}
+import { useEffect, useState } from 'react';
+import { useUser } from '../../contexts/user.context';
+import {
+  BytebankExtractProps,
+  ExtractProps,
+} from '../../classes/models/extract';
 
-interface BytebankExtractPropsData {
-  date: Date;
-  type: 'Depósito' | 'Saque' | 'Transferência';
-  value: number;
-}
+export function BytebankExtract() {
+  const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
+  const { user } = useUser();
 
-export function BytebankExtract({
-  extract,
-  title,
-}: {
-  extract: BytebankExtractProps[];
-  title?: React.ReactNode;
-}) {
-  const numeroFormatado = (number: number) =>
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const fetchExtract = async () => {
+    const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
+    const extract = await res.json();
+    return extract as ExtractProps[];
+  };
+
+  useEffect(() => {
+    fetchExtract().then((res) => {
+      if (res.length === 0) {
+        return;
+      }
+      const resData = res[0].transactions;
+      const agrupado: BytebankExtractProps[] = Object.values(
+        resData.reduce((acc, item) => {
+          const dataObj = new Date(item.date);
+          const mes = format(dataObj, 'MMMM');
+
+          if (!acc[mes]) {
+            acc[mes] = { month: mes, data: [] };
+          }
+
+          acc[mes].data.push({
+            date: dataObj,
+            type: item.type,
+            value: item.value,
+          });
+
+          return acc;
+        }, {} as Record<string, BytebankExtractProps>)
+      );
+
+      setExtract(agrupado);
+    });
+  }, [user]);
+
+  const numberFormat = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
@@ -41,11 +71,14 @@ export function BytebankExtract({
           <Box
             width="100%"
             display="flex"
-            padding="10px"
+            padding="10px 10px 0px 10px"
             flexDirection="row"
+            boxSizing={'border-box'}
             fontWeight={600}
           >
-            <BytebankText color="primary">{itens.month}</BytebankText>
+            <BytebankText fontWeight={'bold'} color="primary">
+              {itens.month}
+            </BytebankText>
           </Box>
           {itens.data.map((item, index) => (
             <Box
@@ -62,11 +95,17 @@ export function BytebankExtract({
               paddingBottom={'20px'}
             >
               <Box width="80%" display="flex" flexDirection="column" gap="5px">
-                <BytebankText color={item.value < 0 ? 'error' : 'primary'}>
+                <BytebankText
+                  textAlign={'left'}
+                  color={item.value < 0 ? 'error' : 'primary'}
+                >
                   {item.type}
                 </BytebankText>
-                <BytebankText color={item.value < 0 ? 'error' : 'primary'}>
-                  {numeroFormatado(item.value)}
+                <BytebankText
+                  textAlign={'left'}
+                  color={item.value < 0 ? 'error' : 'primary'}
+                >
+                  {numberFormat(item.value)}
                 </BytebankText>
               </Box>
               <Box>
