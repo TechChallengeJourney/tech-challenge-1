@@ -1,6 +1,7 @@
 'use client';
 import './style.scss';
 
+import { useRouter } from 'next/navigation';
 import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar, MenuItem, Typography, Menu, IconButton, Avatar, LinearProgress } from '@mui/material';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
@@ -26,6 +27,8 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const { user, setUser, loading } = useUser();
+  
+  const router = useRouter();
   const isLogged = !!(user);
   const settings = [{ name: 'Minha conta', action: () => handleCloseUserMenu() }, { name: 'Sair', action: () => handleLogout() }];
 
@@ -106,6 +109,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     if (response.ok) {
       const userData = await response.json() as User;
       setUser(userData);
+      router.push('/home'); // <-- redirect para /home
       closeLoginModal();
     } else {
       const responseError = await response.json() as { error: string };
