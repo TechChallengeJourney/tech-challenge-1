@@ -16,6 +16,8 @@ interface FinancialSummary {
 
 interface FinancialSummaryContextType extends FinancialSummary {
   updateSummary: (summary: FinancialSummary) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
 }
 
 const FinancialSummaryContext = createContext<FinancialSummaryContextType>({
@@ -24,6 +26,10 @@ const FinancialSummaryContext = createContext<FinancialSummaryContextType>({
   transactions: [],
   updateSummary: () => {
     console.warn('updateSummary method is not implemented.');
+  },
+  isLoading: false,
+  setIsLoading: (value: boolean) => {
+    console.warn('setIsLoading method is not implemented.');
   },
 });
 
@@ -34,14 +40,15 @@ export const FinancialSummaryProvider: React.FC<{ children: React.ReactNode }> =
     transactions: [],
   });
 
-  console.log(summary);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateSummary = (newSummary: FinancialSummary) => {
     setSummary(newSummary);
+    setIsLoading(false);
   };
 
   return (
-    <FinancialSummaryContext.Provider value={{ ...summary, updateSummary }}>
+    <FinancialSummaryContext.Provider value={{ ...summary, updateSummary, isLoading, setIsLoading }}>
       {children}
     </FinancialSummaryContext.Provider>
   );

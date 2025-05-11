@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, Skeleton } from '@mui/material';
 import { BytebankText } from '@bytebank/shared';
 import { VisibilityOff, VisibilityRounded } from '@mui/icons-material';
 import CardIllustration from './card-illustration';
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
-  const { totalDeposits, totalWithdrawals } = useFinancialSummary();
+  const { totalDeposits, totalWithdrawals, isLoading } = useFinancialSummary();
 
   const totalBalance = totalDeposits - totalWithdrawals;
 
@@ -47,9 +47,13 @@ const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
           <BytebankText color="white" sx={{ lineHeight: '32px' }}>
             Conta Corrente
           </BytebankText>
-          <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
-            {visible ? `R$ ${totalBalance.toString()}` : 'R$ ****'}
-          </BytebankText>
+          {isLoading ? (
+            <Skeleton width={100} height={32} animation="wave" />
+          ) : (
+            <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
+              {visible ? `R$ ${totalBalance.toString()}` : 'R$ ****'}
+            </BytebankText>
+          )}
         </div>
         <Box className={styles.mobileOnly}>
           <CardIllustration />
