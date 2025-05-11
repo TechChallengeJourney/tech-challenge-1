@@ -86,7 +86,7 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
       updateSummary(totals);
       setExtract(agrupado);
     });
-  }, [user, updateSummary]);
+  }, [user]);
 
   const numberFormat = (number: number) =>
     new Intl.NumberFormat('pt-BR', {

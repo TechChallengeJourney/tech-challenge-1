@@ -19,7 +19,7 @@ const BalanceHeader: React.FC = () => {
   return (
     <Box className={styles.greetingBlock}>
       <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
-        {`Olá, ${user?.name ?? 'usuário'}! :)`}
+        {`Olá, ${user?.name?.split(' ')[0] ?? 'usuário'}! :)`}
       </BytebankText>
       <BytebankText color="white" variant="xs">
         {formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
