@@ -6,7 +6,6 @@
         display: flex;
         flex-wrap: wrap;
         gap: 24px;
-        // align-items: flex-start;
         justify-content: center;
     }
 }
@@ -15,7 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 100%;          // Ocupa todo o espaço disponível
+    width: 100%;          
     max-width: 690px;     // Mas nunca ultrapassa 690px
     background-color: white;
     border-radius: 8px;
@@ -23,27 +22,14 @@
     
  /* Para desktop, quando a largura é maior que 1024px */
     @media (min-width: 1024px) {
-        width: 282px; /* Largura ajustada para desktop */
-        // position: fixed; /* Manter o componente fixo na lateral */
+        width: 282px; 
         top: 0;
         right: 0;
-        // height: 100vh; /* Ocupa a altura total da tela */
     }
 
     /* Para dispositivos entre 768px e 1024px (tablets e iPads) */
     @media (max-width: 1024px) {
         margin-top: 39px;
-        width: 100%; /* Ocupa 100% do espaço disponível em dispositivos menores */
-    }
-
-    /* Para dispositivos com largura entre 768px e 1023px (tablets) */
-    @media (min-width: 768px) and (max-width: 1023px) {
-        width: 100%; /* Ocupa 100% do espaço disponível em tablets */
-    }
-
-    /* Para dispositivos menores que 768px (smartphones, mobile) */
-    @media (max-width: 767px) {
-        width: 100%; /* Ocupa 100% do espaço disponível em smartphones */
     }
 }
 
@@ -68,8 +54,6 @@
 .leftBlock {
     display: flex;
     flex-direction: column;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     gap: 48px;
     margin: 32px;
 }
@@ -119,10 +103,6 @@
 
 .text {
     line-height: 24px;
-}
-
-.cardWrapper {
-    // position: relative;
 }
 
 .topRightDecoration {
