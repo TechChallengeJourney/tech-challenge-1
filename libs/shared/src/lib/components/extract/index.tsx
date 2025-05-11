@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
 import { useUser } from '../../contexts/user.context';
+import { useFinancialSummary } from '../../contexts/financial-summary.context';
 import {
   BytebankExtractProps,
   ExtractProps,
@@ -14,9 +15,16 @@ interface BytebankExtractComponentProps {
   title?: React.ReactNode;
 }
 
+export interface Transaction {
+  date: string;
+  type: string;
+  value: number;
+}
+
 export function BytebankExtract({ title }: BytebankExtractComponentProps) {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
+  const { updateSummary } = useFinancialSummary();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -28,10 +36,11 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
 
   useEffect(() => {
     fetchExtract().then((res) => {
-      if (res.length === 0) {
-        return;
-      }
+      if (res.length === 0) return;
+
       const resData = res[0].transactions;
+
+      // Agrupamento por mês para exibição
       const agrupado: BytebankExtractProps[] = Object.values(
         resData.reduce((acc, item) => {
           const dataObj = new Date(item.date);
@@ -51,9 +60,31 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
         }, {} as Record<string, BytebankExtractProps>)
       );
 
+      // Atualizar contexto com totais e transações
+      const totals = resData.reduce(
+        (acc, item) => {
+          if (item.value > 0) acc.totalDeposits += item.value;
+          else acc.totalWithdrawals += item.value;
+
+          acc.transactions.push({
+            date: format(item.date, 'dd/MM/yyyy'),
+            type: item.type,
+            value: item.value,
+          });
+
+          return acc;
+        },
+        {
+          totalDeposits: 0,
+          totalWithdrawals: 0,
+          transactions: [] as Transaction[],
+        }
+      );
+
+      updateSummary(totals);
       setExtract(agrupado);
     });
-  }, [user]);
+  }, [user, updateSummary]);
 
   const numberFormat = (number: number) =>
     new Intl.NumberFormat('pt-BR', {
@@ -63,11 +94,7 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
 
   return (
     <>
-      {title && (
-        <Box padding="10px">
-          {title}
-        </Box>
-      )}
+      {title && <Box padding="10px">{title}</Box>}
 
       {extract.map((itens, index) => (
         <Card key={index} sx={{ minWidth: 275 }}>
