@@ -81,8 +81,6 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
         }
       );
 
-      console.log('totals', totals);
-
       updateSummary(totals);
       setExtract(agrupado);
     });

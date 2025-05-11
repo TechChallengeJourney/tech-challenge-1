@@ -13,8 +13,6 @@ export interface BytebankExtractProps {
   data: Transaction[];
 }
 
-
-
 export default function ExtractCard() {
   return (
     <div color="white" className={styles.extract}>
