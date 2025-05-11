@@ -34,6 +34,8 @@ export const FinancialSummaryProvider: React.FC<{ children: React.ReactNode }> =
     transactions: [],
   });
 
+  console.log(summary);
+
   const updateSummary = (newSummary: FinancialSummary) => {
     setSummary(newSummary);
   };

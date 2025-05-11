@@ -7,6 +7,8 @@ import { VisibilityOff, VisibilityRounded } from '@mui/icons-material';
 import CardIllustration from './card-illustration';
 import BalanceHeader from './balance-header';
 import styles from './page.module.scss';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { useFinancialSummary } from 'libs/shared/src/lib/contexts/financial-summary.context';
 
 interface Props {
   visible: boolean;
@@ -14,6 +16,13 @@ interface Props {
 }
 
 const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
+  const { totalDeposits, totalWithdrawals } = useFinancialSummary();
+
+  console.log('totalDeposits', totalDeposits);
+  console.log('totalWithdrawals', totalWithdrawals);
+
+  const totalBalance = totalDeposits - totalWithdrawals;
+
   return (
     <Box className={styles.balanceContainer}>
       <Box className={styles.leftBlock}>
@@ -42,7 +51,7 @@ const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
             Conta Corrente
           </BytebankText>
           <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
-            {visible ? 'R$ 1200,00' : 'R$ ****'}
+            {visible ? `R$ ${totalBalance.toString()}` : 'R$ ****'}
           </BytebankText>
         </div>
         <Box className={styles.mobileOnly}>

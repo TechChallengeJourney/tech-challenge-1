@@ -9,7 +9,6 @@ import { ptBR } from 'date-fns/locale';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { useUser } from 'libs/shared/src/lib/contexts/user.context';
 
-
 const BalanceHeader: React.FC = () => {
   const { user } = useUser();
 
@@ -17,14 +16,13 @@ const BalanceHeader: React.FC = () => {
 
   const formattedDate = format(today, "EEEE',' dd/MM/yyyy", { locale: ptBR });
 
-
   return (
     <Box className={styles.greetingBlock}>
       <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
         {`Olá, ${user?.name ?? 'usuário'}! :)`}
       </BytebankText>
       <BytebankText color="white" variant="xs">
-       {formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
+        {formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)}
       </BytebankText>
     </Box>
   );
