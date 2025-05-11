@@ -18,9 +18,6 @@ interface Props {
 const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
   const { totalDeposits, totalWithdrawals } = useFinancialSummary();
 
-  console.log('totalDeposits', totalDeposits);
-  console.log('totalWithdrawals', totalWithdrawals);
-
   const totalBalance = totalDeposits - totalWithdrawals;
 
   return (
