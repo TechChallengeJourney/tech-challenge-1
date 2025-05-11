@@ -2,16 +2,19 @@
 import { BytebankText } from '../text';
 import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
-import React from 'react'; // necessário para usar React.ReactNode
+import React, { useEffect, useState } from 'react';
 
-import { useEffect, useState } from 'react';
 import { useUser } from '../../contexts/user.context';
 import {
   BytebankExtractProps,
   ExtractProps,
 } from '../../classes/models/extract';
 
-export function BytebankExtract() {
+interface BytebankExtractComponentProps {
+  title?: React.ReactNode;
+}
+
+export function BytebankExtract({ title }: BytebankExtractComponentProps) {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
 

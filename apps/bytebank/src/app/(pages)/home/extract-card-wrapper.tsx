@@ -56,7 +56,6 @@ export default function ExtractCardWrapper() {
     <div color="white" className={styles.extract}>
       <Box className={styles.extractContent}>
         <BytebankExtract
-          extract={sampleData}
           title={
             <BytebankText color="primary" fontSize="24px" fontWeight={600}>
               Extrato
