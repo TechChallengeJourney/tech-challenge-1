@@ -6,7 +6,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 24px;
-        align-items: flex-start;
+        // align-items: flex-start;
         justify-content: center;
     }
 }
@@ -19,7 +19,6 @@
     max-width: 690px;     // Mas nunca ultrapassa 690px
     background-color: white;
     border-radius: 8px;
-    padding: 5px;
     
  /* Para desktop, quando a largura é maior que 1024px */
     @media (min-width: 1024px) {
@@ -55,7 +54,7 @@
 .balanceContainer {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    // align-items: flex-start;
     width: 100%;
 
     @media (max-width: 768px) {
@@ -68,8 +67,8 @@
 .leftBlock {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    // justify-content: flex-start;
+    // align-items: flex-start;
     gap: 48px;
     margin: 32px;
 }
