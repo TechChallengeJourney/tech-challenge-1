@@ -13,7 +13,9 @@ export interface BytebankExtractProps {
   data: Transaction[];
 }
 
-export default function ExtractCardWrapper() {
+
+
+export default function ExtractCard() {
   return (
     <div color="white" className={styles.extract}>
       <Box className={styles.extractContent}>

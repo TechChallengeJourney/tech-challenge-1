@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import ExtractCardWrapper from './extract-card';
+import ExtractCard from './extract-card';
 import AccountOverviewCard from './account-overview-card';
 import styles from './page.module.scss';
 
@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   return (
     <Box className={styles.containerPage}>
       <AccountOverviewCard visible={visible} toggleVisibility={toggleVisibility} />
-      <ExtractCardWrapper />
+      <ExtractCard />
     </Box>
   );
 };
