@@ -37,12 +37,13 @@ export default function Index(): ReactElement {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({...data, id: user?.id}),
+      body: JSON.stringify({id: user?.id, ...data}),
     });
 
     if (response.ok) {
-      const userData = (await response.json()) as User;
-      setUser(userData);
+      const responseData = (await response.json()) as { data: User, message: string };
+      setUser(responseData.data);
+      setSnackbarData({ severity: 'success', message: responseData.message });
     } else {
       const responseError = (await response.json()) as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });

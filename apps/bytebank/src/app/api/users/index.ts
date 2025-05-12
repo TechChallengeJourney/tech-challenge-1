@@ -2,8 +2,9 @@ import { User } from '@bytebank/shared';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const fetchUsers = async () => {
-  const res = await fetch(`${apiUrl}/users`);
+export const fetchUsers = async (userId?: string) => {
+  const hasUserId = (userId) ? '/' + userId : '';
+  const res = await fetch(`${apiUrl}/users${hasUserId}`);
   const users = await res.json();
   return users;
 };
