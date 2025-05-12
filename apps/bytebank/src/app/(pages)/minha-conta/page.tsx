@@ -1,11 +1,14 @@
 'use client';
 import './style.scss';
 import { BytebankButton, BytebankCard, BytebankInputController, BytebankText, palette, User, useUser } from '@bytebank/shared';
-import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
+import { Alert, AlertColor, Box, Snackbar, Theme, useMediaQuery, useTheme } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 export default function Index(): ReactElement {
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
   const [isLoading, setLoading] = useState(false);
   const { user, setUser } = useUser();
   const [snackbarData, setSnackbarData] = useState<{
@@ -73,16 +76,16 @@ export default function Index(): ReactElement {
         </>
       ) : null;
     };
-  
-  return (
+
+ return (
     <>
     <Box mt={4} className='my-account'>
       <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
         <Box p={4}>
           <BytebankText variant={'lg'}>Minha conta</BytebankText>
-          <Box mt={4} display={'flex'} flexDirection={'row'}>
+          <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column'}>
             <Box className='my-account__card-image'>
-              <img src={'/images/my-account.svg'} alt={'Imagem referente a minha conta.'} />
+              <img src={'/images/my-account.svg'} alt={'Imagem referente a página minha conta'} />
             </Box>
             <Box flex={'auto'}>
               <FormProvider {...formMethods}>

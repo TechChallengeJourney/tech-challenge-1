@@ -17,3 +17,15 @@
         }
     }
 }
+
+@media (max-width: 600px) {
+    .my-account {
+        &__card {
+            &-image {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }    
+}
