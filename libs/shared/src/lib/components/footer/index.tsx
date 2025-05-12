@@ -8,7 +8,7 @@ import { AppBar, Box, Container } from '@mui/material';
 
 export function BytebankFooter() {
     return (
-        <AppBar className="footer" position="static">
+        <AppBar className="bytebank-footer" position="static">
             <Container className="container">
                 <Box
                     display={'flex'}

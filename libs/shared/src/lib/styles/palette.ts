@@ -15,6 +15,7 @@ export const palette = {
   "background.gradient": "linear-gradient(90deg, rgba(0,77,97,1) 0%, rgba(255,255,255,1) 100%)",
   "grey.50": "#fafafa",
   "grey.200": "#eeeeee",
+  "grey.300": "#CBCBCB",
   "grey.400": "#bdbdbd",
   "grey.500": "#9e9e9e",
   "grey.600": "#757575",
