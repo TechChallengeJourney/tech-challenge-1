@@ -15,6 +15,9 @@ import {
   IconButton,
   Avatar,
   LinearProgress,
+  Theme,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
@@ -37,6 +40,9 @@ interface HeaderProps {
 
 export function BytebankHeader({ mobile }: HeaderProps) {
   const router = useRouter();
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [snackbarData, setSnackbarData] = useState<{
     severity: AlertColor;
@@ -293,9 +299,12 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     return (
       <>
         <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
+          <Box display={'flex'} flexDirection={'row'} alignItems={'center'} gap={2}>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
             <Avatar />
           </IconButton>
+          {!isMobile ? (<BytebankText variant={'sm'} color={'#FFF'}>{user?.name || ''}</BytebankText>): null}
+          </Box>
           <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
@@ -334,7 +343,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
           className={`header ${isLogged ? 'header--logged' : ''}`}
           position="static"
         >
-          <Container maxWidth="md" className="container">
+          <Container maxWidth={(isLogged ? 'lg' : 'md')} className="container">
             <Box
               display={'flex'}
               flexDirection={'row'}
@@ -342,6 +351,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
               sx={{ flexGrow: 1 }}
               height="100%"
               alignItems="center"
+              justifyContent={'space-between'} 
             >
               <Box display="flex" alignItems="center">
                 <Link href="/">

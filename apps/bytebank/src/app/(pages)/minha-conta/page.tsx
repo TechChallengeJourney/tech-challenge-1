@@ -79,7 +79,7 @@ export default function Index(): ReactElement {
 
   return (
     <>
-      <Box mt={4} className='my-account'>
+      <Box my={4} className='my-account'>
         <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
           <Box p={4}>
             <BytebankText variant={'lg'}>Minha conta</BytebankText>
