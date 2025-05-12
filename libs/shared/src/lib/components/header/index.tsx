@@ -101,6 +101,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const handleLogout = (): void => {
     handleCloseUserMenu();
     setUser(null);
+    redirectTo('/');
   };
 
   const handleRegister = async (data: Partial<User>) => {
