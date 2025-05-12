@@ -109,11 +109,18 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     if (response.ok) {
       const userData = await response.json() as User;
       setUser(userData);
+
       router.push('/home'); // <-- redirect para /home
-      closeLoginModal();
+
+      setTimeout(() => {
+        closeLoginModal(); 
+        setLoginLoading(false);
+      }, 20000); 
+
     } else {
       const responseError = await response.json() as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
+      setLoginLoading(false);
     }
     setLoginLoading(false);
     setSnackbarOpen(true);
