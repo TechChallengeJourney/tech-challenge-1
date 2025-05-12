@@ -83,9 +83,9 @@ export default function Index(): ReactElement {
       <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
         <Box p={4}>
           <BytebankText variant={'lg'}>Minha conta</BytebankText>
-          <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column'}>
+          <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column-reverse'}>
             <Box className='my-account__card-image'>
-              <img src={'/images/my-account.svg'} alt={'Imagem referente a página minha conta'} />
+              <img src={'/images/my-account.svg'} alt={'Imagem de uma pessoa editando sua conta'} />
             </Box>
             <Box flex={'auto'}>
               <FormProvider {...formMethods}>
@@ -108,7 +108,7 @@ export default function Index(): ReactElement {
                     label="Senha"
                     placeholder="Digite sua senha"
                   />
-                  <Box display={'flex'} pt={4} justifyContent={'start'}>
+                  <Box display={'flex'} py={4} justifyContent={'start'}>
                     <BytebankButton
                       label={'Salvar alterações'}
                       color={'secondary'}
