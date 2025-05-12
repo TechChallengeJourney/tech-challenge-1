@@ -19,6 +19,8 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
 import { ReactElement, useState } from 'react';
@@ -41,7 +43,7 @@ interface HeaderProps {
 export function BytebankHeader({ mobile }: HeaderProps) {
   const router = useRouter();
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [snackbarData, setSnackbarData] = useState<{
@@ -299,38 +301,40 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const renderMenuSettings = () => {
     return (
       <>
-        <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
-          <Box display={'flex'} flexDirection={'row'} alignItems={'center'} gap={2}>
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar />
-          </IconButton>
-          {!isMobile ? (<BytebankText variant={'sm'} color={'#FFF'}>{user?.name || ''}</BytebankText>): null}
+        {isLogged ? (
+          <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'} gap={2}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar />
+              </IconButton>
+              {!isMobile ? (<BytebankText variant={'sm'} color={'#FFF'}>{user?.name || ''}</BytebankText>) : null}
+            </Box>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting.name} onClick={setting.action}>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    {setting.name}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting.name} onClick={setting.action}>
-                <Typography sx={{ textAlign: 'center' }}>
-                  {setting.name}
-                </Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
+        ) : null}
       </>
     );
   };
@@ -349,44 +353,55 @@ export function BytebankHeader({ mobile }: HeaderProps) {
               display={'flex'}
               flexDirection={'row'}
               gap={4}
-              sx={{ flexGrow: 1 }}
+              flexGrow="1"
               height="100%"
               alignItems="center"
-              justifyContent={'space-between'} 
+              justifyContent={'space-between'}
             >
-              <Box display="flex" alignItems="center">
-                <Link href="/">
-                  <img
-                    src="/images/logo.png"
-                    className="logo"
-                    alt="Bytebank logo"
-                  />
-                </Link>
+              <Box display="flex" gap={2} justifyContent={'space-around'} flexDirection={(!isMobile ? 'row' : 'row-reverse')}>
+                <Box display="flex" alignItems="center">
+                  <Link href="/">
+                    <img
+                      src="/images/logo.png"
+                      className="logo"
+                      alt="Bytebank logo"
+                    />
+                  </Link>
+                </Box>
+                <BytebankMenu
+                  isLogged={isLogged}
+                  routes={isLogged ? loggedRoutes : unloggedRoutes}
+                  mobile={mobile}
+                />
               </Box>
-              <BytebankMenu
-                isLogged={isLogged}
-                routes={isLogged ? loggedRoutes : unloggedRoutes}
-                mobile={mobile}
-              />
 
               {!isLogged ? (
-                <Box display={'flex'} flex={'none'} gap={2}>
-                  <BytebankButton
-                    sendSubmit={handleRegisterModal}
-                    label="Crie uma conta"
-                    color="success"
-                    variant="contained"
-                  />
-                  <BytebankButton
-                    sendSubmit={handleLoginModal}
-                    label="Entre"
-                    color="success"
-                    variant="outlined"
-                  />
-                </Box>
-              ) : (
-                ''
-              )}
+                !isMobile ? (
+                  <Box display={'flex'} flex={'none'} gap={2}>
+                    <BytebankButton
+                      sendSubmit={handleRegisterModal}
+                      label="Crie uma conta"
+                      color="success"
+                      variant="contained"
+                    />
+                    <BytebankButton
+                      sendSubmit={handleLoginModal}
+                      label="Entre"
+                      color="success"
+                      variant="outlined"
+                    />
+                  </Box>
+                ) :
+                  (<Box display={'flex'}>
+                    <IconButton onClick={handleRegisterModal}>
+                      <AppRegistrationRoundedIcon color={'success'}></AppRegistrationRoundedIcon>
+                    </IconButton>
+                    <IconButton onClick={handleLoginModal}>
+                      <LoginIcon color={'success'}></LoginIcon>
+                    </IconButton>
+                  </Box>
+                  )
+              ) : ''}
               {renderMenuSettings()}
             </Box>
           </Container>

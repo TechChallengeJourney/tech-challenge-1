@@ -7,7 +7,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 export default function Index(): ReactElement {
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [isLoading, setLoading] = useState(false);
   const { user, setUser } = useUser();

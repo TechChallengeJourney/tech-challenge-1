@@ -57,12 +57,12 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
                     <MenuIcon htmlColor={!isLogged ? palette['success.main'] : palette['white.main']} fontSize="large" />
                 </IconButton>
                 <DrawerColor open={open} onClose={toggleDrawer(false)}>
-                    <Box display="flex" flexDirection="column" gap={2} p={4} onClick={toggleDrawer(false)}>
+                    <Box display="flex" flexDirection="column" gap={3} p={4} onClick={toggleDrawer(false)}>
                         {mappedRoutes}
                     </Box>
                 </DrawerColor>
             </Box>
-            <Box className="menu-desktop" gap={2} justifyContent={'flex-start'} textAlign={'center'} minWidth={'40vw'}>
+            <Box className="menu-desktop" gap={4} ml={4} justifyContent={'flex-start'} textAlign={'center'} minWidth={'30vw'}>
                 {mappedRoutes}
             </Box>
         </Box>
