@@ -8,18 +8,18 @@ import { useForm, FormProvider } from 'react-hook-form';
 export default function Index(): ReactElement {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  
+
   const [isLoading, setLoading] = useState(false);
   const { user, setUser } = useUser();
   const [snackbarData, setSnackbarData] = useState<{
-      severity: AlertColor;
-      message: string;
-    } | null>(null);
+    severity: AlertColor;
+    message: string;
+  } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const formMethods = useForm<Partial<User>>({
     defaultValues: {
-      name: '', 
+      name: '',
       email: '',
       password: '',
     },
@@ -40,7 +40,7 @@ export default function Index(): ReactElement {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id: user?.id, ...data}),
+      body: JSON.stringify({ id: user?.id, ...data }),
     });
 
     if (response.ok) {
@@ -56,75 +56,78 @@ export default function Index(): ReactElement {
   };
 
   const renderSnackbar = () => {
-      const handleSnackbarClose = () => {
-        setSnackbarOpen(false);
-        setSnackbarData(null);
-      };
-  
-      return snackbarData ? (
-        <>
-          <Snackbar
-            open={isSnackbarOpen}
-            autoHideDuration={6000}
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          >
-            <Alert onClose={handleSnackbarClose} severity={snackbarData.severity}>
-              {snackbarData.message}
-            </Alert>
-          </Snackbar>
-        </>
-      ) : null;
+    const handleSnackbarClose = () => {
+      setSnackbarOpen(false);
+      setSnackbarData(null);
     };
 
- return (
+    return snackbarData ? (
+      <>
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Alert onClose={handleSnackbarClose} severity={snackbarData.severity}>
+            {snackbarData.message}
+          </Alert>
+        </Snackbar>
+      </>
+    ) : null;
+  };
+
+  return (
     <>
-    <Box mt={4} className='my-account'>
-      <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
-        <Box p={4}>
-          <BytebankText variant={'lg'}>Minha conta</BytebankText>
-          <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column-reverse'}>
-            <Box className='my-account__card-image'>
-              <img src={'/images/my-account.svg'} alt={'Imagem de uma pessoa editando sua conta'} />
-            </Box>
-            <Box flex={'auto'}>
-              <FormProvider {...formMethods}>
-                <form onSubmit={formMethods.handleSubmit(handleUpdate)}>
-                  <BytebankInputController
-                    name="name"
-                    type="text"
-                    label="Nome"
-                    placeholder="Digite seu nome"
-                  />
-                  <BytebankInputController
-                    name="email"
-                    type="email"
-                    label="E-mail"
-                    placeholder="Digite seu e-mail"
-                  />
-                  <BytebankInputController
-                    name="password"
-                    type="password"
-                    label="Senha"
-                    placeholder="Digite sua senha"
-                  />
-                  <Box display={'flex'} py={4} justifyContent={'start'}>
-                    <BytebankButton
-                      label={'Salvar alterações'}
-                      color={'secondary'}
-                      variant={'contained'}
-                      loading={isLoading}
-                      fullWidth
-                    ></BytebankButton>
-                  </Box>
-                </form>
-              </FormProvider>
+      <Box mt={4} className='my-account'>
+        <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
+          <Box p={4}>
+            <BytebankText variant={'lg'}>Minha conta</BytebankText>
+            <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column-reverse'}>
+              <Box className='my-account__card-image'>
+                <img src={'/images/my-account.svg'} alt={'Imagem de uma pessoa editando sua conta'} />
+              </Box>
+              <Box flex={'auto'}>
+                <FormProvider {...formMethods}>
+                  <form onSubmit={formMethods.handleSubmit(handleUpdate)}>
+                    <BytebankInputController
+                      name="name"
+                      autoComplete="name"
+                      type="text"
+                      label="Nome"
+                      placeholder="Digite seu nome"
+                    />
+                    <BytebankInputController
+                      name="email"
+                      autoComplete="email"
+                      type="email"
+                      label="E-mail"
+                      placeholder="Digite seu e-mail"
+                    />
+                    <BytebankInputController
+                      name="password"
+                      autoComplete="new-password"
+                      type="password"
+                      label="Senha"
+                      placeholder="Digite sua senha"
+                    />
+                    <Box display={'flex'} py={4} justifyContent={'start'}>
+                      <BytebankButton
+                        label={'Salvar alterações'}
+                        color={'secondary'}
+                        variant={'contained'}
+                        loading={isLoading}
+                        fullWidth
+                      ></BytebankButton>
+                    </Box>
+                  </form>
+                </FormProvider>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </BytebankCard>
-    </Box>
-    {renderSnackbar()}
+        </BytebankCard>
+      </Box>
+      {renderSnackbar()}
     </>
   );
 }

@@ -79,15 +79,8 @@ export function BytebankHeader({ mobile }: HeaderProps) {
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
-  const closeLoginModal = () => {
-    loginMethods.reset();
-    setOpenLoginModal(false);
-  };
-
-  const closeRegisterModal = () => {
-    registerMethods.reset();
-    setOpenRegisterModal(false);
-  };
+  const closeLoginModal = () => setOpenLoginModal(false);
+  const closeRegisterModal = () => setOpenRegisterModal(false);
 
   const handleLoginModal = () => {
     closeRegisterModal();
@@ -117,6 +110,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     if (response.ok) {
       const res = (await response.json()) as { message: string };
       setSnackbarData({ severity: 'success', message: res.message });
+      registerMethods.reset();
       closeRegisterModal();
     } else {
       const responseError = (await response.json()) as { error: string };
@@ -139,6 +133,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     if (response.ok) {
       const userData = (await response.json()) as User;
       setUser(userData);
+      loginMethods.reset();
       closeLoginModal();
     } else {
       const responseError = (await response.json()) as { error: string };
@@ -187,18 +182,21 @@ export function BytebankHeader({ mobile }: HeaderProps) {
             <form onSubmit={registerMethods.handleSubmit(handleRegister)}>
               <BytebankInputController
                 name="name"
+                autoComplete="name"
                 type="text"
                 label="Nome"
                 placeholder="Digite seu nome"
               />
               <BytebankInputController
                 name="email"
+                autoComplete="email"
                 type="email"
                 label="E-mail"
                 placeholder="Digite seu e-mail"
               />
               <BytebankInputController
                 name="password"
+                autoComplete="new-password"
                 type="password"
                 label="Senha"
                 placeholder="Digite sua senha"
@@ -244,12 +242,14 @@ export function BytebankHeader({ mobile }: HeaderProps) {
             <form onSubmit={loginMethods.handleSubmit(handleLogin)}>
               <BytebankInputController
                 name="email"
+                autoComplete="email"
                 type="email"
                 label="E-mail"
                 placeholder="Digite seu e-mail"
               />
               <BytebankInputController
                 name="password"
+                autoComplete="current-password"
                 type="password"
                 label="Senha"
                 placeholder="Digite sua senha"

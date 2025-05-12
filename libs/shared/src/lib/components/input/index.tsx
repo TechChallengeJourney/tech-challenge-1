@@ -10,6 +10,7 @@ export interface InputProps {
   placeholder?: string;
   error?: boolean;
   helperText?: string;
+  autoComplete?: string;
 }
 
 export default function BytebankInput({
@@ -20,6 +21,7 @@ export default function BytebankInput({
   placeholder,
   error = false,
   helperText = '',
+  autoComplete = ''
 }: InputProps) {
   const TextFieldColor = styled(TextField)({
       backgroundColor: '#FFF',
@@ -36,9 +38,10 @@ export default function BytebankInput({
         placeholder={placeholder}
         error={error}
         helperText={helperText}
-        fullWidth
+        autoComplete={autoComplete}
         margin="normal"
         variant="outlined"
+        fullWidth
       />
     </Box>
   );
