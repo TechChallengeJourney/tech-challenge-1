@@ -28,8 +28,6 @@ export function BytebankTransaction() {
 
   const { user } = useUser();
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
   const isValidFields = () => {
     if (registerMethods.getValues('type').trim() === '') return false;
     if (registerMethods.getValues('value').trim() === '') return false;
@@ -39,16 +37,16 @@ export function BytebankTransaction() {
 
   const handleTransaction = async (data: IForm) => {
     if (isValidFields()) {
-      const response = await fetch(`${apiUrl}/extract`, {
+      const response = await fetch('/api/extract', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
       });
-      registerMethods.setValue('type', '');
-      registerMethods.setValue('value', '');
       if (response.ok) {
+        registerMethods.setValue('type', '');
+        registerMethods.setValue('value', '');
         setSnackbarData({
           severity: 'success',
           message: 'Transação adicionada com sucesso!!',
@@ -57,7 +55,7 @@ export function BytebankTransaction() {
       } else {
         setSnackbarData({
           severity: 'error',
-          message: 'Algo deu errado. Por favor, aguarde e tente novamente.!!',
+          message: 'Algo deu errado. Por favor, aguarde e tente novamente!!',
         });
         setSnackbarOpen(true);
       }
@@ -86,7 +84,7 @@ export function BytebankTransaction() {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         >
           <Alert
-            onClose={() => 'handleClose que eu apaguei'}
+            onClose={() => setSnackbarOpen(false)}
             severity={snackbarData.severity}
           >
             {snackbarData.message}
