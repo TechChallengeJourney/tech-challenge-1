@@ -51,7 +51,7 @@ const BENEFITS: Benefit[] = [
 
 export default function Index(): ReactElement  {
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const renderBanner = (): ReactElement => (
     <div className={styles.banner}>

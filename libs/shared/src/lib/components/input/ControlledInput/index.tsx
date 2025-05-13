@@ -7,6 +7,7 @@ interface ControlledInputProps {
   label: string;
   type?: string;
   placeholder?: string;
+  autoComplete?: string;
 }
 
 export const BytebankInputController: React.FC<ControlledInputProps> = ({
@@ -14,6 +15,7 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
   label,
   type = 'text',
   placeholder,
+  autoComplete,
 }) => {
   const { control } = useFormContext();
   return (
@@ -22,13 +24,13 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Input
-          value={field.value}
-          onChange={field.onChange}
+          {...field}
           label={label}
           type={type}
           placeholder={placeholder}
           error={!!error}
           helperText={error?.message}
+          autoComplete={autoComplete}
         />
       )}
     />

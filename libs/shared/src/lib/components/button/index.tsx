@@ -1,7 +1,6 @@
 'use client';
 import { styled } from '@mui/material';
 import Button, { ButtonProps } from '@mui/material/Button';
-import './style.scss';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
@@ -36,11 +35,18 @@ export interface BytebankButtonProps extends ButtonProps {
   sendSubmit?: () => void;
 }
 
-const ButtonColor = styled(Button)<ButtonProps>(() => ({
+const ButtonColor = styled(Button)<ButtonProps>(() => ([{
   '&.MuiButton-containedTertiary:hover': {
     color: 'white',
   },
-}));
+  '&': {
+    borderRadius: '8px',
+    padding: '15px 30px',
+    boxShadow: 'none',
+    textTransform: 'none',
+  },
+}
+]));
 
 export function BytebankButton({
   label,
@@ -50,7 +56,6 @@ export function BytebankButton({
   ...props
 }: BytebankButtonProps) {
   return (
-    <div className={`bytebank-button bytebank-button--${color}`}>
       <ButtonColor
         type="submit"
         variant={variant}
@@ -60,6 +65,5 @@ export function BytebankButton({
       >
         {label}
       </ButtonColor>
-    </div>
   );
 }
