@@ -6,7 +6,7 @@ import ExtractCard from './extract-card';
 import { AccountOverviewCard } from './account-overview-card';
 import styles from './page.module.scss';
 
- export function Home() {
+const Home: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const toggleVisibility = () => setVisible((prev) => !prev);
 
@@ -19,4 +19,6 @@ import styles from './page.module.scss';
       <ExtractCard />
     </Box>
   );
-}
+};
+
+export default Home;
