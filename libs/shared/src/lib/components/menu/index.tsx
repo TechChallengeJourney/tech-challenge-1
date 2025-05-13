@@ -1,7 +1,7 @@
 'use client';
 import './style.scss';
 import { styled, useTheme } from '@mui/material/styles';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Box, Drawer, Typography, Link, DrawerProps } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,6 +20,7 @@ interface MenuProps {
 }
 
 export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
+    const router = useRouter();
     const theme = useTheme();
     const pathName = usePathname();
     const DrawerColor = styled(Drawer)<DrawerProps>(() => ({
@@ -30,12 +31,15 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
 
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => setOpen(newOpen);
+    const redirectTo = (name: string) => router.push(name);
 
     const mappedRoutes = (
         routes.map(route => (
-            <Link className={`menu-item ${pathName === route.route ? 'active' : ''}`} color={isLogged ? 'white' : 'success'} href={route.route} key={route.route}>
-                <Typography variant="sm" textTransform="capitalize">{route.name}</Typography>
-            </Link>
+            <Typography key={route.route} variant="sm" textTransform="capitalize" className={`menu-item ${pathName === route.route ? 'active' : ''}`}>
+                <Link color={isLogged ? 'white' : 'success'} onClick={() => redirectTo(route.route)}>
+                {route.name}
+                </Link>
+            </Typography>
         ))
     )
 
@@ -53,12 +57,12 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
                     <MenuIcon htmlColor={!isLogged ? palette['success.main'] : palette['white.main']} fontSize="large" />
                 </IconButton>
                 <DrawerColor open={open} onClose={toggleDrawer(false)}>
-                    <Box display="flex" flexDirection="column" p={2} onClick={toggleDrawer(false)}>
+                    <Box display="flex" flexDirection="column" gap={3} p={4} onClick={toggleDrawer(false)}>
                         {mappedRoutes}
                     </Box>
                 </DrawerColor>
             </Box>
-            <Box className="menu-desktop" gap={2} justifyContent={'flex-start'} textAlign={'center'} minWidth={'40vw'}>
+            <Box className="menu-desktop" gap={4} ml={4} justifyContent={'flex-start'} textAlign={'center'} minWidth={'30vw'}>
                 {mappedRoutes}
             </Box>
         </Box>

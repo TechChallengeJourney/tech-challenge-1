@@ -1,0 +1,31 @@
+.my-account {
+    &__card {
+        border: none !important;
+        background-image: 
+        url('/images/pixels-04.png'), 
+        url('/images/pixels-03.png') !important;
+      background-position: 
+        right top, 
+        left bottom !important;
+      background-repeat: 
+        no-repeat, no-repeat !important;
+
+        &-image {
+            img {
+                width: 40vw;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .my-account {
+        &__card {
+            &-image {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }    
+}

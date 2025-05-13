@@ -21,6 +21,7 @@ import {
   BytebankExtractPropsData,
 } from './classes/models/extract';
 import { BytebankTransaction } from './components/card-transaction';
+import { useUser } from './contexts/user.context';
 
 export {
   BytebankButton,
@@ -38,6 +39,7 @@ export {
   BytebankExtract,
   BytebankChart,
   BytebankProvider,
+  useUser,
   defaultTheme,
   palette,
 };

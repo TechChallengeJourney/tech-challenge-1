@@ -1,7 +1,26 @@
 'use client';
 import './style.scss';
 
-import { Alert, AlertColor, AppBar, Box, Container, Link, Snackbar, MenuItem, Typography, Menu, IconButton, Avatar, LinearProgress } from '@mui/material';
+import {
+  Alert,
+  AlertColor,
+  AppBar,
+  Box,
+  Container,
+  Link,
+  Snackbar,
+  MenuItem,
+  Typography,
+  Menu,
+  IconButton,
+  Avatar,
+  LinearProgress,
+  Theme,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded';
 import { BytebankMenu } from '../menu';
 import { BytebankButton } from '../button';
 import { ReactElement, useState } from 'react';
@@ -10,26 +29,46 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { BytebankInputController } from '../input/ControlledInput';
 import { User } from '../../classes/models/user';
 import { BytebankText } from '../text';
-import { loggedRoutes, unloggedRoutes } from '../../classes/constants/routes.config';
+import {
+  loggedRoutes,
+  unloggedRoutes,
+} from '../../classes/constants/routes.config';
 import { useUser } from '../../contexts/user.context';
+import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
   mobile?: boolean;
 }
 
 export function BytebankHeader({ mobile }: HeaderProps) {
+  const router = useRouter();
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [snackbarData, setSnackbarData] = useState<{ severity: AlertColor, message: string; } | null>(null);
+  const [snackbarData, setSnackbarData] = useState<{
+    severity: AlertColor;
+    message: string;
+  } | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const { user, setUser, loading } = useUser();
-  const isLogged = !!(user);
-  const settings = [{ name: 'Minha conta', action: () => handleCloseUserMenu() }, { name: 'Sair', action: () => handleLogout() }];
+  const isLogged = !!user;
+  const settings = [
+    {
+      name: 'Minha conta',
+      action: () => {
+        handleCloseUserMenu();
+        redirectTo('minha-conta');
+      },
+    },
+    { name: 'Sair', action: () => handleLogout() },
+  ];
 
-  const loginMethods = useForm<{ email: string; password: string; }>({
+  const loginMethods = useForm<{ email: string; password: string }>({
     defaultValues: {
       email: '',
       password: '',
@@ -44,17 +83,12 @@ export function BytebankHeader({ mobile }: HeaderProps) {
     },
   });
 
+  const redirectTo = (name: string) => router.push(name);
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
-  const closeLoginModal = () => {
-    loginMethods.reset();
-    setOpenLoginModal(false);
-  };
-
-  const closeRegisterModal = () => {
-    registerMethods.reset();
-    setOpenRegisterModal(false);
-  };
+  const closeLoginModal = () => setOpenLoginModal(false);
+  const closeRegisterModal = () => setOpenRegisterModal(false);
 
   const handleLoginModal = () => {
     closeRegisterModal();
@@ -64,12 +98,13 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const handleRegisterModal = () => {
     closeLoginModal();
     setOpenRegisterModal(true);
-  }
+  };
 
   const handleLogout = (): void => {
     handleCloseUserMenu();
     setUser(null);
-  }
+    redirectTo('/');
+  };
 
   const handleRegister = async (data: Partial<User>) => {
     setRegisterLoading(true);
@@ -78,37 +113,39 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     if (response.ok) {
-      const res = await response.json() as { message: string };
+      const res = (await response.json()) as { message: string };
       setSnackbarData({ severity: 'success', message: res.message });
+      registerMethods.reset();
       closeRegisterModal();
     } else {
-      const responseError = await response.json() as { error: string };
+      const responseError = (await response.json()) as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
     }
     setRegisterLoading(false);
     setSnackbarOpen(true);
   };
 
-  const handleLogin = async (data: { email: string; password: string; }) => {
+  const handleLogin = async (data: { email: string; password: string }) => {
     setLoginLoading(true);
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     if (response.ok) {
-      const userData = await response.json() as User;
+      const userData = (await response.json()) as User;
       setUser(userData);
+      loginMethods.reset();
       closeLoginModal();
     } else {
-      const responseError = await response.json() as { error: string };
+      const responseError = (await response.json()) as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
     }
     setLoginLoading(false);
@@ -121,38 +158,79 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       setSnackbarData(null);
     };
 
-    return (snackbarData) ? (
+    return snackbarData ? (
       <>
-        <Snackbar open={isSnackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-          <Alert
-            onClose={handleSnackbarClose}
-            severity={snackbarData.severity}
-          >
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Alert onClose={handleSnackbarClose} severity={snackbarData.severity}>
             {snackbarData.message}
           </Alert>
         </Snackbar>
       </>
     ) : null;
-  }
+  };
 
   const renderRegisterModal = (isOpen: boolean): ReactElement => (
     <>
-      <BytebankModal title={'Criar uma conta'} illustration={'register'} illustrationSize={'lg'} open={isOpen} onClose={() => closeRegisterModal()}>
+      <BytebankModal
+        title={'Criar uma conta'}
+        illustration={'register'}
+        illustrationSize={'lg'}
+        open={isOpen}
+        onClose={() => closeRegisterModal()}
+      >
         <>
-          <BytebankText>Preencha os campos abaixo para criar sua conta corrente!</BytebankText>
+          <BytebankText>
+            Preencha os campos abaixo para criar sua conta corrente!
+          </BytebankText>
           <FormProvider {...registerMethods}>
             <form onSubmit={registerMethods.handleSubmit(handleRegister)}>
-              <BytebankInputController name="name" type="text" label="Nome" placeholder="Digite seu nome" />
-              <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
-              <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
+              <BytebankInputController
+                name="name"
+                autoComplete="name"
+                type="text"
+                label="Nome"
+                placeholder="Digite seu nome"
+              />
+              <BytebankInputController
+                name="email"
+                autoComplete="email"
+                type="email"
+                label="E-mail"
+                placeholder="Digite seu e-mail"
+              />
+              <BytebankInputController
+                name="password"
+                autoComplete="new-password"
+                type="password"
+                label="Senha"
+                placeholder="Digite sua senha"
+              />
               <Box display={'flex'} pt={2} justifyContent={'center'}>
-                <BytebankButton label={'Criar conta'} color={'secondary'} variant={'contained'} loading={isRegisterLoading} fullWidth></BytebankButton>
+                <BytebankButton
+                  label={'Criar conta'}
+                  color={'secondary'}
+                  variant={'contained'}
+                  loading={isRegisterLoading}
+                  fullWidth
+                ></BytebankButton>
               </Box>
             </form>
           </FormProvider>
-          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Já tem uma conta?</BytebankText>
-            <Link component="button" variant="sm" color={'secondary'}
-              onClick={handleLoginModal}>Fazer login</Link>
+          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}>
+            <BytebankText>Já tem uma conta?</BytebankText>
+            <Link
+              component="button"
+              variant="sm"
+              color={'secondary'}
+              onClick={handleLoginModal}
+            >
+              Fazer login
+            </Link>
           </Box>
         </>
       </BytebankModal>
@@ -161,20 +239,59 @@ export function BytebankHeader({ mobile }: HeaderProps) {
 
   const renderLoginModal = (isOpen: boolean): ReactElement => (
     <>
-      <BytebankModal title={'Login'} illustration={'login'} illustrationSize={'lg'} open={isOpen} onClose={() => closeLoginModal()}>
+      <BytebankModal
+        title={'Login'}
+        illustration={'login'}
+        illustrationSize={'lg'}
+        open={isOpen}
+        onClose={() => closeLoginModal()}
+      >
         <>
           <FormProvider {...loginMethods}>
             <form onSubmit={loginMethods.handleSubmit(handleLogin)}>
-              <BytebankInputController name="email" type="email" label="E-mail" placeholder="Digite seu e-mail" />
-              <BytebankInputController name="password" type="password" label="Senha" placeholder="Digite sua senha" />
-              <Box display={'flex'} gap={2} flexDirection={'column'} justifyContent={'center'}>
-                <Link component="button" variant="sm" color={'secondary'}>Esqueceu sua senha?</Link>
-                <BytebankButton label={'Entrar'} color={'secondary'} variant={'contained'} loading={isLoginLoading} fullWidth></BytebankButton>
+              <BytebankInputController
+                name="email"
+                autoComplete="email"
+                type="email"
+                label="E-mail"
+                placeholder="Digite seu e-mail"
+              />
+              <BytebankInputController
+                name="password"
+                autoComplete="current-password"
+                type="password"
+                label="Senha"
+                placeholder="Digite sua senha"
+              />
+              <Box
+                display={'flex'}
+                gap={2}
+                flexDirection={'column'}
+                justifyContent={'center'}
+              >
+                <Link component="button" variant="sm" color={'secondary'}>
+                  Esqueceu sua senha?
+                </Link>
+                <BytebankButton
+                  label={'Entrar'}
+                  color={'secondary'}
+                  variant={'contained'}
+                  loading={isLoginLoading}
+                  fullWidth
+                ></BytebankButton>
               </Box>
             </form>
           </FormProvider>
-          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}><BytebankText>Não tem uma conta?</BytebankText> <Link component="button" variant="sm" color={'secondary'}
-            onClick={handleRegisterModal}>Crie uma agora!</Link>
+          <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}>
+            <BytebankText>Não tem uma conta?</BytebankText>{' '}
+            <Link
+              component="button"
+              variant="sm"
+              color={'secondary'}
+              onClick={handleRegisterModal}
+            >
+              Crie uma agora!
+            </Link>
           </Box>
         </>
       </BytebankModal>
@@ -182,86 +299,114 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   );
 
   const renderMenuSettings = () => {
-    return (<>
-      <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" />
-        </IconButton>
-        <Menu
-          sx={{ mt: '45px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          {settings.map((setting) => (
-            <MenuItem key={setting.name} onClick={setting.action}>
-              <Typography sx={{ textAlign: 'center' }}>{setting.name}</Typography>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-    </>)
-  }
+    return (
+      <>
+        {isLogged ? (
+          <Box sx={{ flexGrow: 0 }} className={'menu-settings'}>
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'} gap={2}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar />
+              </IconButton>
+              {!isMobile ? (<BytebankText variant={'sm'} color={'#FFF'}>{user?.name || ''}</BytebankText>) : null}
+            </Box>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting.name} onClick={setting.action}>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    {setting.name}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        ) : null}
+      </>
+    );
+  };
 
   return (
     <>
       {loading ? (
         <LinearProgress color={'primary'} />
       ) : (
-        <AppBar className={`header ${isLogged ? 'header--logged' : ''}`} position="static">
-          <Container maxWidth="md" className="container">
+        <AppBar
+          className={`header ${isLogged ? 'header--logged' : ''}`}
+          position="static"
+        >
+          <Container maxWidth={(isLogged ? 'lg' : 'md')} className="container">
             <Box
               display={'flex'}
               flexDirection={'row'}
               gap={4}
-              sx={{ flexGrow: 1 }}
+              flexGrow="1"
               height="100%"
               alignItems="center"
+              justifyContent={'space-between'}
             >
-              <Box display="flex" alignItems="center">
-                <Link href="/">
-                  <img
-                    src="/images/logo.png"
-                    className="logo"
-                    alt="Bytebank logo"
-                  />
-                </Link>
+              <Box display="flex" gap={2} justifyContent={'space-around'} flexDirection={(!isMobile ? 'row' : 'row-reverse')}>
+                <Box display="flex" alignItems="center">
+                  <Link href="/">
+                    <img
+                      src="/images/logo.png"
+                      className="logo"
+                      alt="Bytebank logo"
+                    />
+                  </Link>
+                </Box>
+                <BytebankMenu
+                  isLogged={isLogged}
+                  routes={isLogged ? loggedRoutes : unloggedRoutes}
+                  mobile={mobile}
+                />
               </Box>
-              <BytebankMenu isLogged={isLogged} routes={isLogged ? loggedRoutes : unloggedRoutes} mobile={mobile} />
 
               {!isLogged ? (
-                <Box display={'flex'} flex={'none'} gap={2}>
-                  <BytebankButton
-                    sendSubmit={handleRegisterModal}
-                    label="Crie uma conta"
-                    color="success"
-                    variant="contained"
-                  />
-                  <BytebankButton
-                    sendSubmit={handleLoginModal}
-                    label="Entre"
-                    color="success"
-                    variant="outlined"
-                  />
-                </Box>
-              ) : ''
-              }
+                !isMobile ? (
+                  <Box display={'flex'} flex={'none'} gap={2}>
+                    <BytebankButton
+                      sendSubmit={handleRegisterModal}
+                      label="Crie uma conta"
+                      color="success"
+                      variant="contained"
+                    />
+                    <BytebankButton
+                      sendSubmit={handleLoginModal}
+                      label="Entre"
+                      color="success"
+                      variant="outlined"
+                    />
+                  </Box>
+                ) :
+                  (<Box display={'flex'}>
+                    <IconButton onClick={handleRegisterModal}>
+                      <AppRegistrationRoundedIcon color={'success'}></AppRegistrationRoundedIcon>
+                    </IconButton>
+                    <IconButton onClick={handleLoginModal}>
+                      <LoginIcon color={'success'}></LoginIcon>
+                    </IconButton>
+                  </Box>
+                  )
+              ) : ''}
               {renderMenuSettings()}
             </Box>
           </Container>
         </AppBar>
-      )
-      }
+      )}
 
       {renderRegisterModal(openRegisterModal)}
       {renderLoginModal(openLoginModal)}

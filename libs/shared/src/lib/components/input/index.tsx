@@ -1,4 +1,5 @@
 'use client';
+import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
 export interface InputProps {
@@ -9,6 +10,7 @@ export interface InputProps {
   placeholder?: string;
   error?: boolean;
   helperText?: string;
+  autoComplete?: string;
 }
 
 export default function BytebankInput({
@@ -19,10 +21,12 @@ export default function BytebankInput({
   placeholder,
   error = false,
   helperText = '',
+  autoComplete = ''
 }: InputProps) {
   return (
-    <div className="bytebank-input">
+    <Box className="bytebank-input">
       <TextField
+        sx={{'backgroundColor': '#FFF', 'borderRadius': '5px'}}
         value={value}
         onChange={onChange}
         label={label}
@@ -30,10 +34,11 @@ export default function BytebankInput({
         placeholder={placeholder}
         error={error}
         helperText={helperText}
-        fullWidth
+        autoComplete={autoComplete}
         margin="normal"
         variant="outlined"
+        fullWidth
       />
-    </div>
+    </Box>
   );
 }
