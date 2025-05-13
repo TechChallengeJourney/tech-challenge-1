@@ -2,20 +2,18 @@
 
 import React from 'react';
 import { Box, Divider, Skeleton } from '@mui/material';
-import { BytebankText } from '@bytebank/shared';
+import { BytebankText, useFinancialSummary } from '@bytebank/shared';
 import { VisibilityOff, VisibilityRounded } from '@mui/icons-material';
-import CardIllustration from './card-illustration';
-import BalanceHeader from './balance-header';
+import { CardIllustration } from './card-illustration';
+import { BalanceHeader } from './balance-header';
 import styles from './page.module.scss';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { useFinancialSummary } from 'libs/shared/src/lib/contexts/financial-summary.context';
 
 interface Props {
   visible: boolean;
   toggleVisibility: () => void;
 }
 
-const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
+export function BalanceContent({ visible, toggleVisibility }: Props) {
   const { totalDeposits, totalWithdrawals, isLoading } = useFinancialSummary();
 
   const totalBalance = totalDeposits - totalWithdrawals;
@@ -62,5 +60,3 @@ const BalanceContent: React.FC<Props> = ({ visible, toggleVisibility }) => {
     </Box>
   );
 };
-
-export default BalanceContent;

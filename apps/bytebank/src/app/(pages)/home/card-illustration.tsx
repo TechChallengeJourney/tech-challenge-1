@@ -5,7 +5,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { BytebankIllustration } from '@bytebank/shared';
 import styles from './page.module.scss';
 
-const CardIllustration: React.FC = () => {
+export function CardIllustration(): React.ReactElement {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -16,4 +16,3 @@ const CardIllustration: React.FC = () => {
   );
 };
 
-export default CardIllustration;

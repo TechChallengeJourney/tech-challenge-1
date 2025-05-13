@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { Box } from '@mui/material';
-import { BytebankText } from '@bytebank/shared';
+import { BytebankText, useUser } from '@bytebank/shared';
 import styles from './page.module.scss';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { useUser } from 'libs/shared/src/lib/contexts/user.context';
 
-const BalanceHeader: React.FC = () => {
+export function BalanceHeader(): React.ReactElement {
   const { user } = useUser();
 
   const today = new Date();
@@ -26,6 +24,4 @@ const BalanceHeader: React.FC = () => {
       </BytebankText>
     </Box>
   );
-};
-
-export default BalanceHeader;
+}

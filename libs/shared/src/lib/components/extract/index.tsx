@@ -9,19 +9,10 @@ import { useFinancialSummary } from '../../contexts/financial-summary.context';
 import {
   BytebankExtractProps,
   ExtractProps,
+  BytebankExtractPropsData,
 } from '../../classes/models/extract';
 
-interface BytebankExtractComponentProps {
-  title?: React.ReactNode;
-}
-
-export interface Transaction {
-  date: string;
-  type: string;
-  value: number;
-}
-
-export function BytebankExtract({ title }: BytebankExtractComponentProps) {
+export function BytebankExtract({ title }: { title?: React.ReactNode }) {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
   const { updateSummary } = useFinancialSummary();
@@ -67,7 +58,7 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
           else acc.totalWithdrawals += item.value;
 
           acc.transactions.push({
-            date: format(item.date, 'dd/MM/yyyy'),
+            date: new Date(item.date),
             type: item.type,
             value: item.value,
           });
@@ -77,7 +68,7 @@ export function BytebankExtract({ title }: BytebankExtractComponentProps) {
         {
           totalDeposits: 0,
           totalWithdrawals: 0,
-          transactions: [] as Transaction[],
+          transactions: [] as BytebankExtractPropsData[],
         }
       );
 

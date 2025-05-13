@@ -17,6 +17,7 @@ import { BytebankChart } from './components/chart';
 import { ProviderRouteProps } from './classes/models/provider-route';
 import { User } from './classes/models/user';
 import { useUser } from './contexts/user.context';
+import { useFinancialSummary } from './contexts/financial-summary.context';
 
 export {
   BytebankButton,
@@ -34,6 +35,7 @@ export {
   BytebankChart,
   BytebankProvider,
   useUser,
+  useFinancialSummary,
   defaultTheme,
   palette,
 };

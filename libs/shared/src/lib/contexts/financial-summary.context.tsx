@@ -1,17 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-
-interface Transaction {
-  date: string;
-  type: string;
-  value: number;
-}
-
-interface FinancialSummary {
+import { BytebankExtractPropsData } from '../classes/models/extract';
+export interface FinancialSummary {
   totalDeposits: number;
   totalWithdrawals: number;
-  transactions: Transaction[];
+  transactions: BytebankExtractPropsData[];
 }
 
 interface FinancialSummaryContextType extends FinancialSummary {
@@ -28,7 +22,7 @@ const FinancialSummaryContext = createContext<FinancialSummaryContextType>({
     console.warn('updateSummary method is not implemented.');
   },
   isLoading: false,
-  setIsLoading: (value: boolean) => {
+  setIsLoading: () => {
     console.warn('setIsLoading method is not implemented.');
   },
 });
