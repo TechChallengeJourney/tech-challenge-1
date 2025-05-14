@@ -1,11 +1,15 @@
 import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
-import { BytebankText } from '../text';
+import {
+  BytebankText,
+  BytebankInputController,
+  BytebankButton,
+  BytebankSelectController,
+  BytebankCard,
+  useUser,
+  palette,
+} from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BytebankInputController } from '../input/ControlledInput';
-import { BytebankButton } from '../button';
-import { BytebankSelectController } from '../select/ControlledSelect';
-import { useUser } from '../../contexts/user.context';
 import { useState } from 'react';
 
 export interface IForm {
@@ -95,29 +99,36 @@ export function BytebankTransaction() {
   };
 
   return (
-    <Box className="bytebank-card-content">
-      {renderSnackBar()}
-      <BytebankText fontSize="25px" color="black">
-        Nova transação
-      </BytebankText>
-      <FormProvider {...registerMethods}>
-        <form onSubmit={registerMethods.handleSubmit(handleTransaction)}>
-          <BytebankSelectController
-            name="type"
-            label="Selecione o tipo de transação"
-            options={selectOptions}
-          />
-          <BytebankInputController name="value" label="Valor" type="number" />
-          <Box display={'flex'} pt={2} justifyContent={'center'}>
-            <BytebankButton
-              label={'Concluir transação'}
-              color={'secondary'}
-              variant={'contained'}
-              fullWidth
+    <BytebankCard
+      className="bytebank-card-content"
+      bgcolor={palette['grey.300']}
+    >
+      <Box width="40vw" textAlign="left" p={4}>
+        <Box pb={4}>
+          <BytebankText variant="lg" color="black">
+            Nova transação
+          </BytebankText>
+        </Box>
+        {renderSnackBar()}
+        <FormProvider {...registerMethods}>
+          <form onSubmit={registerMethods.handleSubmit(handleTransaction)}>
+            <BytebankSelectController
+              name="type"
+              label="Selecione o tipo de transação"
+              options={selectOptions}
             />
-          </Box>
-        </form>
-      </FormProvider>
-    </Box>
+            <BytebankInputController name="value" label="Valor" type="number" />
+            <Box display={'flex'} pt={2} justifyContent={'center'}>
+              <BytebankButton
+                label={'Concluir transação'}
+                color={'secondary'}
+                variant={'contained'}
+                fullWidth
+              />
+            </Box>
+          </form>
+        </FormProvider>
+      </Box>
+    </BytebankCard>
   );
 }
