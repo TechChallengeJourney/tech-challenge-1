@@ -84,7 +84,7 @@ export function BytebankCardTransaction() {
       className="bytebank-card-content"
       bgcolor={palette['grey.300']}
     >
-      <Box width="40vw" textAlign="left" p={4}>
+      <Box textAlign="left" p={4}>
         <Box pb={4}>
           <BytebankText variant="lg" color="black">
             Nova transação

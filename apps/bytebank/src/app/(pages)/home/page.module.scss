@@ -1,12 +1,57 @@
+.pageWrapper {
+  display: flex;
+  justify-content: center; // Alinha ao centro horizontalmente
+  align-items: center;     // Alinha ao centro verticalmente
+  min-height: 100vh;       // Garante que ocupa toda a altura da tela
+  width: 100%;
+//   padding: 0 16px;         // Respiro lateral
+
+  box-sizing: border-box;
+}
+
+
 .containerPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; // centraliza colunas no desktop
+    align-items: flex-start;
+    gap: 24px;
     margin-top: 24px;
     margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
 
-    @media (min-width: 1024px) {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        justify-content: center;
+    // Mobile / Tablet
+    @media (max-width: 1023px) {
+        display: block;
+        flex-direction: column;
+        // padding: 0 16px; // respiro lateral
+    }
+
+    @media (max-width: 1199px) {
+        display: block;
     }
 }
 
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+    max-width: 600px;
+
+    @media (max-width: 1023px) {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.rightColumn {
+    flex: 1;
+    max-width: 500px;
+
+    @media (max-width: 1023px) {
+        width: 100%;
+        max-width: 100%;
+    }
+}
