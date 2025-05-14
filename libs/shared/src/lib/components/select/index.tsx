@@ -34,6 +34,7 @@ export default function BytebankSelect({
     <FormControl fullWidth margin="normal" error={error}>
       <InputLabel>{label}</InputLabel>
       <Select
+        sx={{ backgroundColor: '#FFF', borderRadius: '5px' }}
         value={value ?? ''}
         onChange={(e: any) => onChange(e.target.value)}
         label={label}

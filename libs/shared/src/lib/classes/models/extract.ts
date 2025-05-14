@@ -1,15 +1,13 @@
+import { Transaction } from './transaction';
+
 export interface BytebankExtractProps {
   month: string;
-  data: BytebankExtractPropsData[];
-}
-
-interface BytebankExtractPropsData {
-  date: Date;
-  type: 'Depósito' | 'Saque' | 'Transferência';
-  value: number;
+  data: Transaction[];
 }
 
 export interface ExtractProps {
+  type: string;
+  value: number;
+  date: Date;
   userId: string;
-  transactions: BytebankExtractPropsData[];
 }

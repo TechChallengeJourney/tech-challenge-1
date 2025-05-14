@@ -17,7 +17,9 @@ export function BytebankExtract() {
 
   const fetchExtract = async () => {
     const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
+
     const extract = await res.json();
+
     return extract as ExtractProps[];
   };
 
@@ -26,9 +28,8 @@ export function BytebankExtract() {
       if (res.length === 0) {
         return;
       }
-      const resData = res[0].transactions;
       const agrupado: BytebankExtractProps[] = Object.values(
-        resData.reduce((acc, item) => {
+        res.reduce((acc, item) => {
           const dataObj = new Date(item.date);
           const mes = format(dataObj, 'MMMM');
 
@@ -89,21 +90,21 @@ export function BytebankExtract() {
               <Box width="80%" display="flex" flexDirection="column" gap="5px">
                 <BytebankText
                   textAlign={'left'}
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
                   {item.type}
                 </BytebankText>
                 <BytebankText
                   textAlign={'left'}
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
-                  {numberFormat(item.value)}
+                  {numberFormat(+item.value)}
                 </BytebankText>
               </Box>
               <Box>
                 <BytebankText
                   fontSize="12px"
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
                   {format(item.date, 'yy/MM/dd')}
                 </BytebankText>
