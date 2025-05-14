@@ -1,11 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-import { BytebankExtractPropsData } from '../classes/models/extract';
+import { Transaction } from '../classes/models/transaction';
 export interface FinancialSummary {
   totalDeposits: number;
   totalWithdrawals: number;
-  transactions: BytebankExtractPropsData[];
+  transactions: Transaction[];
 }
 
 interface FinancialSummaryContextType extends FinancialSummary {

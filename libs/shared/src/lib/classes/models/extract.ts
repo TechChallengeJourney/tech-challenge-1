@@ -6,9 +6,6 @@ export interface BytebankExtractProps {
   data: Transaction[];
 }
 
-export interface ExtractProps {
-  type: string;
-  value: number;
-  date: Date;
+export interface ExtractProps  extends Transaction {
   userId: string;
 }

@@ -9,8 +9,8 @@ import { useFinancialSummary } from '../../contexts/financial-summary.context';
 import {
   BytebankExtractProps,
   ExtractProps,
-  BytebankExtractPropsData,
 } from '../../classes/models/extract';
+import { Transaction } from '../../classes/models/transaction';
 
 export function BytebankExtract({ title }: { title?: React.ReactNode }) {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
@@ -31,7 +31,7 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
     fetchExtract().then((res) => {
       if (res.length === 0) return;
 
-      const resData = res[0].transactions;
+      const resData = res;
 
       // Agrupamento por mês para exibição
       const agrupado: BytebankExtractProps[] = Object.values(
@@ -56,8 +56,11 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
       // Atualizar contexto com totais e transações
       const totals = resData.reduce(
         (acc, item) => {
-          if (item.value > 0) acc.totalDeposits += item.value;
-          else acc.totalWithdrawals += item.value;
+          console.log(typeof item.value);
+
+          const valueToNumber = +item.value;
+          if (valueToNumber > 0) acc.totalDeposits += valueToNumber;
+          else acc.totalWithdrawals += valueToNumber;
 
           acc.transactions.push({
             date: new Date(item.date),
@@ -70,7 +73,7 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
         {
           totalDeposits: 0,
           totalWithdrawals: 0,
-          transactions: [] as BytebankExtractPropsData[],
+          transactions: [] as Transaction[],
         }
       );
 
@@ -79,11 +82,11 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
     });
   }, [user]);
 
-  const numberFormat = (number: number) =>
-    new Intl.NumberFormat('pt-BR', {
+  const numberFormat = (value: number) =>
+    value.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL',
-    }).format(number);
+    });
 
   return (
     <>

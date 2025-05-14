@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { BytebankIllustration } from '@bytebank/shared';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
+
 import styles from './page.module.scss';
 
-export function CardIllustration(): React.ReactElement {
+export function BytebankCardIllustration(): React.ReactElement {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

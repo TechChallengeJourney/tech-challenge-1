@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
-import { Box } from '@mui/material';
 import { BytebankText, useUser } from '@bytebank/shared';
-import styles from './page.module.scss';
+import { Box } from '@mui/material';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-export function BalanceHeader(): React.ReactElement {
+import styles from './page.module.scss';
+
+export function BytebankBalanceHeader(): React.ReactElement {
   const { user } = useUser();
 
   const today = new Date();

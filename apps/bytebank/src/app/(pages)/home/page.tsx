@@ -1,24 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import ExtractCard from './extract-card';
-import { AccountOverviewCard } from './account-overview-card';
+import React from 'react';
+import { BytebankBalanceCard } from '../_components/balance-card';
+import { BytebankCardTransaction } from '../_components/card-transaction';
+import { BytebankExtractCard } from './_components';
 import styles from './page.module.scss';
 
-const Home: React.FC = () => {
-  const [visible, setVisible] = useState(true);
-  const toggleVisibility = () => setVisible((prev) => !prev);
-
+const BytebankHome: React.FC = () => {
   return (
     <Box className={styles.containerPage}>
-      <AccountOverviewCard
-        visible={visible}
-        toggleVisibility={toggleVisibility}
-      />
-      <ExtractCard />
+      <BytebankBalanceCard />
+      <BytebankExtractCard />
+      <BytebankCardTransaction />
     </Box>
   );
 };
 
-export default Home;
+export default BytebankHome;

@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
-import { Box, Divider, Skeleton } from '@mui/material';
 import { BytebankText, useFinancialSummary } from '@bytebank/shared';
 import { VisibilityOff, VisibilityRounded } from '@mui/icons-material';
-import { CardIllustration } from './card-illustration';
-import { BalanceHeader } from './balance-header';
+import { Box, Divider, Skeleton } from '@mui/material';
+import { BytebankBalanceHeader } from './balance-header';
+import { BytebankCardIllustration } from './card-illustration';
+
 import styles from './page.module.scss';
 
 interface Props {
@@ -13,17 +13,19 @@ interface Props {
   toggleVisibility: () => void;
 }
 
-export function BalanceContent({ visible, toggleVisibility }: Props) {
+export function BytebankBalanceInfo({ visible, toggleVisibility }: Props) {
   const { totalDeposits, totalWithdrawals, isLoading } = useFinancialSummary();
 
   const totalBalance = totalDeposits - totalWithdrawals;
 
+  const totalBalanceFormatted = totalBalance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
   return (
     <Box className={styles.balanceContainer}>
       <Box className={styles.leftBlock}>
-        <BalanceHeader />
+        <BytebankBalanceHeader />
         <Box className={styles.desktopOnly}>
-          <CardIllustration />
+          <BytebankCardIllustration />
         </Box>
       </Box>
 
@@ -49,12 +51,12 @@ export function BalanceContent({ visible, toggleVisibility }: Props) {
             <Skeleton width={100} height={32} animation="wave" />
           ) : (
             <BytebankText color="white" sx={{ fontWeight: 600 }} variant="md">
-              {visible ? `R$ ${totalBalance.toString()}` : 'R$ ****'}
+              {visible ? `${totalBalanceFormatted}` : 'R$ ****'}
             </BytebankText>
           )}
         </div>
         <Box className={styles.mobileOnly}>
-          <CardIllustration />
+          <BytebankCardIllustration />
         </Box>
       </Box>
     </Box>
