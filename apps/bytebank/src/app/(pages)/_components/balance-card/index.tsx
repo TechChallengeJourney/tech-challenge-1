@@ -5,8 +5,7 @@ import { Box } from '@mui/material';
 
 import { useState } from 'react';
 
-import { BytebankBalanceHeader } from './balance-header';
-import { BytebankBalanceInfo } from './balance-info';
+import { BytebankBalanceContent } from './balance-content';
 
 import styles from './page.module.scss';
 
@@ -23,8 +22,7 @@ export function BytebankBalanceCard(): React.ReactElement {
         <Box className={styles.bottomLeftDecoration}>
           <BytebankIllustration name="pixels-01" variant="lg" />
         </Box>
-        <BytebankBalanceHeader />
-        <BytebankBalanceInfo
+        <BytebankBalanceContent
           visible={visible}
           toggleVisibility={toggleVisibility}
         />

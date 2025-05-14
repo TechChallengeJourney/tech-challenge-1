@@ -13,7 +13,7 @@ interface Props {
   toggleVisibility: () => void;
 }
 
-export function BytebankBalanceInfo({ visible, toggleVisibility }: Props) {
+export function BytebankBalanceContent({ visible, toggleVisibility }: Props) {
   const { totalDeposits, totalWithdrawals, isLoading } = useFinancialSummary();
 
   const totalBalance = totalDeposits - totalWithdrawals;
