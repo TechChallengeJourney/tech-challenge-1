@@ -1,15 +1,35 @@
 'use client';
 
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { BytebankBalanceCard } from '../_components/balance-card';
 import { BytebankCardTransaction } from '../_components/card-transaction';
 import { BytebankExtractCard } from './_components';
 import styles from './page.module.scss';
 
 const BytebankHome: React.FC = () => {
+  const [updateExtract, setUpdateExtract] = useState(false);
+
   const theme = useTheme();
   const isMobileOrTablet = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const refreshExtract = () => {
+    return (
+      <>
+        <BytebankExtractCard refresh={updateExtract} />
+      </>
+    );
+  };
+
+  const refreshTransactionCallback = () => {
+    return (
+      <>
+        <BytebankCardTransaction
+          onSuccess={() => setUpdateExtract((prev) => !prev)}
+        />
+      </>
+    );
+  };
 
   if (isMobileOrTablet) {
     // Mobile / Tablet: Balance → Extract → Transaction
@@ -17,8 +37,8 @@ const BytebankHome: React.FC = () => {
       <div className={styles.pageWrapper}>
         <Box className={styles.containerPage}>
           <BytebankBalanceCard />
-          <BytebankExtractCard />
-          <BytebankCardTransaction />
+          {refreshExtract()}
+          {refreshTransactionCallback()}
         </Box>
       </div>
     );
@@ -30,11 +50,9 @@ const BytebankHome: React.FC = () => {
       <Box className={styles.containerPage}>
         <Box className={styles.leftColumn}>
           <BytebankBalanceCard />
-          <BytebankCardTransaction />
+          {refreshTransactionCallback()}
         </Box>
-        <Box className={styles.rightColumn}>
-          <BytebankExtractCard />
-        </Box>
+        <Box className={styles.rightColumn}>{refreshExtract()}</Box>
       </Box>
     </div>
   );
