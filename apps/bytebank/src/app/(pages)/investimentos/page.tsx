@@ -1,6 +1,5 @@
-export default function Investimentos() {
+'use client';
 
-  return (
-      <p>Investimentos</p>
-  );
+export default function Investimentos() {
+  return <p>Investimentos</p>;
 }
