@@ -15,7 +15,6 @@ import { Box, useMediaQuery } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement } from 'react';
 import styles from './page.module.scss';
-import { BytebankCardTransaction } from './(pages)/_components/card-transaction';
 
 type Benefit = {
   icon: ReactElement;
