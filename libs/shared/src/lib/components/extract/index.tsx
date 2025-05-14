@@ -56,8 +56,6 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
       // Atualizar contexto com totais e transações
       const totals = resData.reduce(
         (acc, item) => {
-          console.log(typeof item.value);
-
           const valueToNumber = +item.value;
           if (valueToNumber > 0) acc.totalDeposits += valueToNumber;
           else acc.totalWithdrawals += valueToNumber;

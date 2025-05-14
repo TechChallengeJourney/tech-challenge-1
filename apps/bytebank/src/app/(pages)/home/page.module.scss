@@ -1,10 +1,9 @@
 .pageWrapper {
   display: flex;
-  justify-content: center; // Alinha ao centro horizontalmente
-  align-items: center;     // Alinha ao centro verticalmente
-  min-height: 100vh;       // Garante que ocupa toda a altura da tela
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;       
   width: 100%;
-//   padding: 0 16px;         // Respiro lateral
 
   box-sizing: border-box;
 }
@@ -13,7 +12,7 @@
 .containerPage {
     display: flex;
     flex-direction: row;
-    justify-content: center; // centraliza colunas no desktop
+    justify-content: center; 
     align-items: flex-start;
     gap: 24px;
     margin-top: 24px;
@@ -25,7 +24,6 @@
     @media (max-width: 1023px) {
         display: block;
         flex-direction: column;
-        // padding: 0 16px; // respiro lateral
     }
 
     @media (max-width: 1199px) {
