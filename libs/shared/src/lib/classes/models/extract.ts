@@ -1,12 +1,8 @@
+import { Transaction } from './transaction';
+
 export interface BytebankExtractProps {
   month: string;
-  data: BytebankExtractPropsData[];
-}
-
-export interface BytebankExtractPropsData {
-  date: Date;
-  type: string;
-  value: number;
+  data: Transaction[];
 }
 
 export interface ExtractProps {

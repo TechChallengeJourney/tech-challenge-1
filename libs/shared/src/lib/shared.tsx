@@ -16,11 +16,9 @@ import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
 import { ProviderRouteProps } from './classes/models/provider-route';
 import { User } from './classes/models/user';
-import {
-  ExtractProps,
-  BytebankExtractPropsData,
-} from './classes/models/extract';
+import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
+import { Transaction } from './classes/models/transaction';
 
 export {
   BytebankButton,
@@ -42,9 +40,4 @@ export {
   palette,
 };
 
-export type {
-  ProviderRouteProps,
-  User,
-  ExtractProps,
-  BytebankExtractPropsData,
-};
+export type { ProviderRouteProps, User, ExtractProps, Transaction };

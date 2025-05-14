@@ -7,23 +7,19 @@ import {
   BytebankCard,
   useUser,
   palette,
+  Transaction,
 } from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-export interface IForm {
-  type: string;
-  value: string;
-}
-
-export function BytebankTransaction() {
+export function BytebankCardTransaction() {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState<{
     severity: AlertColor;
     message: string;
   } | null>(null);
-  const registerMethods = useForm<IForm>({
+  const registerMethods = useForm<Partial<Transaction>>({
     defaultValues: {
       type: '',
       value: '',
@@ -32,43 +28,28 @@ export function BytebankTransaction() {
 
   const { user } = useUser();
 
-  const isValidFields = () => {
-    if (registerMethods.getValues('type').trim() === '') return false;
-    if (registerMethods.getValues('value').trim() === '') return false;
-
-    return true;
-  };
-
-  const handleTransaction = async (data: IForm) => {
-    if (isValidFields()) {
-      const response = await fetch('/api/extract', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
+  const handleTransaction = async (data: Partial<Transaction>) => {
+    const response = await fetch('/api/extract', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
+    });
+    if (response.ok) {
+      registerMethods.setValue('type', '');
+      registerMethods.setValue('value', '');
+      setSnackbarData({
+        severity: 'success',
+        message: 'Transação adicionada com sucesso!!',
       });
-      if (response.ok) {
-        registerMethods.setValue('type', '');
-        registerMethods.setValue('value', '');
-        setSnackbarData({
-          severity: 'success',
-          message: 'Transação adicionada com sucesso!!',
-        });
-        setSnackbarOpen(true);
-      } else {
-        setSnackbarData({
-          severity: 'error',
-          message: 'Algo deu errado. Por favor, aguarde e tente novamente!!',
-        });
-        setSnackbarOpen(true);
-      }
-    } else {
       setSnackbarOpen(true);
+    } else {
       setSnackbarData({
         severity: 'error',
-        message: 'Preencha todos os campos!!',
+        message: 'Algo deu errado. Por favor, aguarde e tente novamente!!',
       });
+      setSnackbarOpen(true);
     }
   };
 

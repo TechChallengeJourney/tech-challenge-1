@@ -90,21 +90,21 @@ export function BytebankExtract() {
               <Box width="80%" display="flex" flexDirection="column" gap="5px">
                 <BytebankText
                   textAlign={'left'}
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
                   {item.type}
                 </BytebankText>
                 <BytebankText
                   textAlign={'left'}
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
-                  {numberFormat(item.value)}
+                  {numberFormat(+item.value)}
                 </BytebankText>
               </Box>
               <Box>
                 <BytebankText
                   fontSize="12px"
-                  color={item.value < 0 ? 'error' : 'primary'}
+                  color={+item.value < 0 ? 'error' : 'primary'}
                 >
                   {format(item.date, 'yy/MM/dd')}
                 </BytebankText>
