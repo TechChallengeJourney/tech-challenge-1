@@ -1,58 +1,43 @@
 'use client';
 
+import React, { useState, useCallback } from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react';
 import { BytebankBalanceCard } from '../_components/balance-card';
 import { BytebankCardTransaction } from '../_components/card-transaction';
 import { BytebankExtractCard } from './_components';
 import styles from './page.module.scss';
 
 const BytebankHome: React.FC = () => {
-  const [updateExtract, setUpdateExtract] = useState(false);
+  const [shouldRefreshExtract, setShouldRefreshExtract] = useState(false);
 
   const theme = useTheme();
   const isMobileOrTablet = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const refreshExtract = () => {
-    return (
-      <>
-        <BytebankExtractCard refresh={updateExtract} />
-      </>
-    );
-  };
+  // useCallback p/ evitar re-renderizações desnecessárias
+  const handleTransactionSuccess = useCallback(() => {
+    setShouldRefreshExtract(prev => !prev);
+  }, []);
 
-  const refreshTransactionCallback = () => {
-    return (
-      <>
-        <BytebankCardTransaction
-          onSuccess={() => setUpdateExtract((prev) => !prev)}
-        />
-      </>
-    );
-  };
-
-  if (isMobileOrTablet) {
-    // Mobile / Tablet: Balance → Extract → Transaction
-    return (
-      <div className={styles.pageWrapper}>
-        <Box className={styles.containerPage}>
-          <BytebankBalanceCard />
-          {refreshExtract()}
-          {refreshTransactionCallback()}
-        </Box>
-      </div>
-    );
-  }
-
-  // Desktop: left (Balance + Transaction), right (Extract)
   return (
     <div className={styles.pageWrapper}>
       <Box className={styles.containerPage}>
-        <Box className={styles.leftColumn}>
-          <BytebankBalanceCard />
-          {refreshTransactionCallback()}
-        </Box>
-        <Box className={styles.rightColumn}>{refreshExtract()}</Box>
+        {isMobileOrTablet ? (
+          <>
+            <BytebankBalanceCard />
+            <BytebankExtractCard refresh={shouldRefreshExtract} />
+            <BytebankCardTransaction onSuccess={handleTransactionSuccess} />
+          </>
+        ) : (
+          <>
+            <Box className={styles.leftColumn}>
+              <BytebankBalanceCard />
+              <BytebankCardTransaction onSuccess={handleTransactionSuccess} />
+            </Box>
+            <Box className={styles.rightColumn}>
+              <BytebankExtractCard refresh={shouldRefreshExtract} />
+            </Box>
+          </>
+        )}
       </Box>
     </div>
   );
