@@ -2,16 +2,20 @@
 import { BytebankText } from '../text';
 import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useUser } from '../../contexts/user.context';
+import { useFinancialSummary } from '../../contexts/financial-summary.context';
 import {
   BytebankExtractProps,
   ExtractProps,
 } from '../../classes/models/extract';
+import { Transaction } from '../../classes/models/transaction';
 
-export function BytebankExtract() {
+export function BytebankExtract({ title }: { title?: React.ReactNode }) {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
+  const { updateSummary } = useFinancialSummary();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,9 +29,11 @@ export function BytebankExtract() {
 
   useEffect(() => {
     fetchExtract().then((res) => {
-      if (res.length === 0) {
-        return;
-      }
+      if (res.length === 0) return;
+
+      const resData = res;
+
+      // Agrupamento por mês para exibição
       const agrupado: BytebankExtractProps[] = Object.values(
         res.reduce((acc, item) => {
           const dataObj = new Date(item.date);
@@ -47,18 +53,43 @@ export function BytebankExtract() {
         }, {} as Record<string, BytebankExtractProps>)
       );
 
+      // Atualizar contexto com totais e transações
+      const totals = resData.reduce(
+        (acc, item) => {
+          const valueToNumber = +item.value;
+          if (valueToNumber > 0) acc.totalDeposits += valueToNumber;
+          else acc.totalWithdrawals += valueToNumber;
+
+          acc.transactions.push({
+            date: new Date(item.date),
+            type: item.type,
+            value: item.value,
+          });
+
+          return acc;
+        },
+        {
+          totalDeposits: 0,
+          totalWithdrawals: 0,
+          transactions: [] as Transaction[],
+        }
+      );
+
+      updateSummary(totals);
       setExtract(agrupado);
     });
   }, [user]);
 
-  const numberFormat = (number: number) =>
-    new Intl.NumberFormat('pt-BR', {
+  const numberFormat = (value: number) =>
+    value.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL',
-    }).format(number);
+    });
 
   return (
     <>
+      {title && <Box padding="10px">{title}</Box>}
+
       {extract.map((itens, index) => (
         <Card key={index} sx={{ minWidth: 275 }}>
           <Box

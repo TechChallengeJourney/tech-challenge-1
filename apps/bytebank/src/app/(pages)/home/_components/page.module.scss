@@ -1,0 +1,23 @@
+.extract {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;          
+    max-width: 690px;     // Mas nunca ultrapassa 690px
+    background-color: white;
+    border-radius: 8px;
+    padding-bottom: 15px;
+    margin-bottom: 24px;
+    
+/* Para desktop, quando a largura é maior que 1024px */
+@media (min-width: 1025px) {
+    width: 282px; 
+    top: 0;
+    right: 0;
+}
+
+    /* Para dispositivos entre 768px e 1024px (tablets e iPads) */
+    @media (max-width: 1024px) {
+        margin-top: 39px;
+    }
+}

@@ -19,6 +19,7 @@ import { User } from './classes/models/user';
 import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
 import { Transaction } from './classes/models/transaction';
+import { useFinancialSummary } from './contexts/financial-summary.context';
 
 export {
   BytebankButton,
@@ -36,6 +37,7 @@ export {
   BytebankChart,
   BytebankProvider,
   useUser,
+  useFinancialSummary,
   defaultTheme,
   palette,
 };

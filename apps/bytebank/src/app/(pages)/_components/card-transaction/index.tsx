@@ -13,7 +13,11 @@ import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-export function BytebankCardTransaction() {
+type Props = {
+  onSuccess?: () => void;
+};
+
+export function BytebankCardTransaction({ onSuccess }: Props) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState<{
     severity: AlertColor;
@@ -44,6 +48,7 @@ export function BytebankCardTransaction() {
         message: 'Transação adicionada com sucesso!!',
       });
       setSnackbarOpen(true);
+      onSuccess?.();
     } else {
       setSnackbarData({
         severity: 'error',
@@ -84,7 +89,7 @@ export function BytebankCardTransaction() {
       className="bytebank-card-content"
       bgcolor={palette['grey.300']}
     >
-      <Box width="40vw" textAlign="left" p={4}>
+      <Box textAlign="left" p={4}>
         <Box pb={4}>
           <BytebankText variant="lg" color="black">
             Nova transação

@@ -28,4 +28,8 @@ export const loggedRoutes: ProviderRouteProps[] = [
         name: 'outros',
         route: '/outros'
     },
+    {
+        name: 'home',
+        route: 'home'
+    } 
 ];

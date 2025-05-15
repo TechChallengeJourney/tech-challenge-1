@@ -1,6 +1,7 @@
 'use client';
 import './style.scss';
 
+import { useRouter } from 'next/navigation';
 import {
   Alert,
   AlertColor,
@@ -34,7 +35,6 @@ import {
   unloggedRoutes,
 } from '../../classes/constants/routes.config';
 import { useUser } from '../../contexts/user.context';
-import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
   mobile?: boolean;
@@ -56,6 +56,7 @@ export function BytebankHeader({ mobile }: HeaderProps) {
   const [isRegisterLoading, setRegisterLoading] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const { user, setUser, loading } = useUser();
+  
   const isLogged = !!user;
   const settings = [
     {
@@ -143,10 +144,18 @@ export function BytebankHeader({ mobile }: HeaderProps) {
       const userData = (await response.json()) as User;
       setUser(userData);
       loginMethods.reset();
-      closeLoginModal();
+
+      router.push('/home'); // <-- redirect para /home
+
+      setTimeout(() => {
+        closeLoginModal(); 
+        setLoginLoading(false);
+      }, 20000); 
+
     } else {
       const responseError = (await response.json()) as { error: string };
       setSnackbarData({ severity: 'error', message: responseError.error });
+      setLoginLoading(false);
     }
     setLoginLoading(false);
     setSnackbarOpen(true);
