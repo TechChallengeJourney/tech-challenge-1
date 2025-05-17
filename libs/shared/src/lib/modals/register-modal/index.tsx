@@ -1,16 +1,10 @@
 import { Box, Link } from "@mui/material";
 import { ReactElement, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { User, BytebankModal, BytebankInputController, BytebankButton, BytebankText } from "../../shared";
+import { User, BytebankModal, BytebankInputController, BytebankButton, BytebankText, BytebankAccessModalProps } from "../../shared";
+import { AccessModalType } from "../../classes/enums/access-modal-type.enum";
 
-interface RegisterModalProps {
-    open: boolean;
-    onClose: () => void;
-    onSubmit: (data: any) => void;
-    openLoginModal: () => void;
-}
-
-export function BytebankRegisterModal({ open, onClose, onSubmit, openLoginModal }: RegisterModalProps): ReactElement {
+export function BytebankRegisterModal({ open, onClose, onSubmit, openModal }: BytebankAccessModalProps): ReactElement {
     const [isLoading, setLoading] = useState(false);
 
     const registerMethods = useForm<Partial<User>>({
@@ -95,7 +89,7 @@ export function BytebankRegisterModal({ open, onClose, onSubmit, openLoginModal 
                             component="button"
                             variant="sm"
                             color={'secondary'}
-                            onClick={() => openLoginModal()}
+                            onClick={() => openModal(AccessModalType.LOGIN)}
                         >
                             Fazer login
                         </Link>

@@ -32,6 +32,7 @@ import { BytebankLoginModal } from '../../modals/login-modal';
 import { BytebankRegisterModal } from '../../modals/register-modal';
 import { BytebankSnackbar } from '../snackbar';
 import { SnackbarData } from '../../classes/models/snackbar';
+import { AccessModalType } from '../../classes/enums/access-modal-type.enum';
 
 export function BytebankHeader(): ReactElement {
   const router = useRouter();
@@ -91,6 +92,16 @@ export function BytebankHeader(): ReactElement {
     setSnackbarData({ status, message });
     setSnackbarOpen(true);
   };
+
+  const handleModalStates = (type: AccessModalType) => {
+    if(type === AccessModalType.REGISTER) {
+      closeRegisterModal(); 
+      setOpenLoginModal(true);
+    } else {
+      closeLoginModal();
+      setOpenRegisterModal(true);
+    }
+  }
 
   const handleLogout = (): void => {
     handleCloseUserMenu();
@@ -207,8 +218,8 @@ export function BytebankHeader(): ReactElement {
         </AppBar>
       )}
 
-      <BytebankRegisterModal open={openRegisterModal} onClose={closeRegisterModal} onSubmit={handleRegisterModal} openLoginModal={() => { closeRegisterModal(); setOpenLoginModal(true) }} />
-      <BytebankLoginModal open={openLoginModal} onClose={closeLoginModal} onSubmit={handleLoginModal} openRegisterModal={() => { closeLoginModal(); setOpenRegisterModal(true) }} />
+      <BytebankRegisterModal open={openRegisterModal} onClose={closeRegisterModal} onSubmit={handleRegisterModal} openModal={handleModalStates} />
+      <BytebankLoginModal open={openLoginModal} onClose={closeLoginModal} onSubmit={handleLoginModal} openModal={handleModalStates} />
       <BytebankSnackbar open={isSnackbarOpen} data={snackbarData} onClose={closeSnackbar} />
     </>
   );

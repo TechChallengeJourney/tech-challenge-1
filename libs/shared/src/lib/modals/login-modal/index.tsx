@@ -2,16 +2,10 @@ import { Box, Link } from "@mui/material";
 import { ReactElement, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useUser, User, BytebankModal, BytebankInputController, BytebankButton, BytebankText } from "../../shared";
-import { SnackbarData } from "../../classes/models/snackbar";
+import { BytebankAccessModalProps } from "../../classes/models/access-modal";
+import { AccessModalType } from "../../classes/enums/access-modal-type.enum";
 
-interface LoginModalProps {
-    open: boolean;
-    onClose: () => void;
-    onSubmit: (data: SnackbarData) => void;
-    openRegisterModal: () => void;
-}
-
-export function BytebankLoginModal({ open, onClose, onSubmit, openRegisterModal }: LoginModalProps): ReactElement {
+export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: BytebankAccessModalProps): ReactElement {
     const [isLoading, setLoading] = useState(false);
     const { setUser } = useUser();
 
@@ -96,7 +90,7 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openRegisterModal 
                             component="button"
                             variant="sm"
                             color={'secondary'}
-                            onClick={openRegisterModal}
+                            onClick={() => openModal(AccessModalType.REGISTER)}
                         >
                             Crie uma agora!
                         </Link>
