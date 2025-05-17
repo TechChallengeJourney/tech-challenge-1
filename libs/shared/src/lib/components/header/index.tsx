@@ -160,7 +160,7 @@ export function BytebankHeader(): ReactElement {
             >
               <Box display="flex" gap={2} justifyContent={'space-around'} flexDirection={(!isMobile ? 'row' : 'row-reverse')}>
                 <Box display="flex" alignItems="center">
-                  <Link href="/">
+                  <Link onClick={() => redirectTo(isLogged ? '/home' : '/')} sx={{ cursor: 'pointer' }}>
                     <img
                       src="/images/logo.png"
                       className="logo"
