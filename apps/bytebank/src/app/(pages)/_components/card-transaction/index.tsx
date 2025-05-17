@@ -9,11 +9,11 @@ import {
   palette,
   Transaction,
   BytebankSnackbar,
+  SnackbarData
 } from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { SnackbarData } from 'libs/shared/src/lib/classes/models/snackbar';
 
 type Props = {
   onSuccess?: () => void;

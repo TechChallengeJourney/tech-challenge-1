@@ -1,8 +1,7 @@
 'use client';
 import './style.scss';
-import { BytebankButton, BytebankCard, BytebankInputController, BytebankSnackbar, BytebankText, palette, User, useUser } from '@bytebank/shared';
+import { BytebankButton, BytebankCard, BytebankInputController, BytebankSnackbar, BytebankText, palette, User, useUser, SnackbarData } from '@bytebank/shared';
 import { Box, Theme, useMediaQuery, useTheme } from '@mui/material';
-import { SnackbarData } from 'libs/shared/src/lib/classes/models/snackbar';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
