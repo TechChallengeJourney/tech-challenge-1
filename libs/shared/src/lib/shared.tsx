@@ -20,6 +20,9 @@ import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
 import { Transaction } from './classes/models/transaction';
 import { useFinancialSummary } from './contexts/financial-summary.context';
+import { BytebankLoginModal } from './modals/login-modal';
+import { BytebankRegisterModal } from './modals/register-modal';
+import { BytebankSnackbar } from './components/snackbar';
 
 export {
   BytebankButton,
@@ -36,6 +39,9 @@ export {
   BytebankExtract,
   BytebankChart,
   BytebankProvider,
+  BytebankSnackbar,
+  BytebankLoginModal,
+  BytebankRegisterModal,
   useUser,
   useFinancialSummary,
   defaultTheme,

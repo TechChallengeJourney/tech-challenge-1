@@ -33,11 +33,7 @@ import { BytebankRegisterModal } from '../../modals/register-modal';
 import { BytebankSnackbar } from '../snackbar';
 import { SnackbarData } from '../../classes/models/snackbar';
 
-interface HeaderProps {
-  mobile?: boolean;
-}
-
-export function BytebankHeader({ mobile }: HeaderProps): ReactElement {
+export function BytebankHeader(): ReactElement {
   const router = useRouter();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -175,7 +171,6 @@ export function BytebankHeader({ mobile }: HeaderProps): ReactElement {
                 <BytebankMenu
                   isLogged={isLogged}
                   routes={isLogged ? loggedRoutes : unloggedRoutes}
-                  mobile={mobile}
                 />
               </Box>
 
