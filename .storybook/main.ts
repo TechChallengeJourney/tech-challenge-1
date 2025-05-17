@@ -1,6 +1,4 @@
-import { StorybookConfig } from '@storybook/react-vite';
-
-const config: StorybookConfig = {
+const config = {
   stories: [
     '../libs/shared/src/**/*.mdx',
     '../libs/shared/**/*.stories.@(js|jsx|mjs|ts|tsx)',

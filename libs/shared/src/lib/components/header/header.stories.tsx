@@ -3,7 +3,7 @@ import * as DocBlock from '@storybook/blocks';
 import { BytebankHeader } from './index';
 
 const meta = {
-    title: 'Components/Header', // O título aqui deve estar correto
+    title: 'Components/Header',
     component: BytebankHeader,
     tags: ['autodocs'],
     parameters: {

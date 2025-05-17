@@ -14,7 +14,7 @@ export const unloggedRoutes: ProviderRouteProps[] = [
 export const loggedRoutes: ProviderRouteProps[] = [
     {
         name: 'início',
-        route: '/'
+        route: '/home'
     },
     {
         name: 'investimentos',
@@ -28,8 +28,4 @@ export const loggedRoutes: ProviderRouteProps[] = [
         name: 'outros',
         route: '/outros'
     },
-    {
-        name: 'home',
-        route: 'home'
-    } 
 ];
