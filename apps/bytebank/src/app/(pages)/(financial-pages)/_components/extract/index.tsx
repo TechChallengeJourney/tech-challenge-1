@@ -192,7 +192,7 @@ export function BytebankExtract() {
               </Box>
             ))
           ) : (
-            <Box textAlign={'center'} px={4} pb={4} display={'flex'} flexWrap={'wrap'} justifyContent={'center'} gap={2}>
+            <Box textAlign={'center'} px={4} pb={4} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={2}>
               <ErrorOutlineIcon
                 color="error"
                 sx={{ fontSize: '50px' }}
