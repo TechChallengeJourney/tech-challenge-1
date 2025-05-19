@@ -10,7 +10,6 @@ import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
 import { BytebankProvider } from './components/provider';
-import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
@@ -20,6 +19,15 @@ import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
 import { Transaction } from './classes/models/transaction';
 import { useFinancialSummary } from './contexts/financial-summary.context';
+import { BytebankLoginModal } from './modals/login-modal';
+import { BytebankRegisterModal } from './modals/register-modal';
+import { BytebankSnackbar } from './components/snackbar';
+import { AccessModalType } from './classes/enums/access-modal-type.enum';
+import { SnackbarData } from './classes/models/snackbar';
+import { BytebankModalProps } from './classes/models/modal';
+import { BytebankAccessModalProps } from './classes/models/access-modal';
+
+export * from './classes/models/extract';
 
 export {
   BytebankButton,
@@ -33,13 +41,16 @@ export {
   BytebankFooter,
   BytebankMenu,
   BytebankModal,
-  BytebankExtract,
   BytebankChart,
   BytebankProvider,
+  BytebankSnackbar,
+  BytebankLoginModal,
+  BytebankRegisterModal,
   useUser,
   useFinancialSummary,
   defaultTheme,
   palette,
+  AccessModalType
 };
 
-export type { ProviderRouteProps, User, ExtractProps, Transaction };
+export type { ProviderRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };

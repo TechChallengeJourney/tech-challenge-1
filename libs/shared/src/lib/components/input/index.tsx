@@ -11,6 +11,13 @@ export interface InputProps {
   error?: boolean;
   helperText?: string;
   autoComplete?: string;
+  mask?: 'currency';
+}
+
+function formatCurrency(value: string) {
+  const numeric = value.replace(/\D/g, '');
+  const number = Number(numeric) / 100;
+  return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
 export default function BytebankInput({
@@ -21,14 +28,32 @@ export default function BytebankInput({
   placeholder,
   error = false,
   helperText = '',
-  autoComplete = ''
+  autoComplete = '',
+  mask
 }: InputProps) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (mask === 'currency') {
+      // TypeScript DOM lib workaround: force-cast to any for value access
+      const raw = (e.target as any).value.replace(/\D/g, '');
+      // Chama o onChange com o valor numérico puro
+      const event = {
+        ...e,
+        target: {
+          ...e.target,
+          value: raw,
+        },
+      };
+      onChange(event as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      onChange(e);
+    }
+  };
   return (
     <Box className="bytebank-input">
       <TextField
         sx={{'backgroundColor': '#FFF', 'borderRadius': '5px'}}
-        value={value}
-        onChange={onChange}
+        value={mask === 'currency' && typeof value === 'string' ? formatCurrency(value) : value}
+        onChange={handleChange}
         label={label}
         type={type}
         placeholder={placeholder}
