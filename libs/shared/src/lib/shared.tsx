@@ -10,6 +10,8 @@ import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
 import { BytebankProvider } from './components/provider';
+import { BytebankExtract } from './components/extract/index';
+import { BytebankCardWithIllustration } from './components/card-with-illustration/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
@@ -46,6 +48,7 @@ export {
   BytebankSnackbar,
   BytebankLoginModal,
   BytebankRegisterModal,
+  BytebankCardWithIllustration,
   useUser,
   useFinancialSummary,
   defaultTheme,
@@ -54,3 +57,4 @@ export {
 };
 
 export type { ProviderRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };
+export * from './classes/models/bank-card';
