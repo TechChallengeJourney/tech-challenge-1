@@ -2,6 +2,7 @@
 import { BytebankText } from '@bytebank/shared';
 import { Box, Card } from '@mui/material';
 import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
 import { useUser } from '@bytebank/shared';
 import { useFinancialSummary } from '@bytebank/shared';
@@ -36,7 +37,7 @@ export function BytebankExtract() {
       const agrupado: BytebankExtractProps[] = Object.values(
         res.reduce((acc, item) => {
           const dataObj = new Date(item.date);
-          const mes = format(dataObj, 'MMMM');
+          const mes = format(dataObj, 'MMMM', { locale: ptBR });
           if (!acc[mes]) {
             acc[mes] = { month: mes, data: [] };
           }
@@ -143,7 +144,7 @@ export function BytebankExtract() {
             fontWeight={600}
           >
             <BytebankText fontWeight={'bold'} color="primary">
-              {itens.month}
+              {itens.month.charAt(0).toUpperCase() + itens.month.slice(1)}
             </BytebankText>
           </Box>
           {itens.data.map((item, index) => (
@@ -186,7 +187,7 @@ export function BytebankExtract() {
                   fontSize="12px"
                   color={+item.value < 0 ? 'error' : 'primary'}
                 >
-                  {format(item.date, 'yy/MM/dd')}
+                  {format(item.date, 'dd/MM/yyyy')}
                 </BytebankText>
                 <Box display="flex">
                   <IconButton
