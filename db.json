@@ -40,5 +40,23 @@
       "functions": ["Crédito"],
       "variant": "Virtual"
     }
+  ],
+  "my-cards": [
+    {
+      "id": "bff3",
+      "userId": "c0d9",
+      "cardNumber": "4929970605666969",
+      "name":"João Silva",
+      "functions": ["Crédito", "Débito"],
+      "variant": "Físico"
+    },
+    {
+      "id": "af5b",
+      "userId": "c0d9",
+      "cardNumber": "5407978391046187",
+      "name":"João Silva",
+      "functions": ["Crédito"],
+      "variant": "Virtual"
+    }
   ]
 }
