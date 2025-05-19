@@ -26,5 +26,5 @@
     "src/**/*.spec.jsx",
     "src/**/*.test.jsx"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "../../apps/bytebank/src/app/(pages)/_components/card-transaction/index.tsx"]
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "../../apps/bytebank/src/app/(pages)/(financial-pages)/_components/card-transaction/index.tsx"]
 }

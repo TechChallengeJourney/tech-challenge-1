@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { Box } from '@mui/material';
-import { BytebankCardTransaction } from '../../_components/card-transaction';
+import { BytebankCardTransaction } from '../_components/card-transaction';
 
 const BytebankHome: React.FC = () => {
   const [shouldRefreshExtract, setShouldRefreshExtract] = useState(false);
