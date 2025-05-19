@@ -1,10 +1,17 @@
 import {
   BytebankIllustration,
+  BytebankIllustrationProps,
 } from '../illustration';
 import './style.scss';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Modal, ModalProps, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { BytebankModalProps } from '../../shared';
+
+export interface BytebankModalProps extends ModalProps {
+  title: string;
+  illustration: BytebankIllustrationProps['name'];
+  illustrationSize: BytebankIllustrationProps['variant'];
+  illustrationShow?: boolean;
+}
 
 export function BytebankModal({
   onClose,
@@ -13,6 +20,7 @@ export function BytebankModal({
   title,
   illustration,
   illustrationSize,
+  illustrationShow,
 }: BytebankModalProps) {
   return (
     <Modal open={open} onClose={onClose}>
@@ -24,10 +32,12 @@ export function BytebankModal({
           <CloseIcon />
         </button>
         <Box display="flex" justifyContent="center">
-          <BytebankIllustration
-            variant={illustrationSize}
-            name={illustration}
-          />
+          {illustrationShow && (
+            <BytebankIllustration
+              variant={illustrationSize}
+              name={illustration}
+            />
+          )}
         </Box>
         <Typography alignContent="center" fontWeight="bold" color="textPrimary">
           {title}

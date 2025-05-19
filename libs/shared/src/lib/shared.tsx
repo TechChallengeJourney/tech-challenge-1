@@ -10,7 +10,6 @@ import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
 import { BytebankProvider } from './components/provider';
-import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
@@ -28,6 +27,8 @@ import { SnackbarData } from './classes/models/snackbar';
 import { BytebankModalProps } from './classes/models/modal';
 import { BytebankAccessModalProps } from './classes/models/access-modal';
 
+export * from './classes/models/extract';
+
 export {
   BytebankButton,
   BytebankInputController,
@@ -40,7 +41,6 @@ export {
   BytebankFooter,
   BytebankMenu,
   BytebankModal,
-  BytebankExtract,
   BytebankChart,
   BytebankProvider,
   BytebankSnackbar,

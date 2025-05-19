@@ -1,6 +1,6 @@
-import { BytebankExtract } from '@bytebank/shared';
 import styles from './page.module.scss';
 import { Box } from '@mui/material';
+import { BytebankExtract } from '../../../_components/extract';
 
 type Props = {
   refresh?: boolean;
@@ -8,10 +8,10 @@ type Props = {
 
 export function BytebankExtractCard({ refresh }: Props) {
   return (
-      <Box className={styles.extract}>
-        <BytebankExtract
-          key={refresh ? 'refresh-true' : 'refresh-false'} // <- força recriação do componente
-        />
-      </Box>
+    <Box className={styles.extract}>
+      <BytebankExtract
+        key={refresh ? 'refresh-true' : 'refresh-false'} // <- força recriação do componente
+      />
+    </Box>
   );
 }

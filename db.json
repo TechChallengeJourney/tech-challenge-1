@@ -9,25 +9,18 @@
   ],
   "extract": [
     {
-      "id": "32fc",
-      "userId": "c0d9",
-      "type": "Câmbio de Moeda",
-      "value": "20000",
-      "date": "2025-05-08T15:40:35.080Z"
-    },
-    {
-      "id": "9ba4",
-      "userId": "c0d9",
-      "type": "Câmbio de Moeda",
-      "value": "30000",
-      "date": "2025-05-08T15:40:55.111Z"
-    },
-    {
-      "id": "3c05",
-      "userId": "c0d9",
+      "id": "3992",
+      "date": "2025-05-19T13:46:41.339Z",
       "type": "DOC/TED",
-      "value": "2",
-      "date": "2025-05-08T15:42:46.335Z"
+      "value": "22",
+      "userId": "c0d9"
+    },
+    {
+      "id": "3204",
+      "userId": "c0d9",
+      "type": "",
+      "value": "200000",
+      "date": "2025-05-19T15:26:06.413Z"
     }
   ]
 }
