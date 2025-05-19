@@ -8,8 +8,7 @@ type Props = {
 
 export function BytebankExtractCard({ refresh }: Props) {
   return (
-    <div color="white" className={styles.extract}>
-      <Box>
+      <Box className={styles.extract}>
         <BytebankExtract
           key={refresh ? 'refresh-true' : 'refresh-false'} // <- força recriação do componente
           title={
@@ -19,6 +18,5 @@ export function BytebankExtractCard({ refresh }: Props) {
           }
         />
       </Box>
-    </div>
   );
 }

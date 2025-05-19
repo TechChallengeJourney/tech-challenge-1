@@ -7,7 +7,6 @@
     gap: 16px;
     justify-content: space-between;
     min-height: 400px;
-    max-width: 690px;
 
     @media (max-width: 767px) {
         display: flex;
@@ -56,7 +55,7 @@
     }
 
     @media (min-width: 600px) {
-        margin-top: 92px;
+        margin-top: 12em;
     }
 
 }
