@@ -1,4 +1,4 @@
-import { BytebankExtract, BytebankText } from '@bytebank/shared';
+import { BytebankExtract } from '@bytebank/shared';
 import styles from './page.module.scss';
 import { Box } from '@mui/material';
 

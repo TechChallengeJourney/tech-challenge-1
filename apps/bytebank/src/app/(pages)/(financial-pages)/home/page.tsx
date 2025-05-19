@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { BytebankCardTransaction } from '../_components/card-transaction';
 
 const BytebankHome: React.FC = () => {
-  const [shouldRefreshExtract, setShouldRefreshExtract] = useState(false);
+  const [, setShouldRefreshExtract] = useState(false);
 
 
   // useCallback p/ evitar re-renderizações desnecessárias

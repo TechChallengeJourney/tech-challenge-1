@@ -1,6 +1,6 @@
 'use client';
 import { BytebankText } from '../text';
-import { Box, Card } from '@mui/material';
+import { Box } from '@mui/material';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
