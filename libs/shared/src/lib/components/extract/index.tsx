@@ -13,7 +13,7 @@ import {
 import { Transaction } from '../../classes/models/transaction';
 import { BytebankCard } from '../card';
 
-export function BytebankExtract({ title }: { title?: React.ReactNode }) {
+export function BytebankExtract() {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
   const { updateSummary } = useFinancialSummary();
@@ -90,7 +90,11 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
   return (
     <>
       <BytebankCard>
-        {title && <Box p={2}>{title}</Box>}
+        <Box p={2}>
+          <BytebankText color={'black'} fontWeight={'bold'} variant={'md'}>
+            Extrato
+          </BytebankText>
+        </Box>
 
         {extract.map((itens, index) => (
           <React.Fragment key={index}>
@@ -118,7 +122,12 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
                 borderColor={'primary.main'}
                 p={2}
               >
-                <Box width="80%" display="flex" flexDirection="column" gap="5px">
+                <Box
+                  width="80%"
+                  display="flex"
+                  flexDirection="column"
+                  gap="5px"
+                >
                   <BytebankText
                     textAlign={'left'}
                     color={+item.value < 0 ? 'error' : 'primary'}

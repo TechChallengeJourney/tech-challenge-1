@@ -62,7 +62,7 @@ export default function Index(): ReactElement {
       <Box my={4} className='my-account'>
         <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
           <Box p={4}>
-            <BytebankText variant={'lg'}>Minha conta</BytebankText>
+            <BytebankText variant={'md'} fontWeight={'bold'}>Minha conta</BytebankText>
             <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column-reverse'}>
               <Box className='my-account__card-image'>
                 <img src={'/images/my-account.svg'} alt={'Imagem de uma pessoa editando sua conta'} />

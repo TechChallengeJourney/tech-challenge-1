@@ -76,7 +76,7 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
     >
       <Box textAlign="left" p={4}>
         <Box pb={4}>
-          <BytebankText variant="lg" color="black">
+        <BytebankText fontWeight={'bold'} variant="md" color="black">
             Nova transação
           </BytebankText>
         </Box>
