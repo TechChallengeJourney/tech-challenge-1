@@ -203,10 +203,10 @@ export function BytebankHeader(): ReactElement {
                   </Box>
                 ) :
                   (<Box display={'flex'}>
-                    <IconButton onClick={handleRegisterModal}>
+                    <IconButton onClick={() => setOpenRegisterModal(true)}>
                       <AppRegistrationRoundedIcon color={'success'}></AppRegistrationRoundedIcon>
                     </IconButton>
-                    <IconButton onClick={handleLoginModal}>
+                    <IconButton onClick={() => setOpenLoginModal(true)}>
                       <LoginIcon color={'success'}></LoginIcon>
                     </IconButton>
                   </Box>
