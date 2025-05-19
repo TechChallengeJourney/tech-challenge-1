@@ -10,7 +10,6 @@ import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
 import { BytebankProvider } from './components/provider';
-import { BytebankExtract } from './components/extract/index';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
@@ -20,6 +19,8 @@ import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
 import { Transaction } from './classes/models/transaction';
 import { useFinancialSummary } from './contexts/financial-summary.context';
+
+export * from './classes/models/extract';
 
 export {
   BytebankButton,
@@ -33,7 +34,6 @@ export {
   BytebankFooter,
   BytebankMenu,
   BytebankModal,
-  BytebankExtract,
   BytebankChart,
   BytebankProvider,
   useUser,
