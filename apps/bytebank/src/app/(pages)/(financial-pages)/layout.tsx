@@ -1,10 +1,9 @@
 'use client';
 import { BytebankProvider } from '@bytebank/shared';
 import '../../global.scss';
-import { Box, Container, useMediaQuery, useTheme } from '@mui/material';
-import { useState, useCallback } from 'react';
+import { Box, Container } from '@mui/material';
+import { useState } from 'react';
 import { BytebankBalanceCard } from '../_components/balance-card';
-import { BytebankCardTransaction } from '../_components/card-transaction';
 import { BytebankExtractCard } from './_components';
 import styles from './page.module.scss';
 
