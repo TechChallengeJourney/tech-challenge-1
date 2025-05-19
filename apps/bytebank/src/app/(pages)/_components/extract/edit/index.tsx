@@ -35,7 +35,8 @@ export default function EditExtractModal({
           <BytebankInputController
             name="value"
             label="Novo valor"
-            type="number"
+            type="text"
+            mask="currency"
           />
           <BytebankButton
             label="Salvar"

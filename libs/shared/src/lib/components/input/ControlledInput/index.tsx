@@ -8,6 +8,7 @@ interface ControlledInputProps {
   type?: string;
   placeholder?: string;
   autoComplete?: string;
+  mask?: 'currency';
 }
 
 export const BytebankInputController: React.FC<ControlledInputProps> = ({
@@ -16,6 +17,7 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
   type = 'text',
   placeholder,
   autoComplete,
+  mask,
 }) => {
   const { control } = useFormContext();
   return (
@@ -31,6 +33,7 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
           error={!!error}
           helperText={error?.message}
           autoComplete={autoComplete}
+          mask={mask}
         />
       )}
     />
