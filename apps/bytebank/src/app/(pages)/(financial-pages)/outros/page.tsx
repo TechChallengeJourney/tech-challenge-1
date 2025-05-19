@@ -1,17 +1,11 @@
 'use client';
-import { useState } from 'react';
-import { BytebankBalanceCard } from '../_components/balance-card';
-import { BytebankExtractCard } from '../home/_components';
-import styles from './page.module.scss';
-import { BytebankServices } from '../_components/card-services';
+import { BytebankServices } from '../../_components/card-services';
+import { Box } from 'node_modules/@mui/material';
 
 export default function Outros() {
   return (
-    <div className={styles.pageWrapper}>
-      <BytebankBalanceCard />
-      <BytebankExtractCard />
-
+    <Box>
       <BytebankServices />
-    </div>
+    </Box>
   );
 }

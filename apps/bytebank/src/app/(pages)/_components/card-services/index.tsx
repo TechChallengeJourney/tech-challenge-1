@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { BytebankText, BytebankCard, palette } from '@bytebank/shared';
 import './style.scss';
-import '../card-transaction/style.scss';
+import '../../(financial-pages)/_components/card-transaction/style.scss';
 
 export function BytebankServices() {
   return (
