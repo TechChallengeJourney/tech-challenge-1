@@ -4,6 +4,11 @@ import {
   BytebankIllustration,
   BytebankText,
   BytebankProvider,
+  BytebankLoginModal,
+  BytebankRegisterModal,
+  BytebankSnackbar,
+  AccessModalType,
+  SnackbarData,
 } from '@bytebank/shared';
 import {
   AssuredWorkload,
@@ -13,8 +18,9 @@ import {
 } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import styles from './page.module.scss';
+import { useRouter } from 'next/navigation';
 
 type Benefit = {
   icon: ReactElement;
@@ -50,8 +56,54 @@ const BENEFITS: Benefit[] = [
 ];
 
 export default function Index(): ReactElement {
+  const router = useRouter();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
+
+  const closeLoginModal = () => setOpenLoginModal(false);
+  const closeRegisterModal = () => setOpenRegisterModal(false);
+
+  const closeSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarData(null);
+  };
+
+  const handleLoginModal = ({ status, message }: SnackbarData) => {
+    if (status === 'success') {
+      router.push('/home');
+      setTimeout(() => {
+        closeLoginModal();
+      }, 20000);
+    } else {
+      closeRegisterModal();
+      setSnackbarData({ status, message });
+      setSnackbarOpen(true);
+    }
+  };
+
+  const handleRegisterModal = ({ status, message }: SnackbarData) => {
+    if (status === 'success') {
+      closeRegisterModal();
+    }
+
+    closeLoginModal();
+    setSnackbarData({ status, message });
+    setSnackbarOpen(true);
+  };
+
+  const handleModalStates = (type: AccessModalType) => {
+    if (type === AccessModalType.REGISTER) {
+      closeRegisterModal();
+      setOpenLoginModal(true);
+    } else {
+      closeLoginModal();
+      setOpenRegisterModal(true);
+    }
+  };
 
   const renderBanner = (): ReactElement => (
     <div className={styles.banner}>
@@ -82,19 +134,13 @@ export default function Index(): ReactElement {
           color="black"
           label="Abrir conta"
           variant="contained"
-          // TODO: chamar modal/fazer lógica de abertura de conta(signup)
-          sendSubmit={() => {
-            alert('Chamar modal aqui (signup)');
-          }}
+          sendSubmit={() => setOpenRegisterModal(true)}
         />
         <BytebankButton
           variant="outlined"
           color="black"
           label="Já tenho conta"
-          // TODO: chamar modal/fazer lógica de acesso a conta(login)
-          sendSubmit={() => {
-            alert('Chamar modal aqui (login)');
-          }}
+          sendSubmit={() => setOpenLoginModal(true)}
         />
       </div>
     );
@@ -152,6 +198,23 @@ export default function Index(): ReactElement {
         {renderBanner()}
         {renderValuePropositionBlock()}
       </div>
+      <BytebankRegisterModal
+        open={openRegisterModal}
+        onClose={closeRegisterModal}
+        onSubmit={handleRegisterModal}
+        openModal={handleModalStates}
+      />
+      <BytebankLoginModal
+        open={openLoginModal}
+        onClose={closeLoginModal}
+        onSubmit={handleLoginModal}
+        openModal={handleModalStates}
+      />
+      <BytebankSnackbar
+        open={isSnackbarOpen}
+        data={snackbarData}
+        onClose={closeSnackbar}
+      />
     </BytebankProvider>
   );
 }

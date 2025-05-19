@@ -1,7 +1,7 @@
 'use client';
 import './style.scss';
-import { BytebankButton, BytebankCard, BytebankInputController, BytebankText, palette, User, useUser } from '@bytebank/shared';
-import { Alert, AlertColor, Box, Snackbar, Theme, useMediaQuery, useTheme } from '@mui/material';
+import { BytebankButton, BytebankCard, BytebankInputController, BytebankSnackbar, BytebankText, palette, User, useUser, SnackbarData } from '@bytebank/shared';
+import { Box, Theme, useMediaQuery, useTheme } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -11,10 +11,7 @@ export default function Index(): ReactElement {
 
   const [isLoading, setLoading] = useState(false);
   const { user, setUser } = useUser();
-  const [snackbarData, setSnackbarData] = useState<{
-    severity: AlertColor;
-    message: string;
-  } | null>(null);
+  const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const formMethods = useForm<Partial<User>>({
@@ -33,6 +30,11 @@ export default function Index(): ReactElement {
     });
   }, [user, formMethods]);
 
+  const closeSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarData(null);
+  };
+
   const handleUpdate = async (data: Partial<User>) => {
     setLoading(true);
     const response = await fetch('/api/users/' + user?.id, {
@@ -46,35 +48,13 @@ export default function Index(): ReactElement {
     if (response.ok) {
       const responseData = (await response.json()) as { data: User, message: string };
       setUser(responseData.data);
-      setSnackbarData({ severity: 'success', message: responseData.message });
+      setSnackbarData({ status: 'success', message: responseData.message });
     } else {
       const responseError = (await response.json()) as { error: string };
-      setSnackbarData({ severity: 'error', message: responseError.error });
+      setSnackbarData({ status: 'error', message: responseError.error });
     }
     setLoading(false);
     setSnackbarOpen(true);
-  };
-
-  const renderSnackbar = () => {
-    const handleSnackbarClose = () => {
-      setSnackbarOpen(false);
-      setSnackbarData(null);
-    };
-
-    return snackbarData ? (
-      <>
-        <Snackbar
-          open={isSnackbarOpen}
-          autoHideDuration={6000}
-          onClose={handleSnackbarClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Alert onClose={handleSnackbarClose} severity={snackbarData.severity}>
-            {snackbarData.message}
-          </Alert>
-        </Snackbar>
-      </>
-    ) : null;
   };
 
   return (
@@ -127,7 +107,7 @@ export default function Index(): ReactElement {
           </Box>
         </BytebankCard>
       </Box>
-      {renderSnackbar()}
+      <BytebankSnackbar open={isSnackbarOpen} data={snackbarData} onClose={closeSnackbar} />
     </>
   );
 }
