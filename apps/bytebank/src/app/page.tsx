@@ -59,51 +59,51 @@ export default function Index(): ReactElement {
   const router = useRouter();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-    const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
-    const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-    const [openLoginModal, setOpenLoginModal] = useState(false);
-    const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
   const closeLoginModal = () => setOpenLoginModal(false);
-    const closeRegisterModal = () => setOpenRegisterModal(false);
-  
-    const closeSnackbar = () => {
-      setSnackbarOpen(false);
-      setSnackbarData(null)
-    };
-  
-    const handleLoginModal = ({ status, message }: SnackbarData) => {
-      if (status === 'success') {
-        router.push('/home');
-        setTimeout(() => {
-          closeLoginModal();
-        }, 20000);
-      } else {
-        closeRegisterModal();
-        setSnackbarData({ status, message });
-        setSnackbarOpen(true);
-      }
-    };
-  
-    const handleRegisterModal = ({ status, message }: SnackbarData) => {
-      if (status === 'success') {
-        closeRegisterModal();
-      }
-  
-      closeLoginModal();
+  const closeRegisterModal = () => setOpenRegisterModal(false);
+
+  const closeSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarData(null);
+  };
+
+  const handleLoginModal = ({ status, message }: SnackbarData) => {
+    if (status === 'success') {
+      router.push('/home');
+      setTimeout(() => {
+        closeLoginModal();
+      }, 20000);
+    } else {
+      closeRegisterModal();
       setSnackbarData({ status, message });
       setSnackbarOpen(true);
-    };
-  
-    const handleModalStates = (type: AccessModalType) => {
-      if(type === AccessModalType.REGISTER) {
-        closeRegisterModal(); 
-        setOpenLoginModal(true);
-      } else {
-        closeLoginModal();
-        setOpenRegisterModal(true);
-      }
     }
+  };
+
+  const handleRegisterModal = ({ status, message }: SnackbarData) => {
+    if (status === 'success') {
+      closeRegisterModal();
+    }
+
+    closeLoginModal();
+    setSnackbarData({ status, message });
+    setSnackbarOpen(true);
+  };
+
+  const handleModalStates = (type: AccessModalType) => {
+    if (type === AccessModalType.REGISTER) {
+      closeRegisterModal();
+      setOpenLoginModal(true);
+    } else {
+      closeLoginModal();
+      setOpenRegisterModal(true);
+    }
+  };
 
   const renderBanner = (): ReactElement => (
     <div className={styles.banner}>
@@ -198,9 +198,23 @@ export default function Index(): ReactElement {
         {renderBanner()}
         {renderValuePropositionBlock()}
       </div>
-      <BytebankRegisterModal open={openRegisterModal} onClose={closeRegisterModal} onSubmit={handleRegisterModal} openModal={handleModalStates} />
-            <BytebankLoginModal open={openLoginModal} onClose={closeLoginModal} onSubmit={handleLoginModal} openModal={handleModalStates} />
-            <BytebankSnackbar open={isSnackbarOpen} data={snackbarData} onClose={closeSnackbar} />
+      <BytebankRegisterModal
+        open={openRegisterModal}
+        onClose={closeRegisterModal}
+        onSubmit={handleRegisterModal}
+        openModal={handleModalStates}
+      />
+      <BytebankLoginModal
+        open={openLoginModal}
+        onClose={closeLoginModal}
+        onSubmit={handleLoginModal}
+        openModal={handleModalStates}
+      />
+      <BytebankSnackbar
+        open={isSnackbarOpen}
+        data={snackbarData}
+        onClose={closeSnackbar}
+      />
     </BytebankProvider>
   );
 }

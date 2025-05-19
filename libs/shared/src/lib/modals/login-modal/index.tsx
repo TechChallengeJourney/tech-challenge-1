@@ -85,7 +85,7 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
                         </form>
                     </FormProvider>
                     <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}>
-                        <BytebankText>Não tem uma conta?</BytebankText>{' '}
+                        <BytebankText>Não tem uma conta?</BytebankText>
                         <Link
                             component="button"
                             variant="sm"
