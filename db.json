@@ -9,18 +9,18 @@
   ],
   "extract": [
     {
-      "id": "65ed",
-      "userId": "c0d9",
-      "type": "DOC/TED",
-      "value": "200",
-      "date": "2025-05-19T13:44:14.641Z"
-    },
-    {
       "id": "3992",
       "date": "2025-05-19T13:46:41.339Z",
       "type": "DOC/TED",
       "value": "2",
       "userId": "c0d9"
+    },
+    {
+      "id": "5c3d",
+      "userId": "c0d9",
+      "type": "Câmbio de Moeda",
+      "value": "50000",
+      "date": "2025-05-19T14:53:52.834Z"
     }
   ]
 }

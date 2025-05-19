@@ -1,4 +1,4 @@
-import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   BytebankText,
   BytebankInputController,
@@ -8,6 +8,8 @@ import {
   useUser,
   palette,
   Transaction,
+  BytebankSnackbar,
+  SnackbarData
 } from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -19,10 +21,7 @@ type Props = {
 
 export function BytebankCardTransaction({ onSuccess }: Props) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarData, setSnackbarData] = useState<{
-    severity: AlertColor;
-    message: string;
-  } | null>(null);
+  const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
   const registerMethods = useForm<Partial<Transaction>>({
     defaultValues: {
       type: '',
@@ -31,6 +30,11 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
   });
 
   const { user } = useUser();
+
+  const closeSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarData(null);
+  };
 
   const handleTransaction = async (data: Partial<Transaction>) => {
     const response = await fetch('/api/extract', {
@@ -44,14 +48,14 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
       registerMethods.setValue('type', '');
       registerMethods.setValue('value', '');
       setSnackbarData({
-        severity: 'success',
+        status: 'success',
         message: 'Transação adicionada com sucesso!!',
       });
       setSnackbarOpen(true);
       onSuccess?.();
     } else {
       setSnackbarData({
-        severity: 'error',
+        status: 'error',
         message: 'Algo deu errado. Por favor, aguarde e tente novamente!!',
       });
       setSnackbarOpen(true);
@@ -64,38 +68,18 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
     { label: 'Empréstimo e Financeiro', value: 'Empréstimo e Financeiro' },
   ];
 
-  const renderSnackBar = () => {
-    return snackbarData ? (
-      <>
-        <Snackbar
-          open={isSnackbarOpen}
-          autoHideDuration={6000}
-          onClose={() => setSnackbarOpen(false)}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Alert
-            onClose={() => setSnackbarOpen(false)}
-            severity={snackbarData.severity}
-          >
-            {snackbarData.message}
-          </Alert>
-        </Snackbar>
-      </>
-    ) : null;
-  };
-
   return (
+    <>
     <BytebankCard
       className="bytebank-card-content"
       bgcolor={palette['grey.300']}
     >
       <Box textAlign="left" p={4}>
         <Box pb={4}>
-          <BytebankText variant="lg" color="black">
+        <BytebankText fontWeight={'bold'} variant="md" color="black">
             Nova transação
           </BytebankText>
         </Box>
-        {renderSnackBar()}
         <FormProvider {...registerMethods}>
           <form onSubmit={registerMethods.handleSubmit(handleTransaction)}>
             <BytebankSelectController
@@ -116,5 +100,7 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
         </FormProvider>
       </Box>
     </BytebankCard>
+    <BytebankSnackbar open={isSnackbarOpen} data={snackbarData} onClose={closeSnackbar} />
+    </>
   );
 }

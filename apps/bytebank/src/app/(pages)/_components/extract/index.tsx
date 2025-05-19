@@ -1,4 +1,3 @@
-// Copiado de libs/shared/src/lib/components/extract/index.tsx
 'use client';
 import { BytebankText } from '@bytebank/shared';
 import { Box, Card } from '@mui/material';
@@ -14,14 +13,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
-export function BytebankExtract({ title }: { title?: React.ReactNode }) {
+export function BytebankExtract() {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
   const { updateSummary } = useFinancialSummary();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Transaction | null>(null);
-  const [editValue, setEditValue] = useState('');
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -98,7 +96,11 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
 
   return (
     <>
-      {title && <Box padding="10px">{title}</Box>}
+      <Box p={2}>
+        <BytebankText color={'black'} fontWeight={'bold'} variant={'md'}>
+          Extrato
+        </BytebankText>
+      </Box>
       <EditExtractModal
         open={editModalOpen}
         onClose={() => setEditModalOpen(false)}
@@ -149,7 +151,7 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
               key={index}
               width="100%"
               display="flex"
-              padding="15px"
+              px={2}
               flexDirection="row"
               justifyContent="space-between"
               boxSizing="border-box"
