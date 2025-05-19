@@ -31,7 +31,6 @@
 .leftColumn {
     display: flex;
     flex-direction: column;
-    gap: 24px;
 
     @media (max-width: 1023px) {
         width: 100% !important;

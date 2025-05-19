@@ -17,7 +17,7 @@ const RootLayout = ({ children,
         <BytebankProvider>
             <Container>
                 <Box my={4} gap={4} className={styles.containerPage}>
-                    <Box className={styles.leftColumn} width={'70%'}>
+                    <Box className={styles.leftColumn} width={'70%'} gap={4}>
                         <BytebankBalanceCard />
                         {children}
                     </Box>
