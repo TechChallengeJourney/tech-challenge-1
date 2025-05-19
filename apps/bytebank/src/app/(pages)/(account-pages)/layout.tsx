@@ -1,12 +1,12 @@
 'use client';
-import { BytebankProvider } from '@bytebank/shared';
-import '../global.scss';
-import { Container } from '@mui/material';
+import { Container } from "@mui/material";
+import { BytebankProvider } from "@bytebank/shared";
 
 const RootLayout = ({ children,
 }: {
     children: React.ReactNode;
 }) => {
+
     return (
         <BytebankProvider>
             <Container>{children}</Container>

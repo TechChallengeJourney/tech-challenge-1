@@ -1,6 +1,6 @@
 'use client';
 import { BytebankText } from '../text';
-import { Box, Card } from '@mui/material';
+import { Box } from '@mui/material';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
@@ -11,8 +11,9 @@ import {
   ExtractProps,
 } from '../../classes/models/extract';
 import { Transaction } from '../../classes/models/transaction';
+import { BytebankCard } from '../card';
 
-export function BytebankExtract({ title }: { title?: React.ReactNode }) {
+export function BytebankExtract() {
   const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
   const { updateSummary } = useFinancialSummary();
@@ -88,62 +89,71 @@ export function BytebankExtract({ title }: { title?: React.ReactNode }) {
 
   return (
     <>
-      {title && <Box padding="10px">{title}</Box>}
+      <BytebankCard>
+        <Box p={2}>
+          <BytebankText color={'black'} fontWeight={'bold'} variant={'md'}>
+            Extrato
+          </BytebankText>
+        </Box>
 
-      {extract.map((itens, index) => (
-        <Card key={index} sx={{ minWidth: 275 }}>
-          <Box
-            width="100%"
-            display="flex"
-            padding="10px 10px 0px 10px"
-            flexDirection="row"
-            boxSizing={'border-box'}
-            fontWeight={600}
-          >
-            <BytebankText fontWeight={'bold'} color="primary">
-              {itens.month}
-            </BytebankText>
-          </Box>
-          {itens.data.map((item, index) => (
+        {extract.map((itens, index) => (
+          <React.Fragment key={index}>
             <Box
-              key={index}
               width="100%"
               display="flex"
-              padding="15px"
+              px={2}
               flexDirection="row"
-              justifyContent="space-between"
-              boxSizing="border-box"
-              borderBottom={'1px solid '}
-              borderColor={'primary.main'}
-              paddingTop={'20px'}
-              paddingBottom={'20px'}
+              boxSizing={'border-box'}
+              fontWeight={600}
             >
-              <Box width="80%" display="flex" flexDirection="column" gap="5px">
-                <BytebankText
-                  textAlign={'left'}
-                  color={+item.value < 0 ? 'error' : 'primary'}
-                >
-                  {item.type}
-                </BytebankText>
-                <BytebankText
-                  textAlign={'left'}
-                  color={+item.value < 0 ? 'error' : 'primary'}
-                >
-                  {numberFormat(+item.value)}
-                </BytebankText>
-              </Box>
-              <Box>
-                <BytebankText
-                  fontSize="12px"
-                  color={+item.value < 0 ? 'error' : 'primary'}
-                >
-                  {format(item.date, 'yy/MM/dd')}
-                </BytebankText>
-              </Box>
+              <BytebankText fontWeight={'bold'} color="primary">
+                {itens.month}
+              </BytebankText>
             </Box>
-          ))}
-        </Card>
-      ))}
+            {itens.data.map((item, idx) => (
+              <Box
+                key={idx}
+                width="100%"
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                boxSizing="border-box"
+                borderBottom={'1px solid '}
+                borderColor={'primary.main'}
+                p={2}
+              >
+                <Box
+                  width="80%"
+                  display="flex"
+                  flexDirection="column"
+                  gap="5px"
+                >
+                  <BytebankText
+                    textAlign={'left'}
+                    color={+item.value < 0 ? 'error' : 'primary'}
+                  >
+                    {item.type}
+                  </BytebankText>
+                  <BytebankText
+                    textAlign={'left'}
+                    color={+item.value < 0 ? 'error' : 'primary'}
+                  >
+                    {numberFormat(+item.value)}
+                  </BytebankText>
+                </Box>
+                <Box>
+                  <BytebankText
+                    fontSize="12px"
+                    color={+item.value < 0 ? 'error' : 'primary'}
+                  >
+                    {format(item.date, 'yy/MM/dd')}
+                  </BytebankText>
+                </Box>
+              </Box>
+            ))}
+          </React.Fragment>
+        ))}
+      </BytebankCard>
     </>
   );
 }
