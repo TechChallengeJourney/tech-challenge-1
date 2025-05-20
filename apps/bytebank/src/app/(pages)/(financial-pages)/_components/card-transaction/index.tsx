@@ -92,7 +92,6 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
               <Box
                 display={'flex'}
                 flexWrap={'wrap'}
-                pt={2}
                 justifyContent={'center'}
               >
                 <Box flexGrow={'1'}>
@@ -104,14 +103,18 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
                     mask="currency"
                     
                   />
-                  <BytebankButton
-                    label={'Concluir transação'}
-                    color={'secondary'}
-                    variant={'contained'}
-                    fullWidth
-                  />
+                  <Box mt={4}>
+                    <BytebankButton
+                      label={'Concluir transação'}
+                      color={'secondary'}
+                      variant={'contained'}
+                      fullWidth
+                    />
+                  </Box>
                 </Box>
-                <BytebankIllustration variant="auto" name="card-holding" />
+                <Box mt={2}>
+                  <BytebankIllustration variant="auto" name="card-holding" />
+                </Box>
               </Box>
             </form>
           </FormProvider>
