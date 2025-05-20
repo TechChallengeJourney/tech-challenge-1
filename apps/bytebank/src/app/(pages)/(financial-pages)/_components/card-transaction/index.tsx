@@ -38,6 +38,7 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
   };
 
   const handleTransaction = async (data: Partial<Transaction>) => {
+    data.value = Number(data.value) / 100;
     const response = await fetch('/api/extract', {
       method: 'POST',
       headers: {
@@ -49,14 +50,14 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
       transactionMethods.reset({value: '', type: ''});
       setSnackbarData({
         status: 'success',
-        message: 'Transação adicionada com sucesso!!',
+        message: 'Transação adicionada com sucesso!',
       });
       setSnackbarOpen(true);
       onSuccess?.();
     } else {
       setSnackbarData({
         status: 'error',
-        message: 'Algo deu errado. Por favor, aguarde e tente novamente!!',
+        message: 'Algo deu errado. Por favor, aguarde e tente novamente!',
       });
       setSnackbarOpen(true);
     }
