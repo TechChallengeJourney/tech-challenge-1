@@ -198,7 +198,7 @@ export function BytebankExtract() {
                 sx={{ fontSize: '50px' }}
                 />
               <BytebankText variant={'sm'}>
-                Não encontramos nenhuma transação para você, que tal criar uma nova?
+                Não encontramos nenhuma transação, que tal criar uma nova?
               </BytebankText>
             </Box>
           )}
