@@ -1,22 +1,25 @@
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, RegisterOptions, useFormContext } from 'react-hook-form';
 import BytebankSelect, { SelectOption } from '../index';
 
 interface ControlledSelectProps {
   name: string;
   label: string;
   options: SelectOption[];
+  rules?: RegisterOptions;
 }
 
 export const BytebankSelectController: React.FC<ControlledSelectProps> = ({
   name,
   label,
+  rules,
   options,
 }) => {
   const { control } = useFormContext();
   return (
     <Controller
       name={name}
+      rules={rules}
       control={control}
       render={({ field, fieldState: { error } }) => (
         <BytebankSelect

@@ -47,6 +47,7 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
                 illustrationSize={'lg'}
                 open={open}
                 onClose={() => onClose()}
+                fullHeight
             >
                 <>
                     <FormProvider {...loginMethods}>

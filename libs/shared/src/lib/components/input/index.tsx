@@ -1,5 +1,5 @@
 'use client';
-import { Box } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
 export interface InputProps {
@@ -48,10 +48,17 @@ export default function BytebankInput({
       onChange(e);
     }
   };
+
+  const InputColor = styled(TextField)<InputProps>(() => ([{
+    '.MuiOutlinedInput-root': {
+      backgroundColor: 'white',
+    },
+  }
+  ]));
   return (
     <Box className="bytebank-input">
-      <TextField
-        sx={{'backgroundColor': '#FFF', 'borderRadius': '5px'}}
+      <InputColor
+        sx={{'borderRadius': '5px'}}
         value={mask === 'currency' && typeof value === 'string' ? formatCurrency(value) : value}
         onChange={handleChange}
         label={label}

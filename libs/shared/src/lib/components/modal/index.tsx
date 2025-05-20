@@ -11,6 +11,7 @@ export interface BytebankModalProps extends ModalProps {
   illustration: BytebankIllustrationProps['name'];
   illustrationSize: BytebankIllustrationProps['variant'];
   illustrationShow?: boolean;
+  fullHeight?: boolean;
 }
 
 export function BytebankModal({
@@ -21,10 +22,15 @@ export function BytebankModal({
   illustration,
   illustrationSize,
   illustrationShow,
+  fullHeight = false,
 }: BytebankModalProps) {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box className="bytebank-modal">
+      <Box
+        className={`bytebank-modal ${
+          fullHeight && 'bytebank-modal-full-height'
+        }`}
+      >
         <button
           onClick={(event) => onClose?.(event, 'backdropClick')}
           className="bytebank-modal-close"
