@@ -1,25 +1,25 @@
 ## 🧠 Contexto e objetivo da mudança
 ---
 
-Descreva o **contexto** da alteração (ex: problema que está sendo resolvido, necessidade do cliente, melhoria técnica, etc).  
-Explique o **objetivo** deste PR de forma clara e direta.
+<!-- Descreva o **contexto** da alteração (ex: problema que está sendo resolvido, necessidade do cliente, melhoria técnica, etc).  
+Explique o **objetivo** deste PR de forma clara e direta. -->
 
 ---
 
 ## 📸 Imagem ou evidência visual (quando aplicável)
 
-Inclua **prints de tela**, **GIFs** ou **links para preview** quando houver mudanças visuais (novos componentes, telas, estilos etc).
+<!-- Inclua **prints de tela**, **GIFs** ou **links para preview** quando houver mudanças visuais (novos componentes, telas, estilos etc). -->
 
 ---
 
 ## 🧪 Passos detalhados para testar
 
-Descreva como o revisor pode **reproduzir/testar** essa mudança localmente:
+<!-- Descreva como o revisor pode **reproduzir/testar** essa mudança localmente:
 
 1. Clone o repositório e acesse a branch do PR
 2. Rode o projeto com: `npm run dev` / `pnpm dev` / `dotnet run` (dependendo do projeto)
 3. Navegue até: `ex: /tela-de-login`
-4. Verifique se: `ex: botão "Entrar" está funcionando corretamente`
+4. Verifique se: `ex: botão "Entrar" está funcionando corretamente` -->
 
 ---
 
@@ -69,7 +69,7 @@ wip: Código em desenvolvimento
 
 ## 🧩 Issues relacionadas
 
-Para **vincular automaticamente este PR a um card do GitHub Projects ou uma issue**, use uma das palavras-chave abaixo seguidas do número da issue:
+<!-- Para **vincular automaticamente este PR a um card do GitHub Projects ou uma issue**, use uma das palavras-chave abaixo seguidas do número da issue:
 
 > Exemplo:
 > 
@@ -85,4 +85,4 @@ Palavras-chave suportadas (acionam o fechamento automático da issue ao fazer me
 - `Fixes` / `fix` / `fixed`
 - `Resolves` / `resolve` / `resolved`
 
-> 💡 Isso ajuda o GitHub a atualizar automaticamente o status do card vinculado no **GitHub Projects** e facilita o rastreamento de tarefas.
+> 💡 Isso ajuda o GitHub a atualizar automaticamente o status do card vinculado no **GitHub Projects** e facilita o rastreamento de tarefas. -->
