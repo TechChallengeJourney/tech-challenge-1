@@ -14,7 +14,7 @@ export const GET = async (request: Request): Promise<NextResponse<BankCard[] | E
         const url = new URL(request.url);
         const userId = url.searchParams.get('userId');
 
-        const response = await fetch(`${apiUrl}/my-cards?userId=${userId}`, {
+        const response = await fetch(`${apiUrl}/cards?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

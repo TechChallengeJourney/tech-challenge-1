@@ -74,7 +74,7 @@ const MyBankCards: React.FC = () => {
                                                 <Box className={styles.actions}>
                                                     <BytebankButton color="secondary" label="Configurar" variant="contained" />
                                                     <BytebankButton color="secondary" label="Bloquear" variant="outlined" />
-                                                    <BytebankText color="black" fontSize="16px" fontWeight={400}>
+                                                    <BytebankText color="black" variant="sm" fontWeight={400}>
                                                         Função: {card.functions.join("/")}
                                                     </BytebankText>
                                                 </Box>
