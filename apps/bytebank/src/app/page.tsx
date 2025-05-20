@@ -10,7 +10,6 @@ import {
   BytebankSnackbar,
   AccessModalType,
   SnackbarData,
-  UserProvider,
 } from '@bytebank/shared';
 import {
   AssuredWorkload,
