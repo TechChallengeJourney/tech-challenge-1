@@ -1,7 +1,6 @@
 'use client';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { RegisterOptions } from 'react-hook-form';
 
 export interface InputProps {
   value?: string;
