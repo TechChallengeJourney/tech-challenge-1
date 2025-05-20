@@ -9,28 +9,28 @@
     min-height: 400px;
     max-width: 690px;
 
+    border: none !important;
+    background-position:
+        right top,
+        left bottom !important;
+    background-repeat: no-repeat, no-repeat !important;
+
+    &--primary {
+        background-image: url("/images/pixels-01.png"), url("/images/pixels-02.png") !important;
+    }
+
+    &--grey {
+        background-image: url("/images/pixels-03.png"), url("/images/pixels-04.png") !important;
+    }
+
     @media (max-width: 767px) {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100%;
-        min-height: 655px
+        min-height: 655px;
     }
-}
-
-.topRightDecoration {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 0;
-}
-
-.bottomLeftDecoration {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
 }
 
 .children {
