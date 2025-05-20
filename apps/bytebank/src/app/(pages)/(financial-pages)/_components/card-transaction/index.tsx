@@ -10,6 +10,7 @@ import {
   Transaction,
   BytebankSnackbar,
   SnackbarData,
+  BytebankIllustration,
 } from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -87,19 +88,27 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
                 label="Selecione o tipo de transação"
                 options={selectOptions}
               />
-              <BytebankInputController
-                name="value"
-                label="Valor"
-                type="text"
-                mask="currency"
-              />
-              <Box display={'flex'} pt={2} justifyContent={'center'}>
-                <BytebankButton
-                  label={'Concluir transação'}
-                  color={'secondary'}
-                  variant={'contained'}
-                  fullWidth
-                />
+              <Box
+                display={'flex'}
+                flexWrap={'wrap'}
+                pt={2}
+                justifyContent={'center'}
+              >
+                <Box flexGrow={'1'}>
+                  <BytebankInputController
+                    name="value"
+                    label="Valor"
+                    type="text"
+                    mask="currency"
+                  />
+                  <BytebankButton
+                    label={'Concluir transação'}
+                    color={'secondary'}
+                    variant={'contained'}
+                    fullWidth
+                  />
+                </Box>
+                <BytebankIllustration variant="auto" name="card-holding" />
               </Box>
             </form>
           </FormProvider>
