@@ -23,7 +23,7 @@ type Props = {
 export function BytebankCardTransaction({ onSuccess }: Props) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
-  const registerMethods = useForm<Partial<Transaction>>({
+  const transactionMethods = useForm<Partial<Transaction>>({
     defaultValues: {
       type: '',
       value: '',
@@ -46,8 +46,7 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
       body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
     });
     if (response.ok) {
-      registerMethods.setValue('type', '');
-      registerMethods.setValue('value', '');
+      transactionMethods.reset({value: '', type: ''});
       setSnackbarData({
         status: 'success',
         message: 'Transação adicionada com sucesso!!',
@@ -81,9 +80,10 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
               Nova transação
             </BytebankText>
           </Box>
-          <FormProvider {...registerMethods}>
-            <form onSubmit={registerMethods.handleSubmit(handleTransaction)}>
+          <FormProvider {...transactionMethods}>
+            <form onSubmit={transactionMethods.handleSubmit(handleTransaction)}>
               <BytebankSelectController
+                rules={{required: "Este campo é obrigatório"}}
                 name="type"
                 label="Selecione o tipo de transação"
                 options={selectOptions}
@@ -96,10 +96,12 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
               >
                 <Box flexGrow={'1'}>
                   <BytebankInputController
+                    rules={{required: "Este campo é obrigatório"}}
                     name="value"
                     label="Valor"
                     type="text"
                     mask="currency"
+                    
                   />
                   <BytebankButton
                     label={'Concluir transação'}

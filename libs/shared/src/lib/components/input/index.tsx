@@ -1,6 +1,7 @@
 'use client';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import { RegisterOptions } from 'react-hook-form';
 
 export interface InputProps {
   value?: string;
@@ -51,7 +52,7 @@ export default function BytebankInput({
   return (
     <Box className="bytebank-input">
       <TextField
-        sx={{'backgroundColor': '#FFF', 'borderRadius': '5px'}}
+        sx={{'borderRadius': '5px'}}
         value={mask === 'currency' && typeof value === 'string' ? formatCurrency(value) : value}
         onChange={handleChange}
         label={label}
