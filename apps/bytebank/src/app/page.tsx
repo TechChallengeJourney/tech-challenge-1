@@ -196,32 +196,30 @@ export default function Index(): ReactElement {
   );
 
   return (
-    <UserProvider>
+    <BytebankProvider>
       <BytebankAuthRedirect>
-        <BytebankProvider>
-          <div className={styles.contentWrapper}>
-            {renderBanner()}
-            {renderValuePropositionBlock()}
-          </div>
-          <BytebankRegisterModal
-            open={openRegisterModal}
-            onClose={closeRegisterModal}
-            onSubmit={handleRegisterModal}
-            openModal={handleModalStates}
-          />
-          <BytebankLoginModal
-            open={openLoginModal}
-            onClose={closeLoginModal}
-            onSubmit={handleLoginModal}
-            openModal={handleModalStates}
-          />
-          <BytebankSnackbar
-            open={isSnackbarOpen}
-            data={snackbarData}
-            onClose={closeSnackbar}
-          />
-        </BytebankProvider>
+        <div className={styles.contentWrapper}>
+          {renderBanner()}
+          {renderValuePropositionBlock()}
+        </div>
+        <BytebankRegisterModal
+          open={openRegisterModal}
+          onClose={closeRegisterModal}
+          onSubmit={handleRegisterModal}
+          openModal={handleModalStates}
+        />
+        <BytebankLoginModal
+          open={openLoginModal}
+          onClose={closeLoginModal}
+          onSubmit={handleLoginModal}
+          openModal={handleModalStates}
+        />
+        <BytebankSnackbar
+          open={isSnackbarOpen}
+          data={snackbarData}
+          onClose={closeSnackbar}
+        />
       </BytebankAuthRedirect>
-    </UserProvider>
+    </BytebankProvider>
   );
 }

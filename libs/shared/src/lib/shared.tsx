@@ -26,7 +26,6 @@ import { AccessModalType } from './classes/enums/access-modal-type.enum';
 import { SnackbarData } from './classes/models/snackbar';
 import { BytebankModalProps } from './classes/models/modal';
 import { BytebankAccessModalProps } from './classes/models/access-modal';
-import { UserProvider } from './contexts/user.context';
 
 export * from './classes/models/extract';
 
@@ -47,20 +46,11 @@ export {
   BytebankSnackbar,
   BytebankLoginModal,
   BytebankRegisterModal,
-  UserProvider,
   useUser,
   useFinancialSummary,
   defaultTheme,
   palette,
-  AccessModalType,
+  AccessModalType
 };
 
-export type {
-  ProviderRouteProps,
-  User,
-  ExtractProps,
-  Transaction,
-  BytebankModalProps,
-  BytebankAccessModalProps,
-  SnackbarData,
-};
+export type { ProviderRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };
