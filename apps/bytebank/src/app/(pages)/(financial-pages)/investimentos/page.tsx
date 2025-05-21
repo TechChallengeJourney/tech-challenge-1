@@ -6,10 +6,7 @@ import { BytebankCard, palette, BytebankText, BytebankChart } from '@bytebank/sh
 
 const Investimentos: React.FC = () => {
   return (
-    <BytebankCard
-      className="bytebank-card-content"
-      bgcolor={palette['grey.300']}
-    >
+    <BytebankCard bgIllustration="grey">
       <Box textAlign="left" p={4}>
         <Box pb={4}>
           <BytebankText fontWeight={'bold'} variant="md" color="black">

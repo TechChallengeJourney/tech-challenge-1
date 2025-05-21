@@ -54,3 +54,4 @@ export {
 };
 
 export type { ProviderRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };
+export * from './classes/models/bank-card';

@@ -11,8 +11,8 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
 
     const loginMethods = useForm<{ email: string; password: string }>({
         defaultValues: {
-            email: '',
-            password: '',
+            email: 'joao@example.com',
+            password: 'Teste123',
         },
     });
 
@@ -47,6 +47,7 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
                 illustrationSize={'lg'}
                 open={open}
                 onClose={() => onClose()}
+                fullHeight
             >
                 <>
                     <FormProvider {...loginMethods}>

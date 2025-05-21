@@ -1,4 +1,10 @@
-export default function Outros() {
+'use client';
+import MyBankCards from './_components/my-bank-cards';
 
-  return (<p>Outros</p>);
+const Index: React.FC = () => {
+    return (
+        <MyBankCards />
+    ) 
 }
+
+export default Index;

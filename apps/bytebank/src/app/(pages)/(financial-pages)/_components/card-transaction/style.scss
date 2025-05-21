@@ -8,4 +8,10 @@
   left bottom !important;
   background-repeat: 
   no-repeat, no-repeat !important;
+
+  @media (max-width: 675px) {
+    img {
+      padding-top:2rem;
+    }
+  }
 }

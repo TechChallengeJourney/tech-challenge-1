@@ -44,6 +44,7 @@ export function BytebankRegisterModal({ open, onClose, onSubmit, openModal }: By
                 illustrationSize={'lg'}
                 open={open}
                 onClose={() => onClose()}
+                fullHeight
             >
                 <>
                     <BytebankText>
