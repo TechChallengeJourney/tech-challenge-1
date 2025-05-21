@@ -1,11 +1,10 @@
 'use client';
-import { BytebankServices } from '../../_components/card-services';
-import { Box } from 'node_modules/@mui/material';
+import MyBankCards from './_components/my-bank-cards';
 
-export default function Outros() {
-  return (
-    <Box>
-      <BytebankServices />
-    </Box>
-  );
+const Index: React.FC = () => {
+    return (
+        <MyBankCards />
+    ) 
 }
+
+export default Index;

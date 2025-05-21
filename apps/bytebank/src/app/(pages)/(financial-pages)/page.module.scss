@@ -1,17 +1,18 @@
 .pageWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;       
-  width: 100%;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 70px;
 }
 
 
 .containerPage {
     display: flex;
     flex-direction: row;
-    justify-content: center; 
+    justify-content: center;
     align-items: flex-start;
     gap: 24px;
     width: 100%;
@@ -21,10 +22,6 @@
     @media (max-width: 1023px) {
         display: block;
         flex-direction: column;
-    }
-
-    @media (max-width: 1199px) {
-        display: block;
     }
 }
 

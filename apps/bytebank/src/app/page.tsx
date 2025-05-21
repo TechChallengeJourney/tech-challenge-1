@@ -1,4 +1,5 @@
 'use client';
+
 import {
   BytebankButton,
   BytebankIllustration,
@@ -21,6 +22,7 @@ import { Theme, useTheme } from '@mui/material/styles';
 import { ReactElement, useState } from 'react';
 import styles from './page.module.scss';
 import { useRouter } from 'next/navigation';
+import BytebankAuthRedirect from './(pages)/_components/loading-page/auth-redirect';
 
 type Benefit = {
   icon: ReactElement;
@@ -194,27 +196,29 @@ export default function Index(): ReactElement {
 
   return (
     <BytebankProvider>
-      <div className={styles.contentWrapper}>
-        {renderBanner()}
-        {renderValuePropositionBlock()}
-      </div>
-      <BytebankRegisterModal
-        open={openRegisterModal}
-        onClose={closeRegisterModal}
-        onSubmit={handleRegisterModal}
-        openModal={handleModalStates}
-      />
-      <BytebankLoginModal
-        open={openLoginModal}
-        onClose={closeLoginModal}
-        onSubmit={handleLoginModal}
-        openModal={handleModalStates}
-      />
-      <BytebankSnackbar
-        open={isSnackbarOpen}
-        data={snackbarData}
-        onClose={closeSnackbar}
-      />
+      <BytebankAuthRedirect>
+        <div className={styles.contentWrapper}>
+          {renderBanner()}
+          {renderValuePropositionBlock()}
+        </div>
+        <BytebankRegisterModal
+          open={openRegisterModal}
+          onClose={closeRegisterModal}
+          onSubmit={handleRegisterModal}
+          openModal={handleModalStates}
+        />
+        <BytebankLoginModal
+          open={openLoginModal}
+          onClose={closeLoginModal}
+          onSubmit={handleLoginModal}
+          openModal={handleModalStates}
+        />
+        <BytebankSnackbar
+          open={isSnackbarOpen}
+          data={snackbarData}
+          onClose={closeSnackbar}
+        />
+      </BytebankAuthRedirect>
     </BytebankProvider>
   );
 }
