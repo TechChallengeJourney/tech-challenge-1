@@ -1,10 +1,10 @@
 import {
-    BytebankCardWithIllustration,
     BytebankCardBank,
     useUser,
     BytebankText,
     BankCard,
-    BytebankButton
+    BytebankButton,
+    BytebankCard
 } from '@bytebank/shared';
 import React, { useEffect, useState } from 'react';
 
@@ -50,7 +50,7 @@ const MyBankCards: React.FC = () => {
 
     return (
 
-        <BytebankCardWithIllustration variant='grey'>
+        <BytebankCard bgIllustration='grey' className={styles.card}>
             <Box className={styles.container}>
                 <BytebankText color="black" fontSize="24px" fontWeight={600} >
                     Meus cartões
@@ -87,7 +87,7 @@ const MyBankCards: React.FC = () => {
                     </>
                 }
             </Box >
-        </BytebankCardWithIllustration>
+        </BytebankCard>
     )
 }
 
