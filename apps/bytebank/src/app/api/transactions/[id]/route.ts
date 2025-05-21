@@ -3,7 +3,7 @@ import {
   fetchTransactions,
   updateTransaction,
   deleteTransaction,
-} from '../../../services/transactions/transactions.service';
+} from '../../../services/extract/transactions.service';
 
 export async function GET(request: Request) {
   try {
