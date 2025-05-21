@@ -76,7 +76,7 @@ export function BytebankExtract() {
       updateSummary(totals);
       setExtract(agrupado);
     });
-  }, [user, updateSummary, apiUrl]);
+  }, [user]);
 
   const numberFormat = (value: number) =>
     value.toLocaleString('pt-BR', {
