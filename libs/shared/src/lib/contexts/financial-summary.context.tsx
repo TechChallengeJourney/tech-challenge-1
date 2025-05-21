@@ -3,9 +3,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Transaction } from '../classes/models/transaction';
 export interface FinancialSummary {
-  totalDeposits: number;
-  totalWithdrawals: number;
   transactions: Transaction[];
+  total_value: number;
 }
 
 interface FinancialSummaryContextType extends FinancialSummary {
@@ -15,8 +14,7 @@ interface FinancialSummaryContextType extends FinancialSummary {
 }
 
 const FinancialSummaryContext = createContext<FinancialSummaryContextType>({
-  totalDeposits: 0,
-  totalWithdrawals: 0,
+  total_value: 0,
   transactions: [],
   updateSummary: () => {
     console.warn('updateSummary method is not implemented.');
@@ -29,8 +27,7 @@ const FinancialSummaryContext = createContext<FinancialSummaryContextType>({
 
 export const FinancialSummaryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [summary, setSummary] = useState<FinancialSummary>({
-    totalDeposits: 0,
-    totalWithdrawals: 0,
+    total_value: 0,
     transactions: [],
   });
 

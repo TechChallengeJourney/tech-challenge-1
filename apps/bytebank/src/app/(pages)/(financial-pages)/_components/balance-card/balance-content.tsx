@@ -14,11 +14,9 @@ interface Props {
 }
 
 export function BytebankBalanceContent({ visible, toggleVisibility }: Props) {
-  const { totalDeposits, totalWithdrawals, isLoading } = useFinancialSummary();
+  const { isLoading, total_value } = useFinancialSummary();
 
-  const totalBalance = totalDeposits - totalWithdrawals;
-
-  const totalBalanceFormatted = totalBalance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+  const totalBalanceFormatted = total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
   return (
     <Box className={styles.balanceContainer}>

@@ -2,7 +2,6 @@
 import { BytebankCard, BytebankText } from '@bytebank/shared';
 import { Box } from '@mui/material';
 import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
 import { useUser } from '@bytebank/shared';
 import { useFinancialSummary } from '@bytebank/shared';
@@ -26,57 +25,22 @@ export function BytebankExtract() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
-    const fetchExtract = async () => {
-      const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
+    const getTransactions = async () => {
+      if (!user) return;
+      const res = await fetch(`api/transactions?userId=${user?.id}`);
       const extract = await res.json();
+
+      if (!extract) return;
+
+      updateSummary(extract);
+      setExtract(extract.transactions);
+
       return extract as ExtractProps[];
     };
-    fetchExtract().then((res) => {
-      if (res.length === 0) return;
-      const resData = res;
-      // Agrupamento por mês para exibição
-      const agrupado: BytebankExtractProps[] = Object.values(
-        res.reduce((acc, item) => {
-          const dataObj = new Date(item.date);
-          const mes = format(dataObj, 'MMMM', { locale: ptBR });
-          if (!acc[mes]) {
-            acc[mes] = { month: mes, data: [] };
-          }
-          acc[mes].data.push({
-            id: item.id,
-            date: dataObj,
-            type: item.type,
-            value: item.value,
-            userId: item.userId,
-          });
-          return acc;
-        }, {} as Record<string, BytebankExtractProps>)
-      );
-      // Atualizar contexto com totais e transações
-      const totals = resData.reduce(
-        (acc, item) => {
-          const valueToNumber = +item.value;
-          if (valueToNumber > 0) acc.totalDeposits += valueToNumber;
-          else acc.totalWithdrawals += valueToNumber;
-          acc.transactions.push({
-            id: item.id,
-            date: new Date(item.date),
-            userId: item.userId,
-            type: item.type,
-            value: item.value,
-          });
-          return acc;
-        },
-        {
-          totalDeposits: 0,
-          totalWithdrawals: 0,
-          transactions: [] as Transaction[],
-        }
-      );
-      updateSummary(totals);
-      setExtract(agrupado);
-    });
-  }, [user, updateSummary, apiUrl]);
+
+    getTransactions();
+  
+  }, [user]);
 
   const numberFormat = (value: number) =>
     value.toLocaleString('pt-BR', {
@@ -192,11 +156,16 @@ export function BytebankExtract() {
               </Box>
             ))
           ) : (
-            <Box textAlign={'center'} px={4} pb={4} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={2}>
-              <ErrorOutlineIcon
-                color="error"
-                sx={{ fontSize: '50px' }}
-                />
+            <Box
+              textAlign={'center'}
+              px={4}
+              pb={4}
+              display={'flex'}
+              flexDirection={'column'}
+              alignItems={'center'}
+              gap={2}
+            >
+              <ErrorOutlineIcon color="error" sx={{ fontSize: '50px' }} />
               <BytebankText variant={'sm'}>
                 Não encontramos nenhuma transação, que tal criar uma nova?
               </BytebankText>
