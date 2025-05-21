@@ -11,8 +11,8 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
 
     const loginMethods = useForm<{ email: string; password: string }>({
         defaultValues: {
-            email: '',
-            password: '',
+            email: 'joao@example.com',
+            password: 'Teste123',
         },
     });
 

@@ -22,5 +22,41 @@
       "value": "200000",
       "date": "2025-05-19T15:26:06.413Z"
     }
+  ],
+  "cards": [
+    {
+      "id": "bff3",
+      "userId": "c0d9",
+      "cardNumber": "4929970605666969",
+      "name":"João Silva",
+      "functions": ["Crédito", "Débito"],
+      "variant": "Físico"
+    },
+    {
+      "id": "af5b",
+      "userId": "c0d9",
+      "cardNumber": "5407978391046187",
+      "name":"João Silva",
+      "functions": ["Crédito"],
+      "variant": "Virtual"
+    }
+  ],
+  "cards": [
+    {
+      "id": "bff3",
+      "userId": "c0d9",
+      "cardNumber": "4929970605666969",
+      "name":"João Silva",
+      "functions": ["Crédito", "Débito"],
+      "variant": "Físico"
+    },
+    {
+      "id": "af5b",
+      "userId": "c0d9",
+      "cardNumber": "5407978391046187",
+      "name":"João Silva",
+      "functions": ["Crédito"],
+      "variant": "Virtual"
+    }
   ]
 }

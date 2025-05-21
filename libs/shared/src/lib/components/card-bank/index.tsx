@@ -3,9 +3,10 @@ import { BytebankCard } from '../card';
 import { palette } from '../../styles/palette';
 import './style.scss';
 import { BytebankIllustration } from '../illustration';
+import { BankCardVariant } from '../../shared';
 
 export interface BytebankCardBankProps {
-  variant: 'physical' | 'virtual';
+  variant: BankCardVariant;
   details: BytebankCardBankDetails
 }
 
@@ -15,8 +16,8 @@ export interface BytebankCardBankDetails {
   expirationDate: string;
 }
 
-export function BytebankCardBank({ variant = 'physical', details }: BytebankCardBankProps) {
-  const bgcolor = variant === 'physical' ? palette['primary.main'] : palette['grey.600'];
+export function BytebankCardBank({ variant = 'Físico', details }: BytebankCardBankProps) {
+  const bgcolor = variant === 'Físico' ? palette['primary.main'] : palette['grey.600'];
   return (
     <Box className="card-bank--container">
       <BytebankCard bgcolor={bgcolor} variant="elevation" className={`card-bank--container__card`}>
