@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, RegisterOptions } from 'react-hook-form';
 import Input from '../index';
 
 interface ControlledInputProps {
@@ -9,6 +9,7 @@ interface ControlledInputProps {
   placeholder?: string;
   autoComplete?: string;
   mask?: 'currency';
+  rules?: RegisterOptions;
 }
 
 export const BytebankInputController: React.FC<ControlledInputProps> = ({
@@ -18,11 +19,13 @@ export const BytebankInputController: React.FC<ControlledInputProps> = ({
   placeholder,
   autoComplete,
   mask,
+  rules,
 }) => {
   const { control } = useFormContext();
   return (
     <Controller
       name={name}
+      rules={rules}
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Input

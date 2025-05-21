@@ -1,6 +1,6 @@
 import styles from './page.module.scss';
 import { Box } from '@mui/material';
-import { BytebankExtract } from '../../../_components/extract';
+import { BytebankExtract } from '../extract';
 
 type Props = {
   refresh?: boolean;
