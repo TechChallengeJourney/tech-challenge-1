@@ -3,8 +3,6 @@ import { fetchTransactions, createTransaction } from '../../services/extract/tra
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -63,7 +61,7 @@ export async function GET(request: Request) {
     let total_value = 0;
 
     const extract = Object.values(
-      data.reduce((acc: any, item: any) => {
+      data.reduce((acc, item) => {
         const dataObj = new Date(item.date);
         const mes = format(dataObj, 'MMMM', { locale: ptBR });
         if (!acc[mes]) {

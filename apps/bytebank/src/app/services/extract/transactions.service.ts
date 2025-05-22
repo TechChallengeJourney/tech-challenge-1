@@ -1,12 +1,7 @@
+import { Transaction } from '@bytebank/shared';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-interface Transaction {
-    id: string;
-    userId: string;
-    type: string;
-    value: string;
-    date: string;
-}
 export async function fetchTransactions(userId: string) {
     return await fetch(`${API_URL}/extract?userId=${userId}`, { method: 'GET' });
 }

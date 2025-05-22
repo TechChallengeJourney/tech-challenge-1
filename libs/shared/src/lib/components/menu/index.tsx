@@ -6,15 +6,10 @@ import { Box, Drawer, Typography, Link, DrawerProps } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import { palette } from '../../shared';
-
-export interface Route {
-  name: string;
-  route: string;
-}
+import { palette, ProviderRouteProps } from '../../shared';
 
 interface MenuProps {
-    routes: Route[];
+    routes: ProviderRouteProps[];
     isLogged?: boolean;
     mobile?: boolean;
 }
@@ -35,7 +30,7 @@ export function BytebankMenu({ routes, isLogged, mobile }: MenuProps) {
 
     const mappedRoutes = (
         routes.map(route => (
-            <Typography key={route.route} variant="sm" textTransform="capitalize" className={`menu-item ${pathName === route.route ? 'active' : ''}`}>
+            <Typography key={route.route} variant="sm" textTransform="capitalize" className={`menu-item ${route.disabled && 'disabled'} ${pathName === route.route ? 'active' : ''}`}>
                 <Link color={isLogged ? 'white' : 'success'} onClick={() => redirectTo(route.route)}>
                 {route.name}
                 </Link>
