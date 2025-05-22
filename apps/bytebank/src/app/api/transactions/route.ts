@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fetchTransactions } from '../../services/extract/transactions.service';
+import { fetchTransactions, createTransaction } from '../../services/extract/transactions.service';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -16,13 +16,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const response = await fetch(`${apiUrl}/extract`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await createTransaction(data);
 
     if (!response.ok) {
       return NextResponse.json(
@@ -68,8 +62,8 @@ export async function GET(request: Request) {
 
     let total_value = 0;
 
-    const transactions = Object.values(
-      data.reduce((acc, item) => {
+    const extract = Object.values(
+      data.reduce((acc: any, item: any) => {
         const dataObj = new Date(item.date);
         const mes = format(dataObj, 'MMMM', { locale: ptBR });
         if (!acc[mes]) {
@@ -89,7 +83,7 @@ export async function GET(request: Request) {
     );
 
     return NextResponse.json(
-      { transactions, total_value },
+      { extract, total_value },
       {
         status: 200,
       }

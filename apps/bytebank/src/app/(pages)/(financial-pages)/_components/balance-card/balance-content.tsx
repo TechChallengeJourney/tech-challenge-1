@@ -1,6 +1,6 @@
 'use client';
 
-import { BytebankText, useFinancialSummary } from '@bytebank/shared';
+import { BytebankText, useFinancialData } from '@bytebank/shared';
 import { VisibilityOff, VisibilityRounded } from '@mui/icons-material';
 import { Box, Divider, Skeleton } from '@mui/material';
 import { BytebankBalanceHeader } from './balance-header';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function BytebankBalanceContent({ visible, toggleVisibility }: Props) {
-  const { isLoading, total_value } = useFinancialSummary();
+  const { isLoading, total_value } = useFinancialData();
 
   const totalBalanceFormatted = total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 

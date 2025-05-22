@@ -11,6 +11,7 @@ import {
   BytebankSnackbar,
   SnackbarData,
   BytebankIllustration,
+  useFinancialData,
 } from '@bytebank/shared';
 import './style.scss';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -23,6 +24,7 @@ type Props = {
 export function BytebankCardTransaction({ onSuccess }: Props) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
+  const { fetchTransactions } = useFinancialData();
   const transactionMethods = useForm<Partial<Transaction>>({
     defaultValues: {
       type: '',
@@ -39,21 +41,26 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
 
   const handleTransaction = async (data: Partial<Transaction>) => {
     data.value = Number(data.value) / 100;
-    const response = await fetch('/api/extract', {
+
+    const response = await fetch('/api/transactions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userId: user?.id, ...data, date: new Date() }),
     });
+
     if (response.ok) {
-      transactionMethods.reset({value: '', type: ''});
+      transactionMethods.reset({ value: '', type: '' });
       setSnackbarData({
         status: 'success',
         message: 'Transação adicionada com sucesso!',
       });
       setSnackbarOpen(true);
       onSuccess?.();
+      if (user) {
+        fetchTransactions(user);
+      }
     } else {
       setSnackbarData({
         status: 'error',
@@ -84,7 +91,7 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
           <FormProvider {...transactionMethods}>
             <form onSubmit={transactionMethods.handleSubmit(handleTransaction)}>
               <BytebankSelectController
-                rules={{required: "Este campo é obrigatório"}}
+                rules={{ required: "Este campo é obrigatório" }}
                 name="type"
                 label="Selecione o tipo de transação"
                 options={selectOptions}
@@ -96,12 +103,12 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
               >
                 <Box flexGrow={'1'}>
                   <BytebankInputController
-                    rules={{required: "Este campo é obrigatório"}}
+                    rules={{ required: "Este campo é obrigatório" }}
                     name="value"
                     label="Valor"
                     type="text"
                     mask="currency"
-                    
+
                   />
                   <Box mt={4}>
                     <BytebankButton

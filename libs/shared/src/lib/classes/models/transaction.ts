@@ -5,3 +5,8 @@ export interface Transaction {
   value: string | number;
   userId?: string;
 }
+
+export interface Extract {
+    month: string;
+    data: Transaction[];
+}
