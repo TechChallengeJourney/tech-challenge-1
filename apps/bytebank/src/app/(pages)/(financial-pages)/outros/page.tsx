@@ -1,5 +1,5 @@
 'use client';
-import { BytebankServices } from './_components/card-services';
+import { BytebankServices } from './_components/services-card';
 
 const Index: React.FC = () => {
   return (
