@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { fetchTransactions, createTransaction } from '../../services/extract/transactions.service';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { ExtractProps, Transaction } from '@bytebank/shared';
 
 export async function POST(request: Request) {
   try {
@@ -56,12 +57,12 @@ export async function GET(request: Request) {
       );
     }
 
-    const data = await response.json();
+    const data: Transaction[] = await response.json();
 
     let total_value = 0;
 
     const extract = Object.values(
-      data.reduce((acc, item) => {
+      data.reduce<Record<string, ExtractProps>>((acc, item) => {
         const dataObj = new Date(item.date);
         const mes = format(dataObj, 'MMMM', { locale: ptBR });
         if (!acc[mes]) {

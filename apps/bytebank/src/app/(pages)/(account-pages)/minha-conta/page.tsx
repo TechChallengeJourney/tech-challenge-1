@@ -1,6 +1,6 @@
 'use client';
 import './style.scss';
-import { BytebankButton, BytebankCard, BytebankInputController, BytebankSnackbar, BytebankText, palette, User, useUser, SnackbarData } from '@bytebank/shared';
+import { BytebankButton, BytebankCard, BytebankInputController, BytebankSnackbar, BytebankText, User, useUser, SnackbarData, BytebankIllustration } from '@bytebank/shared';
 import { Box, Theme, useMediaQuery, useTheme } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -60,12 +60,12 @@ export default function Index(): ReactElement {
   return (
     <>
       <Box my={4} className='my-account'>
-        <BytebankCard bgcolor={palette['grey.300']} className='my-account__card'>
+        <BytebankCard bgIllustration="grey" className='my-account__card'>
           <Box p={4}>
             <BytebankText variant={'md'} fontWeight={'bold'}>Minha conta</BytebankText>
             <Box mt={4} display={'flex'} flexDirection={!isMobile ? 'row' : 'column-reverse'}>
               <Box className='my-account__card-image'>
-                <img src={'/images/my-account.svg'} alt={'Imagem de uma pessoa editando sua conta'} />
+                <BytebankIllustration name="my-account" />
               </Box>
               <Box flex={'auto'}>
                 <FormProvider {...formMethods}>

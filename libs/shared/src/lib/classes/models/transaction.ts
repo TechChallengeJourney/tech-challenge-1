@@ -6,7 +6,3 @@ export interface Transaction {
   userId?: string;
 }
 
-export interface Extract {
-    month: string;
-    data: Transaction[];
-}

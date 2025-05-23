@@ -26,7 +26,7 @@ import { AccessModalType } from './classes/enums/access-modal-type.enum';
 import { SnackbarData } from './classes/models/snackbar';
 import { BytebankModalProps } from './classes/models/modal';
 import { BytebankAccessModalProps } from './classes/models/access-modal';
-import { BytebankDivider } from './components/divider'
+import { BytebankDivider } from './components/divider';
 
 export * from './classes/models/extract';
 
