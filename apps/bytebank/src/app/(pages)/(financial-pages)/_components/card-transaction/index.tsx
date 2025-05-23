@@ -108,13 +108,13 @@ export function BytebankCardTransaction({ onSuccess }: Props) {
                     label="Valor"
                     type="text"
                     mask="currency"
-
                   />
                   <Box mt={4}>
                     <BytebankButton
                       label={'Concluir transação'}
                       color={'secondary'}
                       variant={'contained'}
+                      disabled={!transactionMethods.formState.isValid}
                       fullWidth
                     />
                   </Box>
