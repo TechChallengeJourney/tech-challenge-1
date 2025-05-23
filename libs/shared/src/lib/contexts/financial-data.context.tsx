@@ -1,11 +1,10 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-import { Extract, Transaction } from '../classes/models/transaction';
-import { User } from '../shared';
+import { ExtractProps, User } from '../shared';
 
 export interface FinancialData {
-  extract: Extract[];
+  extract: ExtractProps[];
   total_value: number;
 }
 

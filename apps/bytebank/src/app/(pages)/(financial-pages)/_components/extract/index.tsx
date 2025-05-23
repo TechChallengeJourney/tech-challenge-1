@@ -155,7 +155,7 @@ export function BytebankExtract() {
                         {itens.month.charAt(0).toUpperCase() + itens.month.slice(1)}
                       </BytebankText>
                     </Box>
-                    {itens.data.map((item, index) => (
+                    {itens.data.map((item: Transaction, index: number) => (
                       <Box
                         key={index}
                         width="100%"
