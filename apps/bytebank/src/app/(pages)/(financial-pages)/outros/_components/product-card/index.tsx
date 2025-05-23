@@ -8,7 +8,7 @@ import {
 import './style.scss';
 import Link from 'next/link';
 
-interface serviceCardProps {
+interface ProductCardProps {
   imageName: string;
   path: string;
   title: string;
@@ -47,9 +47,9 @@ const data = [
   },
 ];
 
-const ServiceCard = ({ imageName, path, title }: serviceCardProps) => {
+const ProductCard = ({ imageName, path, title }: ProductCardProps) => {
   return (
-    <Link href={`/outros/${path}`} className="service-link">
+    <Link href={`/outros/${path}`} className="product-link">
       <Box
         sx={{ background: palette['white.main'], borderRadius: '8px' }}
         height={167}
@@ -73,7 +73,7 @@ const ServiceCard = ({ imageName, path, title }: serviceCardProps) => {
   );
 };
 
-export const BytebankServices = () => {
+export const BytebankProducts = () => {
   return (
     <BytebankCard bgIllustration="grey">
       <Box p={4}>
@@ -81,9 +81,9 @@ export const BytebankServices = () => {
           Confira os serviços disponíveis
         </BytebankText>
       </Box>
-      <Box className="servicesWrapper">
-        {data.map(({ imageName, path, title }: serviceCardProps, i) => (
-          <ServiceCard
+      <Box className="productsWrapper">
+        {data.map(({ imageName, path, title }: ProductCardProps, i) => (
+          <ProductCard
             key={i}
             imageName={imageName}
             path={path}
