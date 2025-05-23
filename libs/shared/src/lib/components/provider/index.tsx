@@ -5,7 +5,7 @@ import { BytebankHeader } from '../header';
 import { Box } from '@mui/material';
 import { ProviderRouteProps } from '../../classes/models/provider-route';
 import { UserProvider } from '../../contexts/user.context';
-import { FinancialSummaryProvider } from '../../contexts/financial-summary.context';
+import { FinancialDataProvider } from '../../contexts/financial-data.context';
 import { BytebankFooter } from '../footer';
 
 export function BytebankProvider({
@@ -20,13 +20,13 @@ export function BytebankProvider({
     <>
       <ThemeProvider theme={defaultTheme}>
         <UserProvider>
-          <FinancialSummaryProvider>
+          <FinancialDataProvider>
             {canNavigate ? <BytebankHeader /> : ''}
             <Box display={'flex'} minHeight="100vh">
               {children}
             </Box>
             {canNavigate ? <BytebankFooter /> : ''}
-          </FinancialSummaryProvider>
+          </FinancialDataProvider>
         </UserProvider>
       </ThemeProvider>
     </>

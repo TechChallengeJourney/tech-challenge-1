@@ -10,6 +10,7 @@ export default function BytebankLoadingContent() {
       justifyContent="center"
       height="100vh"
       textAlign="center"
+      margin="0 auto"
       px={2}
     >
       <BytebankIllustration name="card-saving" variant="lg" />

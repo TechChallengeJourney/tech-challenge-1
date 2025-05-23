@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import {
   Select,
   MenuItem,
@@ -7,6 +6,7 @@ import {
   InputLabel,
   FormHelperText,
 } from '@mui/material';
+import './style.scss';
 
 export interface SelectOption {
   label: string;
@@ -31,10 +31,9 @@ export default function BytebankSelect({
   helperText = '',
 }: SelectProps) {
   return (
-    <FormControl fullWidth margin="normal" error={error}>
+    <FormControl variant='filled' fullWidth margin="normal" error={error}>
       <InputLabel>{label}</InputLabel>
       <Select
-        sx={{ backgroundColor: '#FFF', borderRadius: '5px' }}
         value={value ?? ''}
         onChange={(e: any) => onChange(e.target.value)}
         label={label}

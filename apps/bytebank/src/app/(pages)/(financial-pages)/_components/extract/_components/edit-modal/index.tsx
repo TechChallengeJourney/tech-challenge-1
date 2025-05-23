@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BytebankModal, Transaction } from '@bytebank/shared';
 import { BytebankInputController } from '@bytebank/shared';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -22,6 +22,11 @@ export default function EditExtractModal({
     onSave(String(data.value));
     onClose();
   };
+  useEffect(() => {
+    
+    methods.reset({ value: (Number(item?.value) * 100).toString() || '' });
+
+  }, [item])
   return (
     <BytebankModal
       open={open}

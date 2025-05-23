@@ -19,15 +19,15 @@ export interface BytebankButtonProps extends ButtonProps {
    * A cor do botão
    */
   color:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'warning'
-    | 'black'
-    | 'white';
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'error'
+  | 'info'
+  | 'warning'
+  | 'black'
+  | 'white';
   /**
    * O estilo do botão
    */
@@ -38,6 +38,10 @@ export interface BytebankButtonProps extends ButtonProps {
 const ButtonColor = styled(Button)<ButtonProps>(() => ([{
   '&.MuiButton-containedTertiary:hover': {
     color: 'white',
+  },
+  '&.Mui-disabled': {
+    color: '#3E3E3E',
+    backgroundColor: '#A7A7A7',
   },
   '&': {
     borderRadius: '8px',
@@ -56,14 +60,14 @@ export function BytebankButton({
   ...props
 }: BytebankButtonProps) {
   return (
-      <ButtonColor
-        type="submit"
-        variant={variant}
-        color={color}
-        onClick={sendSubmit}
-        {...props}
-      >
-        {label}
-      </ButtonColor>
+    <ButtonColor
+      type="submit"
+      variant={variant}
+      color={color}
+      onClick={sendSubmit}
+      {...props}
+    >
+      {label}
+    </ButtonColor>
   );
 }

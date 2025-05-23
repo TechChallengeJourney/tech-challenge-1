@@ -1,6 +1,7 @@
 'use client';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import './style.scss';
 
 export interface InputProps {
   value?: string;
@@ -32,15 +33,16 @@ export default function BytebankInput({
   mask
 }: InputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = (e.target as HTMLInputElement).value.replace(/\D/g, '');
+    
     if (mask === 'currency') {
-      // TypeScript DOM lib workaround: force-cast to any for value access
-      const raw = (e.target as any).value.replace(/\D/g, '');
-      // Chama o onChange com o valor numérico puro
+      newValue = newValue.replace(/^0+/, '');
+
       const event = {
         ...e,
         target: {
           ...e.target,
-          value: raw,
+          value: newValue,
         },
       };
       onChange(event as React.ChangeEvent<HTMLInputElement>);
@@ -48,17 +50,9 @@ export default function BytebankInput({
       onChange(e);
     }
   };
-
-  const InputColor = styled(TextField)<InputProps>(() => ([{
-    '.MuiOutlinedInput-root': {
-      backgroundColor: 'white',
-    },
-  }
-  ]));
   return (
     <Box className="bytebank-input">
-      <InputColor
-        sx={{'borderRadius': '5px'}}
+      <TextField
         value={mask === 'currency' && typeof value === 'string' ? formatCurrency(value) : value}
         onChange={handleChange}
         label={label}
@@ -68,7 +62,7 @@ export default function BytebankInput({
         helperText={helperText}
         autoComplete={autoComplete}
         margin="normal"
-        variant="outlined"
+        variant={'filled'}
         fullWidth
       />
     </Box>
