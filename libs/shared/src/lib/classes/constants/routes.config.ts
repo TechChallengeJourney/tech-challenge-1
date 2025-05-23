@@ -22,7 +22,8 @@ export const loggedRoutes: ProviderRouteProps[] = [
     },
     {
         name: 'transferências',
-        route: '/transferencias'
+        route: '/transferencias',
+        disabled: true
     },
     {
         name: 'outros',

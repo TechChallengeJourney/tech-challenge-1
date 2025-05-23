@@ -1,12 +1,10 @@
 'use client';
-import { BytebankCard, BytebankText } from '@bytebank/shared';
-import { Box } from '@mui/material';
+import { BytebankCard, BytebankDivider, BytebankSnackbar, BytebankText, SnackbarData } from '@bytebank/shared';
+import { Box, Skeleton } from '@mui/material';
 import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
 import { useUser } from '@bytebank/shared';
-import { useFinancialSummary } from '@bytebank/shared';
-import { BytebankExtractProps, ExtractProps } from '@bytebank/shared';
+import { useFinancialData } from '@bytebank/shared';
 import { Transaction } from '@bytebank/shared';
 import EditExtractModal from './_components/edit-modal';
 import DeleteExtractModal from './_components/delete-modal';
@@ -16,67 +14,24 @@ import IconButton from '@mui/material/IconButton';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 export function BytebankExtract() {
-  const [extract, setExtract] = useState<BytebankExtractProps[]>([]);
   const { user } = useUser();
-  const { updateSummary } = useFinancialSummary();
+  const { fetchTransactions, extract, isLoading } = useFinancialData();
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState<SnackbarData | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Transaction | null>(null);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
   useEffect(() => {
-    const fetchExtract = async () => {
-      const res = await fetch(`${apiUrl}/extract?userId=${user?.id}`);
-      const extract = await res.json();
-      return extract as ExtractProps[];
+    const getTransactions = async () => {
+      if (!user) return;
+      await fetchTransactions(user)
     };
-    fetchExtract().then((res) => {
-      if (res.length === 0) return;
-      const resData = res;
-      // Agrupamento por mês para exibição
-      const agrupado: BytebankExtractProps[] = Object.values(
-        res.reduce((acc, item) => {
-          const dataObj = new Date(item.date);
-          const mes = format(dataObj, 'MMMM', { locale: ptBR });
-          if (!acc[mes]) {
-            acc[mes] = { month: mes, data: [] };
-          }
-          acc[mes].data.push({
-            id: item.id,
-            date: dataObj,
-            type: item.type,
-            value: item.value,
-            userId: item.userId,
-          });
-          return acc;
-        }, {} as Record<string, BytebankExtractProps>)
-      );
-      // Atualizar contexto com totais e transações
-      const totals = resData.reduce(
-        (acc, item) => {
-          const valueToNumber = +item.value;
-          if (valueToNumber > 0) acc.totalDeposits += valueToNumber;
-          else acc.totalWithdrawals += valueToNumber;
-          acc.transactions.push({
-            id: item.id,
-            date: new Date(item.date),
-            userId: item.userId,
-            type: item.type,
-            value: item.value,
-          });
-          return acc;
-        },
-        {
-          totalDeposits: 0,
-          totalWithdrawals: 0,
-          transactions: [] as Transaction[],
-        }
-      );
-      updateSummary(totals);
-      setExtract(agrupado);
-    });
+
+    getTransactions();
+
   }, [user]);
+
 
   const numberFormat = (value: number) =>
     value.toLocaleString('pt-BR', {
@@ -96,6 +51,68 @@ export function BytebankExtract() {
     setDeleteModalOpen(true);
   };
 
+  const closeSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarData(null);
+  };
+
+  const handleTransactionUpdate = async (data: Transaction, newValue: string) => {
+    data.value = (Number(newValue) / 100).toString();
+    data.date = new Date();
+
+    const response = await fetch(`/api/transactions/${data.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      setSnackbarData({
+        status: 'success',
+        message: 'Transação adicionada com sucesso!',
+      });
+      setSnackbarOpen(true);
+      if (user) {
+        fetchTransactions(user);
+      }
+    } else {
+      errorSnackBar();
+    }
+  };
+  const handleTransactionDelete = async (id: string) => {
+    const response = await fetch(`/api/transactions/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(id)
+    });
+
+    if (response.ok) {
+      setSnackbarData({
+        status: 'success',
+        message: 'Transação excluída com sucesso!',
+      });
+      setSnackbarOpen(true);
+      if (user) {
+        fetchTransactions(user);
+      }
+    } else {
+      errorSnackBar();
+    }
+  };
+
+  const errorSnackBar = () => {
+    setSnackbarData({
+      status: 'error',
+      message: 'Algo deu errado. Por favor, aguarde e tente novamente!',
+    });
+    setSnackbarOpen(true);
+  }
+
+
   return (
     <>
       <BytebankCard bgcolor={'#FFF'}>
@@ -106,102 +123,126 @@ export function BytebankExtract() {
             </BytebankText>
           </Box>
           {/* Lista de extratos */}
-          {extract.length !== 0 ? (
-            extract.map((itens, index) => (
-              <Box key={index}>
+          {isLoading ?
+            <Box >
+              <Box px={4}>
+                <Skeleton width={40} variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+              </Box>
+              <Box my={2}>
+                <BytebankDivider type="horizontal" color="primary" />
+              </Box>
+              <Box px={4}>
+                <Skeleton width={40} variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+              </Box>
+            </Box> :
+            <>
+              {extract?.length !== 0 ? (
+                extract?.map((itens, index) => (
+                  <Box key={index}>
+                    <Box
+                      width="100%"
+                      display="flex"
+                      px={4}
+                      flexDirection="row"
+                      boxSizing={'border-box'}
+                      fontWeight={600}
+                    >
+                      <BytebankText fontWeight={'bold'} color="primary">
+                        {itens.month.charAt(0).toUpperCase() + itens.month.slice(1)}
+                      </BytebankText>
+                    </Box>
+                    {itens.data.map((item: Transaction, index: number) => (
+                      <Box
+                        key={index}
+                        width="100%"
+                        display="flex"
+                        px={4}
+                        flexDirection="row"
+                        justifyContent="space-between"
+                        boxSizing="border-box"
+                        borderBottom={
+                          itens.data.length !== index + 1 ? '1px solid ' : ''
+                        }
+                        borderColor={'primary.main'}
+                        paddingTop={'20px'}
+                        paddingBottom={'20px'}
+                        alignItems="center"
+                        position={'relative'}
+                      >
+                        <Box
+                          width="80%"
+                          display="flex"
+                          flexDirection="column"
+                          gap="5px"
+                        >
+                          <BytebankText
+                            textAlign={'left'}
+                            color={+item.value < 0 ? 'error' : 'primary'}
+                          >
+                            {item.type}
+                          </BytebankText>
+                          <BytebankText
+                            textAlign={'left'}
+                            color={+item.value < 0 ? 'error' : 'primary'}
+                          >
+                            {numberFormat(+item.value)}
+                          </BytebankText>
+                        </Box>
+                        <Box
+                          display={'flex'}
+                          flexDirection="column"
+                          gap="5px"
+                          justifyContent={'space-between'}
+                        >
+                          <BytebankText
+                            fontSize="12px"
+                            color={+item.value < 0 ? 'error' : 'primary'}
+                          >
+                            {format(item.date, 'dd/MM/yyyy')}
+                          </BytebankText>
+                          <Box display="flex">
+                            <IconButton
+                              color="primary"
+                              onClick={() => handleEdit(item)}
+                              size="small"
+                            >
+                              <EditIcon />
+                            </IconButton>
+                            <IconButton
+                              color="primary"
+                              onClick={() => handleDelete(item)}
+                              size="small"
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                ))
+              ) : (
                 <Box
-                  width="100%"
-                  display="flex"
+                  textAlign={'center'}
                   px={4}
-                  flexDirection="row"
-                  boxSizing={'border-box'}
-                  fontWeight={600}
+                  pb={4}
+                  display={'flex'}
+                  flexDirection={'column'}
+                  alignItems={'center'}
+                  gap={2}
                 >
-                  <BytebankText fontWeight={'bold'} color="primary">
-                    {itens.month.charAt(0).toUpperCase() + itens.month.slice(1)}
+                  <ErrorOutlineIcon color="error" sx={{ fontSize: '50px' }} />
+                  <BytebankText variant={'sm'}>
+                    Não encontramos nenhuma transação, que tal criar uma nova?
                   </BytebankText>
                 </Box>
-                {itens.data.map((item, index) => (
-                  <Box
-                    key={index}
-                    width="100%"
-                    display="flex"
-                    px={4}
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    boxSizing="border-box"
-                    borderBottom={
-                      itens.data.length !== index + 1 ? '1px solid ' : ''
-                    }
-                    borderColor={'primary.main'}
-                    paddingTop={'20px'}
-                    paddingBottom={'20px'}
-                    alignItems="center"
-                    position={'relative'}
-                  >
-                    <Box
-                      width="80%"
-                      display="flex"
-                      flexDirection="column"
-                      gap="5px"
-                    >
-                      <BytebankText
-                        textAlign={'left'}
-                        color={+item.value < 0 ? 'error' : 'primary'}
-                      >
-                        {item.type}
-                      </BytebankText>
-                      <BytebankText
-                        textAlign={'left'}
-                        color={+item.value < 0 ? 'error' : 'primary'}
-                      >
-                        {numberFormat(+item.value)}
-                      </BytebankText>
-                    </Box>
-                    <Box
-                      display={'flex'}
-                      flexDirection="column"
-                      gap="5px"
-                      justifyContent={'space-between'}
-                    >
-                      <BytebankText
-                        fontSize="12px"
-                        color={+item.value < 0 ? 'error' : 'primary'}
-                      >
-                        {format(item.date, 'dd/MM/yyyy')}
-                      </BytebankText>
-                      <Box display="flex">
-                        <IconButton
-                          color="primary"
-                          onClick={() => handleEdit(item)}
-                          size="small"
-                        >
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          color="primary"
-                          onClick={() => handleDelete(item)}
-                          size="small"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Box>
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-            ))
-          ) : (
-            <Box textAlign={'center'} px={4} pb={4} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={2}>
-              <ErrorOutlineIcon
-                color="error"
-                sx={{ fontSize: '50px' }}
-                />
-              <BytebankText variant={'sm'}>
-                Não encontramos nenhuma transação, que tal criar uma nova?
-              </BytebankText>
-            </Box>
-          )}
+              )}
+            </>
+          }
         </Box>
       </BytebankCard>
 
@@ -211,14 +252,7 @@ export function BytebankExtract() {
         item={selectedItem as Transaction}
         onSave={async (newValue) => {
           if (!selectedItem) return;
-          await fetch(`${apiUrl}/extract/${selectedItem.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...selectedItem, value: newValue }),
-          });
-          setEditModalOpen(false);
-          setSelectedItem(null);
-          window.location.reload();
+          handleTransactionUpdate(selectedItem, newValue)
         }}
       />
       <DeleteExtractModal
@@ -227,14 +261,11 @@ export function BytebankExtract() {
         item={selectedItem}
         onConfirm={async () => {
           if (!selectedItem) return;
-          await fetch(`${apiUrl}/extract/${selectedItem.id}`, {
-            method: 'DELETE',
-          });
-          setDeleteModalOpen(false);
-          setSelectedItem(null);
-          window.location.reload();
+          setDeleteModalOpen(false)
+          handleTransactionDelete(selectedItem.id)
         }}
       />
+      <BytebankSnackbar open={snackbarOpen} data={snackbarData} onClose={closeSnackbar} />
     </>
   );
 }

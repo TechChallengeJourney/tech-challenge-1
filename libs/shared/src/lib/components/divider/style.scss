@@ -11,6 +11,10 @@
         height: 100%;
     }
 
+    &--primary {
+        background-color: var( --mui-palette-primary-main);
+    }
+
     &--orange {
         background-color: var(--mui-palette-secondary-main);
     }

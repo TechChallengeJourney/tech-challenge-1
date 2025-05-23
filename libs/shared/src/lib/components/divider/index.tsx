@@ -3,6 +3,7 @@ import './style.scss';
 
 export interface DividerProps {
     type?: 'horizontal' | 'vertical';
+    className?: string;
     color?:
     | 'primary'
     | 'secondary'
@@ -14,11 +15,12 @@ export interface DividerProps {
     | 'black';
 }
 
-export function Divider({
+export function BytebankDivider({
     type = 'horizontal',
-    color = 'black'
+    color = 'black',
+    className
 }: DividerProps) {
     return (
-        <div className={`divider divider--${type} divider--${color}`}></div>
+        <div className={`divider divider--${type} divider--${color} ${className}`}></div>
     );
 }
