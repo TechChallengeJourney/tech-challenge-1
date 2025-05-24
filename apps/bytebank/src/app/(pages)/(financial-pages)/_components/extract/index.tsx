@@ -1,5 +1,11 @@
 'use client';
-import { BytebankCard, BytebankDivider, BytebankSnackbar, BytebankText, SnackbarData } from '@bytebank/shared';
+import {
+  BytebankCard,
+  BytebankDivider,
+  BytebankSnackbar,
+  BytebankText,
+  SnackbarData,
+} from '@bytebank/shared';
 import { Box, Skeleton } from '@mui/material';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
@@ -25,13 +31,11 @@ export function BytebankExtract() {
   useEffect(() => {
     const getTransactions = async () => {
       if (!user) return;
-      await fetchTransactions(user)
+      await fetchTransactions(user);
     };
 
     getTransactions();
-
   }, [user]);
-
 
   const numberFormat = (value: number) =>
     value.toLocaleString('pt-BR', {
@@ -56,7 +60,10 @@ export function BytebankExtract() {
     setSnackbarData(null);
   };
 
-  const handleTransactionUpdate = async (data: Transaction, newValue: string) => {
+  const handleTransactionUpdate = async (
+    data: Transaction,
+    newValue: string
+  ) => {
     data.value = (Number(newValue) / 100).toString();
     data.date = new Date();
 
@@ -87,7 +94,7 @@ export function BytebankExtract() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(id)
+      body: JSON.stringify(id),
     });
 
     if (response.ok) {
@@ -110,8 +117,7 @@ export function BytebankExtract() {
       message: 'Algo deu errado. Por favor, aguarde e tente novamente!',
     });
     setSnackbarOpen(true);
-  }
-
+  };
 
   return (
     <>
@@ -123,26 +129,51 @@ export function BytebankExtract() {
             </BytebankText>
           </Box>
           {/* Lista de extratos */}
-          {isLoading ?
-            <Box >
+          {isLoading ? (
+            <Box>
               <Box px={4}>
-                <Skeleton width={40} variant="text" sx={{ fontSize: '1.5rem' }} />
-                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
-                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton
+                  width={40}
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
+                <Skeleton
+                  width="full"
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
+                <Skeleton
+                  width="full"
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
               </Box>
               <Box my={2}>
                 <BytebankDivider type="horizontal" color="primary" />
               </Box>
               <Box px={4}>
-                <Skeleton width={40} variant="text" sx={{ fontSize: '1.5rem' }} />
-                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
-                <Skeleton width="full" variant="text" sx={{ fontSize: '1.5rem' }} />
+                <Skeleton
+                  width={40}
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
+                <Skeleton
+                  width="full"
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
+                <Skeleton
+                  width="full"
+                  variant="text"
+                  sx={{ fontSize: '1.5rem' }}
+                />
               </Box>
-            </Box> :
+            </Box>
+          ) : (
             <>
               {extract?.length !== 0 ? (
                 extract?.map((itens, index) => (
-                  <Box key={index}>
+                  <Box key={index} maxHeight={'763px'} overflow={'auto'}>
                     <Box
                       width="100%"
                       display="flex"
@@ -152,7 +183,8 @@ export function BytebankExtract() {
                       fontWeight={600}
                     >
                       <BytebankText fontWeight={'bold'} color="primary">
-                        {itens.month.charAt(0).toUpperCase() + itens.month.slice(1)}
+                        {itens.month.charAt(0).toUpperCase() +
+                          itens.month.slice(1)}
                       </BytebankText>
                     </Box>
                     {itens.data.map((item: Transaction, index: number) => (
@@ -242,7 +274,7 @@ export function BytebankExtract() {
                 </Box>
               )}
             </>
-          }
+          )}
         </Box>
       </BytebankCard>
 
@@ -252,7 +284,7 @@ export function BytebankExtract() {
         item={selectedItem as Transaction}
         onSave={async (newValue) => {
           if (!selectedItem) return;
-          handleTransactionUpdate(selectedItem, newValue)
+          handleTransactionUpdate(selectedItem, newValue);
         }}
       />
       <DeleteExtractModal
@@ -261,11 +293,15 @@ export function BytebankExtract() {
         item={selectedItem}
         onConfirm={async () => {
           if (!selectedItem) return;
-          setDeleteModalOpen(false)
-          handleTransactionDelete(selectedItem.id)
+          setDeleteModalOpen(false);
+          handleTransactionDelete(selectedItem.id);
         }}
       />
-      <BytebankSnackbar open={snackbarOpen} data={snackbarData} onClose={closeSnackbar} />
+      <BytebankSnackbar
+        open={snackbarOpen}
+        data={snackbarData}
+        onClose={closeSnackbar}
+      />
     </>
   );
 }
