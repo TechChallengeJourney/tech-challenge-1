@@ -1,38 +1,29 @@
 import { useUser } from '@bytebank/shared';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BytebankLoadingContent from '../loading-content';
+import { usePathname, useRouter } from 'next/navigation';
 
-export default function BytebankAuthRedirect({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { user, loading } = useUser();
+export default function BytebankAuthRedirect({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useUser();
   const router = useRouter();
-  const [checking, setChecking] = useState(false);
-  const [loadingDelayPassed, setloadingDelayPassed] = useState(false);
+  const pathname = usePathname();
 
-  const isAuthenticating = loading || user === undefined;
+  const [redirecting, setRedirecting] = useState(false);
 
-  // Timeout para garantir pelo menos 500ms de loading para evitar a home não logada piscando
-  useEffect(() => {
-    const timer = setTimeout(() => setloadingDelayPassed(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const isPublicPage = pathname === '/';
 
   useEffect(() => {
-    if (!isAuthenticating) {
-      if (user) {
-        router.replace('/home');
-      } else {
-        // Usuário não logado: libera renderização da home não logada
-        setChecking(true);
-      }
+    if (isAuthenticated && isPublicPage) {
+      setRedirecting(true);
+      router.replace('/home');
     }
-  }, [user, loading, router, isAuthenticating]);
+  }, [isAuthenticated, isPublicPage, router]);
 
-  if (!checking || isAuthenticating || !loadingDelayPassed) {
+  if (redirecting) {
+    return <BytebankLoadingContent />;
+  }
+
+  if (!isPublicPage) {
     return <BytebankLoadingContent />;
   }
 
