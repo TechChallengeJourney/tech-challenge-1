@@ -8,7 +8,7 @@ interface UserContextProps {
   user: User | null;
   setUser: (user: User | null) => void;
   loading: boolean;
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -19,16 +19,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!sessionUser);
 
-  // console.log(isAuthenticated, 'isAuthenticated');
-  // console.log(sessionUser, 'sessionUser in UserProvider');
 
   useEffect(() => {
     if (sessionUser !== null) {
-      console.log('sessionUser:  IF preenchido');
       setUser(sessionUser);
       setIsAuthenticated(true);
     } else {
-      console.log('sessionUser:  ELSE null');
       setUser(null);
       setIsAuthenticated(false);
     }
@@ -36,7 +32,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [sessionUser]);
 
   const handleSetUser = (user: User | null) => {
-    console.log('handleSetUser called with');
     setUser(user);
     setSessionUser(user);
     setIsAuthenticated(!!user);
