@@ -1,6 +1,6 @@
 # Bytebank - Tech Challenge #1
 
-Bem-vindo ao projeto de estudo **Bytebank**, uma aplicação moderna desenvolvida em **Next.js**. Para garantir uma estrutura flexível, escalável e organizada, o projeto foi criado utilizando o Nx (https://nx.dev/getting-started/intro). Essa abordagem facilita o compartilhamento de componentes e a gestão de diferentes features, possibilitando uma integração eficiente de múltiplos frameworks.
+Bem-vindo ao projeto de estudo **Bytebank**, uma aplicação moderna desenvolvida em **Next.js**. Para garantir uma estrutura flexível, escalável e organizada, o projeto foi criado utilizando o Nx (https://nx.dev/getting-started/intro). Essa abordagem facilita o compartilhamento de componentes e a gestão de diferentes features, possibilitando uma integração eficiente de múltiplos frameworks no decorrer do avanço dos estudos.
 
 ---
 
