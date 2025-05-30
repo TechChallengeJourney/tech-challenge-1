@@ -53,7 +53,7 @@ npm run json-server
 
 ## 🎨 Estilização
 
-Para visualizar o Design System do projeto, utilizamos o Storybook para exibir e demonstrar as definições de layout e componentes, foi baseado neste Figma (https://www.figma.com/design/ns5TC3X5Xr8V7I3LYKg9KA/Projeto-Financeiro?node-id=503-4264&p=f). Para conferir, utilize o comando:
+Para visualizar o Design System do projeto, utilizamos o Storybook para exibir e demonstrar as definições de layout e componentes, foi baseado neste Figma (https://www.figma.com/design/ns5TC3X5Xr8V7I3LYKg9KA/Projeto-Financeiro?node-id=503-4264&p=f). Para conferir, utilize os comandos:
 
 ```bash
 npm run build-storybook
