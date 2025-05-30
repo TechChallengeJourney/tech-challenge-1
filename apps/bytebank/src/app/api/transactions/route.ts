@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fetchTransactions, createTransaction } from '../../services/extract/transactions.service';
+import { fetchTransactions, createTransaction } from '../../actions/transactions';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ExtractProps, Transaction } from '@bytebank/shared';

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { addUser, fetchUsers } from '../users';
+import { addUser, fetchUsers } from '../../actions/users';
 import bcrypt from 'bcrypt';
 
 export async function POST(request: Request) {
