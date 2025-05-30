@@ -1,82 +1,65 @@
-# Bytebank
+# Bytebank - Tech Challenge #1
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Bem-vindo ao projeto de estudo **Bytebank**, uma aplicação moderna desenvolvida em **Next.js**. Para a estrutura do projeto, foi criado utilizando o **Nx** (https://nx.dev/getting-started/intro) para a melhor organização e compartilhamento de componentes entre futuras features com diferentes frameworks.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🚀 Começando
 
-## Finish your CI setup
+Estas instruções vão te ajudar a rodar o projeto localmente e explorar as funcionalidades que implementamos neste projeto, que são elas:
+- Possibilidade de criar um novo usuário e logar na aplicação com **autenticação**;
+- Criar, editar e excluir uma transação registrada;
+- Visualizar o saldo total 
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/NsCxfef7EY)
+### Pré-requisitos
 
+Certifique-se de ter o [Node.js](https://nodejs.org/) instalado na sua máquina.
 
-## Run tasks
+---
 
-To run the dev server for your app, use:
+## 🛠️ Instalação
 
-```sh
-npx nx dev bytebank
+Clone este repositório:
+
+```bash
+git clone https://github.com/TechChallengeJourney/tech-challenge-1.git
+cd tech-challenge-1
 ```
 
-To create a production bundle:
+Instale todas as dependências:
 
-```sh
-npx nx build bytebank
+```bash
+npm install
 ```
 
-To see all available targets to run for a project, run:
+## 🚀 Como Executar
 
-```sh
-npx nx show project bytebank
+### Rodar o projeto Next.js
+
+Execute o comando abaixo para iniciar o servidor de desenvolvimento:
+
+```bash
+npm run start
+```
+Acesse http://localhost:3000 no seu navegador para visualizar o projeto.
+
+## Rodar a API Mockada (Json Server)
+
+Para iniciar a API simulada, utilize:
+
+```bash
+npm run json-server
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## 🎨 Estilização
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Para visualizar o Design System do projeto, utilizamos o Storybook para exibir e demonstrar as definições de layout e componentes, foi baseado neste Figma (https://www.figma.com/design/ns5TC3X5Xr8V7I3LYKg9KA/Projeto-Financeiro?node-id=503-4264&p=f). Para conferir, utilize o comando:
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/next:app demo
+```bash
+npm run build-storybook
+npm run storybook
 ```
 
-To generate a new library, use:
-
-```sh
-npx nx g @nx/react:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
