@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { fetchUsers } from '../users';
+import { fetchUsers } from '../../actions/users';
 import { User } from '@bytebank/shared';
 
 export async function POST(request: Request) {
