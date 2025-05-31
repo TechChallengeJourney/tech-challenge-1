@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Box, Typography } from '@mui/material';
 import * as DocBlock from '@storybook/blocks';
 import { BytebankIllustration, BytebankIllustrationProps } from '.';
@@ -19,7 +19,7 @@ export default {
 
           <Box>
           <Typography variant="h5" gutterBottom>Lista de ilustrações</Typography>
-            <Box display="flex" flexDirection="row" flexWrap="nowrap" alignItems="flex-end" gap={5}>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" alignItems="flex-end" gap={5}>
               {['card-holding', 'card-saving', 'login', 'register', 'error', 'graphic', 'pixels-01', 'pixels-02'].map((name) => (
                 <Box key={name} display="flex" alignItems="center" flexDirection="column">
                   <BytebankIllustration name={name} variant="md" />
@@ -45,8 +45,8 @@ export default {
   },
 } as Meta;
 
-const createStory = ({ name = 'card-holding', variant = 'md' }): Story<BytebankIllustrationProps> => {
-  const Template: Story<BytebankIllustrationProps> = (args: BytebankIllustrationProps) => (
+const createStory = ({ name = 'card-holding', variant = 'md' }): StoryFn<BytebankIllustrationProps> => {
+  const Template: StoryFn<BytebankIllustrationProps> = (args: BytebankIllustrationProps) => (
       <BytebankIllustration {...args} />
   );
   Template.args = {

@@ -6,10 +6,10 @@ import { Box, Drawer, Typography, Link, DrawerProps } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import { palette, ProviderRouteProps } from '../../shared';
+import { palette, WrapperRouteProps } from '../../shared';
 
 interface MenuProps {
-    routes: ProviderRouteProps[];
+    routes: WrapperRouteProps[];
     isLogged?: boolean;
     mobile?: boolean;
 }

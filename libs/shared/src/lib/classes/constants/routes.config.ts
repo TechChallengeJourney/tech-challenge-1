@@ -1,6 +1,6 @@
-import { ProviderRouteProps } from "../models/provider-route";
+import { WrapperRouteProps } from "../models/wrapper-route";
 
-export const unloggedRoutes: ProviderRouteProps[] = [
+export const unloggedRoutes: WrapperRouteProps[] = [
     {
         name: 'Sobre',
         route: '/'
@@ -11,7 +11,7 @@ export const unloggedRoutes: ProviderRouteProps[] = [
     },
 ];
 
-export const loggedRoutes: ProviderRouteProps[] = [
+export const loggedRoutes: WrapperRouteProps[] = [
     {
         name: 'início',
         route: '/home'

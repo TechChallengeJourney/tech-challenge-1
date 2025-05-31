@@ -1,9 +1,8 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { BytebankChart } from '../chart';
 
 const meta: Meta<typeof BytebankChart> = {
-  title: 'Components/BytebankChart',
+  title: 'Components/Chart',
   component: BytebankChart,
   tags: ['autodocs'],
 };
