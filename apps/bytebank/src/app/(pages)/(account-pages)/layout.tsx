@@ -1,6 +1,6 @@
 'use client';
 import { Container } from "@mui/material";
-import { BytebankProvider } from "@bytebank/shared";
+import { BytebankWrapper } from "@bytebank/shared";
 
 const RootLayout = ({ children,
 }: {
@@ -8,9 +8,9 @@ const RootLayout = ({ children,
 }) => {
 
     return (
-        <BytebankProvider>
+        <BytebankWrapper>
             <Container>{children}</Container>
-        </BytebankProvider>
+        </BytebankWrapper>
     );
 }
 

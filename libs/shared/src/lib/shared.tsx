@@ -9,11 +9,11 @@ import { BytebankFooter } from './components/footer';
 import { BytebankText } from './components/text';
 import { BytebankSelectController } from './components/select/ControlledSelect';
 import { BytebankModal } from './components/modal/index';
-import { BytebankProvider } from './components/provider';
+import { BytebankWrapper } from './components/wrapper';
 import defaultTheme from './themes/default.theme';
 import { palette } from './styles/palette';
 import { BytebankChart } from './components/chart';
-import { ProviderRouteProps } from './classes/models/provider-route';
+import { WrapperRouteProps } from './classes/models/wrapper-route';
 import { User } from './classes/models/user';
 import { ExtractProps } from './classes/models/extract';
 import { useUser } from './contexts/user.context';
@@ -43,7 +43,7 @@ export {
   BytebankMenu,
   BytebankModal,
   BytebankChart,
-  BytebankProvider,
+  BytebankWrapper,
   BytebankSnackbar,
   BytebankLoginModal,
   BytebankRegisterModal,
@@ -55,5 +55,5 @@ export {
   BytebankDivider
 };
 
-export type { ProviderRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };
+export type { WrapperRouteProps, User, ExtractProps, Transaction, BytebankModalProps, BytebankAccessModalProps, SnackbarData };
 export * from './classes/models/bank-card';

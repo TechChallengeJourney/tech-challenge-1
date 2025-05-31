@@ -85,7 +85,7 @@ export function BytebankRegisterModal({ open, onClose, onSubmit, openModal }: By
                             </Box>
                         </form>
                     </FormProvider>
-                    <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}>
+                    <Box pt={4} display={'flex'} gap={1} justifyContent={'center'} flexWrap={'wrap'}>
                         <BytebankText>Já tem uma conta?</BytebankText>
                         <Link
                             component="button"

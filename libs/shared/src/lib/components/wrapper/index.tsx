@@ -3,16 +3,16 @@ import { ThemeProvider } from '@mui/material/styles';
 import defaultTheme from '../../themes/default.theme';
 import { BytebankHeader } from '../header';
 import { Box } from '@mui/material';
-import { ProviderRouteProps } from '../../classes/models/provider-route';
+import { WrapperRouteProps } from '../../classes/models/wrapper-route';
 import { UserProvider } from '../../contexts/user.context';
 import { FinancialDataProvider } from '../../contexts/financial-data.context';
 import { BytebankFooter } from '../footer';
 
-export function BytebankProvider({
+export function BytebankWrapper({
   canNavigate = true,
   children,
 }: {
-  routes?: ProviderRouteProps[];
+  routes?: WrapperRouteProps[];
   canNavigate?: boolean;
   children: React.ReactNode;
 }) {

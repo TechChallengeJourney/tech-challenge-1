@@ -1,5 +1,5 @@
 'use client';
-import { BytebankProvider } from '@bytebank/shared';
+import { BytebankWrapper } from '@bytebank/shared';
 import '../../global.scss';
 import { Box, Container } from '@mui/material';
 import { useState } from 'react';
@@ -14,7 +14,7 @@ const RootLayout = ({ children,
     const [shouldRefreshExtract] = useState(false);
 
     return (
-        <BytebankProvider>
+        <BytebankWrapper>
             <Container>
                 <Box my={4} gap={4} className={styles.containerPage}>
                     <Box className={styles.leftColumn} width={'70%'} gap={4}>
@@ -26,7 +26,7 @@ const RootLayout = ({ children,
                     </Box>
                 </Box>
             </Container>
-        </BytebankProvider>
+        </BytebankWrapper>
     );
 }
 

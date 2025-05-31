@@ -1,5 +1,5 @@
-import { Meta, Story } from '@storybook/react';
-import { Box, ThemeProvider, Typography } from '@mui/material';
+import { Meta, StoryFn } from '@storybook/react';
+import { Box, Typography } from '@mui/material';
 import { defaultTheme } from '../shared';
 import * as DocBlock from '@storybook/blocks';
 
@@ -32,7 +32,7 @@ export default {
   },
 } as Meta;
 
-const TextsTemplate: Story<{variant: string, label: string}> = ({variant = 'lg', label = 'Bytebank Dynamic Heading'}) => (
+const TextsTemplate: StoryFn<{variant: string, label: string}> = ({variant = 'lg', label = 'Bytebank Dynamic Heading'}) => (
   <>
       <Box sx={{ margin: 2 }}> 
         <Typography variant={variant}>{label}</Typography>

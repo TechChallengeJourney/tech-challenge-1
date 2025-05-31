@@ -1,22 +1,22 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { BytebankProvider } from './index';
+import { BytebankWrapper } from './index';
 
-describe('Provider', () => {
-  it('renders successfully with BytebankProvider', () => {
+describe('Wrapper', () => {
+  it('renders successfully with BytebankWrapper', () => {
     const { baseElement } = render(
-      <BytebankProvider canNavigate={true} routes={[]} >
+      <BytebankWrapper canNavigate={true} routes={[]} >
         Child Component
-      </BytebankProvider>
+      </BytebankWrapper>
     );
     expect(baseElement).toBeTruthy();
   });
 
   it('does not render the header when canNavigate is false', () => {
     const { queryByText } = render(
-      <BytebankProvider canNavigate={false} routes={[]} >
+      <BytebankWrapper canNavigate={false} routes={[]} >
         Child Component
-      </BytebankProvider>
+      </BytebankWrapper>
     );
     expect(queryByText('Mocked BytebankHeader')).not.toBeInTheDocument();
   });

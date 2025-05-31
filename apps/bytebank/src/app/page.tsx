@@ -4,7 +4,7 @@ import {
   BytebankButton,
   BytebankIllustration,
   BytebankText,
-  BytebankProvider,
+  BytebankWrapper,
   BytebankLoginModal,
   BytebankRegisterModal,
   BytebankSnackbar,
@@ -195,7 +195,7 @@ export default function Index(): ReactElement {
   );
 
   return (
-    <BytebankProvider>
+    <BytebankWrapper>
       <BytebankAuthRedirect>
         <div className={styles.contentWrapper}>
           {renderBanner()}
@@ -219,6 +219,6 @@ export default function Index(): ReactElement {
           onClose={closeSnackbar}
         />
       </BytebankAuthRedirect>
-    </BytebankProvider>
+    </BytebankWrapper>
   );
 }

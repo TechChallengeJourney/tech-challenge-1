@@ -11,8 +11,8 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
 
     const loginMethods = useForm<{ email: string; password: string }>({
         defaultValues: {
-            email: 'joao@example.com',
-            password: 'Teste123',
+            email: '',
+            password: '',
         },
     });
 
@@ -86,7 +86,7 @@ export function BytebankLoginModal({ open, onClose, onSubmit, openModal }: Byteb
                             </Box>
                         </form>
                     </FormProvider>
-                    <Box pt={4} display={'flex'} gap={1} justifyContent={'center'}>
+                    <Box pt={4} display={'flex'} gap={1} justifyContent={'center'} flexWrap={'wrap'}>
                         <BytebankText>Não tem uma conta?</BytebankText>
                         <Link
                             component="button"
